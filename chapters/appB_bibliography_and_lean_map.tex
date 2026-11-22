@@ -1,0 +1,629 @@
+\chapter{Bibliography and Lean~4 Archive Concordance}
+\label{app:B}
+
+\section{Chapter-to-Archive Concordance Table}
+\label{sec:appB:concordance}
+
+\cref{tab:appB:concordance} maps every chapter of this $\approx 300$-page structuralist monograph (\texttt{paper\_300p/}) to its corresponding chapters in the $36$-chapter archive-mirroring exposition (\texttt{paper/}) and to its primary verified files in the Lean~4.33.1 formalization~\cite{Alpoge2026}.
+
+\begin{longtable}{@{}clll@{}}
+\caption{Concordance between \texttt{paper\_300p/}, \texttt{paper/}, and the Lean~4.33.1 source tree.}
+\label{tab:appB:concordance}\\
+\toprule
+\textbf{Ch.} & \textbf{Title / Structural Role} & \textbf{Legacy \texttt{paper/}} & \textbf{Primary Lean~4 Archive Anchor} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Ch.} & \textbf{Title / Structural Role} & \textbf{Legacy \texttt{paper/}} & \textbf{Primary Lean~4 Archive Anchor} \\
+\midrule
+\endhead
+\ref{ch:00} & Preface, Architecture, and Rigor Manifesto & \texttt{ch00} & Top-level architecture \\
+\ref{ch:01} & Main Structural Theorem, GRH (Cor.~1), and Classical Interface & \texttt{ch01}--\texttt{ch02}, \texttt{ch31}--\texttt{ch32} & \texttt{Main.lean}, \texttt{EveryCharacterOfLiteratureOfVWin.lean} \\
+\ref{ch:02} & Centered Ramp Sums and Window Landau Theorem & \texttt{ch03} & \texttt{ZeroFreeOfRpowWindow.lean}, \texttt{landauTails.lean} \\
+\ref{ch:03} & Host CM Fields, Balance Identity, and $\sqrt{x}$ Minimax & \texttt{ch04}--\texttt{ch05} & \texttt{ChBalance.lean}, \texttt{ChCore.lean}, \texttt{hostFactsS.lean} \\
+\ref{ch:04} & Auxiliary Prime Pairs, Behrend $T_2$, and Host Supply & \texttt{ch06}--\texttt{ch07} & \texttt{MSqPairs.lean}, \texttt{BadShare.lean}, \texttt{SupplyChi.lean} \\
+\ref{ch:05} & Squared-Norm Bost Slope and Tight Frame Engine & \texttt{ch33} & \texttt{FrameLinearAlgebraFirst.lean}, \texttt{TheoremFSharp.lean} \\
+\ref{ch:06} & Period-Tower Assembly and Main Inequality $(\star)$ & \texttt{ch34}--\texttt{ch36} & \texttt{TopDensityNGeSixteen.lean}, \texttt{ChTop.lean}, \texttt{ShapeOf.lean} \\
+\ref{ch:07} & Period Towers, CM Models, Landherr $k{=}1$, and Inert Integrality & \texttt{ch08}--\texttt{ch09} & \texttt{KernelsIntegralInert.lean}, \texttt{FinalS.lean} \\
+\ref{ch:08} & Inert-Prime Derivatives and Cyclic Orbital LP Duality & \texttt{ch10} & \texttt{MaxFlowValueAttained.lean}, \texttt{CompanionTheory.lean} \\
+\ref{ch:09} & Coarse Multiplicity, Kernel-Free Gain, and Glued Lattices & \texttt{ch11}--\texttt{ch12} & \texttt{PlaneCountTheoremWithConstants.lean}, \texttt{PlacesP.lean} \\
+\ref{ch:10} & Level Primes and Four-Class Loss Consolidation ($e_L{=}0$) & \texttt{ch13} & \texttt{AdmissibleSchurLemma.lean}, \texttt{DiscriminantSettingSatisfied.lean} \\
+\ref{ch:11} & Unitary Theta Proportionality and Seesaw Chain & \texttt{ch14}--\texttt{ch15} & \texttt{TheoremKOfMod.lean}, \texttt{UnfoldingsOfChain.lean} \\
+\ref{ch:12} & Analytic Kernel Sizes and Four-Block Arithmetic Inputs & \texttt{ch16}--\texttt{ch17} (I) & \texttt{YoungDiagramTopExact.lean}, \texttt{MeanLogPeriodChowlaSelberg.lean} \\
+\ref{ch:13} & Volume Theorem in Indefinite Signature $(p,q)$ & \texttt{ch18} & \texttt{GoodTowerExistsX.lean}, \texttt{TowerWeilTheorem.lean} \\
+\ref{ch:14} & Arakelov Covolume Descent on Deep Shimura Covers & \texttt{ch19} & \texttt{TopCovolSlim2Use.lean}, \texttt{FlatDegreeStatement.lean} \\
+\ref{ch:15} & Poincar\'e Unfolding and Re-Homed Wave-Grid Bound & \texttt{ch20}, \texttt{ch17} (II) & \texttt{FourParts.lean}, \texttt{StepThmBPinnedCOfN.lean} \\
+\ref{ch:16} & Off-Diagonal Orthogonality, JSZ, and Limit Multiplicity & \texttt{ch21}--\texttt{ch22} & \texttt{GrowthOfBasic.lean}, \texttt{ThmSOwn.lean}, \texttt{StandingHypothesesHoldFamily.lean} \\
+\ref{ch:17} & Prismatic/Wach $\ell{\in}\{2,3\}$, Green, and Definite Assembly & \texttt{ch23}--\texttt{ch24} & \texttt{At23OfAll.lean}, \texttt{GreenCuspidalCharsByRegularCharsProof.lean}, \texttt{Hyps.lean} \\
+\ref{ch:18} & Bloch--Kato Selmer, Berger--Wach, and Twisted Integrality & \texttt{ch25} & \texttt{CFinal.lean}, \texttt{DivinNOfHypV.lean} \\
+\ref{ch:19} & Parity Split, Minus Part, 4-Step Lemma~K, and Window Avoidance & \texttt{ch26}--\texttt{ch27} & \texttt{LogH.lean}, \texttt{LemmaKOfLitN.lean}, \texttt{DetBound.lean} \\
+\ref{ch:20} & $2$-Power Bernoulli Units, Graded Deformations, and $\sqrt{b}$ Closure & \texttt{ch28}--\texttt{ch30} & \texttt{LemmaX.lean}, \texttt{OrbitVanishingLocal.lean}, \texttt{LemmaP.lean}, \texttt{VwinOfRow.lean} \\
+\bottomrule
+\end{longtable}
+
+\section{References}
+\label{sec:appB:references}
+
+\begin{thebibliography}{99}
+
+\bibitem{Alpoge2026}
+L.~Alp\"oge (with Claude),
+\emph{A proof of the Generalized Riemann Hypothesis for Dirichlet $L$-functions},
+announcement (\url{https://alpo.ge/remark.pdf}) and Lean~4.33.1 formalization archive (\url{https://github.com/leanprover-community/riemann-hypothesis}), November~2026.
+
+\bibitem{AngehrnSiu1995}
+U.~Angehrn and Y.-T.~Siu,
+\emph{Effective freeness and point separation for adjoint bundles},
+Invent.\ Math.\ \textbf{122} (1995), no.~2, 291--308.
+
+\bibitem{AnschutzLeBras2023}
+J.~Ansch\"utz and A.-C.~Le~Bras,
+\emph{Prismatic Dieudonn\'e theory},
+Forum Math.\ Pi \textbf{11} (2023), Paper No.~e2, 92~pp.
+
+\bibitem{ArthurClozel1989}
+J.~Arthur and L.~Clozel,
+\emph{Simple Algebras, Base Change, and the Advanced Theory of the Trace Formula},
+Ann.\ of Math.\ Stud., vol.~120, Princeton Univ.\ Press, Princeton, NJ, 1989.
+
+\bibitem{Artin1927}
+E.~Artin,
+\emph{Beweis des allgemeinen Reziprozit\"atsgesetzes},
+Abh.\ Math.\ Sem.\ Univ.\ Hamburg \textbf{5} (1927), 353--363.
+
+\bibitem{Bass1964}
+H.~Bass,
+\emph{$K$-theory and stable algebra},
+Publ.\ Math.\ Inst.\ Hautes \'Etudes Sci.\ \textbf{22} (1964), 5--60.
+
+\bibitem{Behrend1946}
+F.~A.~Behrend,
+\emph{On sets of integers which contain no three terms in arithmetical progression},
+Proc.\ Nat.\ Acad.\ Sci.\ U.S.A.\ \textbf{32} (1946), 331--332.
+
+\bibitem{BellaicheChenevier2009}
+J.~Bella\"iche and G.~Chenevier,
+\emph{Families of Galois Representations and Selmer Groups},
+Ast\'erisque \textbf{324} (2009), xii+314~pp.
+
+\bibitem{BellaicheChenevier2011}
+J.~Bella\"iche and G.~Chenevier,
+\emph{The sign of Galois representations attached to automorphic forms for unitary groups},
+Compos.\ Math.\ \textbf{147} (2011), no.~5, 1337--1352.
+
+\bibitem{Berger2004}
+L.~Berger,
+\emph{Limites de repr\'esentations cristallines},
+Compos.\ Math.\ \textbf{140} (2004), no.~6, 1473--1498.
+
+\bibitem{BernsteinZelevinsky1977}
+I.~N.~Bernstein and A.~V.~Zelevinsky,
+\emph{Induced representations of reductive $\mathfrak{p}$-adic groups. I},
+Ann.\ Sci.\ \'Ecole Norm.\ Sup.\ (4) \textbf{10} (1977), no.~4, 441--472.
+
+\bibitem{BhattScholze2023}
+B.~Bhatt and P.~Scholze,
+\emph{Prismatic $F$-crystals and crystalline Galois representations},
+Camb.\ J.\ Math.\ \textbf{11} (2023), no.~2, 507--562.
+
+\bibitem{BLGGT2014}
+T.~Barnet-Lamb, T.~Gee, D.~Geraghty, and R.~Taylor,
+\emph{Potential automorphy and change of weight},
+Ann.\ of Math.\ (2) \textbf{179} (2014), no.~2, 501--609.
+
+\bibitem{BlochKato1990}
+S.~Bloch and K.~Kato,
+\emph{$L$-functions and Tamagawa numbers of motives},
+in \emph{The Grothendieck Festschrift, Vol.~I}, Progr.\ Math., vol.~86, Birkh\"auser, Boston, MA, 1990, pp.~333--400.
+
+\bibitem{Borel1969}
+A.~Borel,
+\emph{Introduction aux groupes arithm\'etiques},
+Actualit\'es Sci.\ Indust., no.~1341, Hermann, Paris, 1969.
+
+\bibitem{Borel1974}
+A.~Borel,
+\emph{Stable real cohomology of arithmetic groups},
+Ann.\ Sci.\ \'Ecole Norm.\ Sup.\ (4) \textbf{7} (1974), 235--272.
+
+\bibitem{Bost1996}
+J.-B.~Bost,
+\emph{P\'eriodes et isog\'enies des vari\'et\'es ab\'eliennes sur les corps de nombres (d'apr\`es D.~Masser et G.~W\"ustholz)},
+S\'eminaire Bourbaki, Vol.\ 1994/95, Ast\'erisque \textbf{237} (1996), Exp.\ No.~795, 115--161.
+
+\bibitem{BostGilletSoule1994}
+J.-B.~Bost, H.~Gillet, and C.~Soul\'e,
+\emph{Heights of projective varieties and positive Green forms},
+J.\ Amer.\ Math.\ Soc.\ \textbf{7} (1994), no.~4, 903--1027.
+
+\bibitem{Braun1941}
+H.~Braun,
+\emph{Zur Theorie der Hermiteschen Formen},
+Abh.\ Math.\ Sem.\ Hansischen Univ.\ \textbf{14} (1941), 61--150.
+
+\bibitem{BushnellHenniart2005}
+C.~J.~Bushnell and G.~Henniart,
+\emph{The essentially tame local Langlands correspondence, I},
+J.\ Amer.\ Math.\ Soc.\ \textbf{18} (2005), no.~3, 685--710.
+
+\bibitem{BushnellHenniart2011}
+C.~J.~Bushnell and G.~Henniart,
+\emph{The essentially tame local Langlands correspondence, III: the general case},
+Proc.\ Lond.\ Math.\ Soc.\ (3) \textbf{101} (2010), 497--553; and \emph{Level-zero explicit local Langlands}, J.\ Number Theory \textbf{131} (2011).
+
+\bibitem{Caraiani2012}
+A.~Caraiani,
+\emph{Local-global compatibility and the action of monodromy on nearby cycles},
+Duke Math.\ J.\ \textbf{161} (2012), no.~12, 2311--2413; and Compos.\ Math.\ \textbf{148} (2012).
+
+\bibitem{Caraiani2014}
+A.~Caraiani,
+\emph{Monodromy and local-global compatibility for $\ell = p$},
+Algebra Number Theory \textbf{8} (2014), no.~7, 1597--1646.
+
+\bibitem{Casselman1989}
+W.~Casselman,
+\emph{Canonical extensions of Harish-Chandra modules to representations of $G$},
+Canad.\ J.\ Math.\ \textbf{41} (1989), no.~3, 385--438.
+
+\bibitem{ChenevierHarris2013}
+G.~Chenevier and M.~Harris,
+\emph{Construction of automorphic Galois representations, II},
+Camb.\ J.\ Math.\ \textbf{1} (2013), no.~1, 53--73.
+
+\bibitem{ChowlaSelberg1967}
+S.~Chowla and A.~Selberg,
+\emph{On Epstein's zeta-function},
+J.\ Reine Angew.\ Math.\ \textbf{227} (1967), 86--110.
+
+\bibitem{Clozel1990}
+L.~Clozel,
+\emph{Motifs et formes automorphes: applications du principe de fonctorialit\'e},
+in \emph{Automorphic Forms, Shimura Varieties, and $L$-Functions, Vol.~I}, Perspect.\ Math., vol.~10, Academic Press, 1990, pp.~77--159.
+
+\bibitem{Colmez1993}
+P.~Colmez,
+\emph{P\'eriodes des vari\'et\'es ab\'eliennes \`a multiplication complexe},
+Ann.\ of Math.\ (2) \textbf{138} (1993), no.~3, 625--683.
+
+\bibitem{Deligne1974}
+P.~Deligne,
+\emph{La conjecture de Weil. I},
+Publ.\ Math.\ Inst.\ Hautes \'Etudes Sci.\ \textbf{43} (1974), 273--307; and \emph{Applications de la formule des traces aux sommes trigonom\'etriques}, SGA~$4\frac{1}{2}$ (1977).
+
+\bibitem{DeligneLusztig1976}
+P.~Deligne and G.~Lusztig,
+\emph{Representations of reductive groups over finite fields},
+Ann.\ of Math.\ (2) \textbf{103} (1976), no.~1, 103--161.
+
+\bibitem{Demailly1993}
+J.-P.~Demailly,
+\emph{A numerical criterion for very ample line bundles},
+J.\ Differential Geom.\ \textbf{37} (1993), no.~2, 323--374.
+
+\bibitem{Deuring1941}
+M.~Deuring,
+\emph{Die Typen der Multiplikatorenringe elliptischer Funktionenk\"orper},
+Abh.\ Math.\ Sem.\ Hansischen Univ.\ \textbf{14} (1941), 197--272.
+
+\bibitem{DixmierMalliavin1978}
+J.~Dixmier and P.~Malliavin,
+\emph{Factorisations de fonctions et de vecteurs ind\'efiniment diff\'erentiables},
+Bull.\ Sci.\ Math.\ (2) \textbf{102} (1978), no.~4, 307--330.
+
+\bibitem{Dwork1960}
+B.~Dwork,
+\emph{On the rationality of the zeta function of an algebraic variety},
+Amer.\ J.\ Math.\ \textbf{82} (1960), 631--648.
+
+\bibitem{FaltingsChai1990}
+G.~Faltings and C.-L.~Chai,
+\emph{Degeneration of Abelian Varieties},
+Ergeb.\ Math.\ Grenzgeb.\ (3), vol.~22, Springer-Verlag, Berlin, 1990.
+
+\bibitem{Fargues2010}
+L.~Fargues,
+\emph{La filtration de Harder--Narasimhan des sch\'emas en groupes finis et plats},
+J.\ Reine Angew.\ Math.\ \textbf{645} (2010), 1--39; and Math.\ Ann.\ \textbf{347} (2010).
+
+\bibitem{FerreroWashington1979}
+B.~Ferrero and L.~C.~Washington,
+\emph{The Iwasawa invariant $\mu_p$ vanishes for abelian number fields},
+Ann.\ of Math.\ (2) \textbf{109} (1979), no.~2, 377--395.
+
+\bibitem{Flath1979}
+D.~Flath,
+\emph{Decomposition of representations into tensor products},
+in \emph{Automorphic Forms, Representations and $L$-Functions}, Proc.\ Sympos.\ Pure Math., vol.~33, Part~1, AMS, 1979, pp.~179--183.
+
+\bibitem{Fontaine1994}
+J.-M.~Fontaine,
+\emph{Le corps des p\'eriodes $p$-adiques} and \emph{Repr\'esentations $p$-adiques semi-stables},
+in \emph{P\'eriodes $p$-adiques (Bures-sur-Yvette, 1988)}, Ast\'erisque \textbf{223} (1994), 59--111 and 113--184.
+
+\bibitem{FultonHarris1991}
+W.~Fulton and J.~Harris,
+\emph{Representation Theory: A First Course},
+Grad.\ Texts in Math., vol.~129, Springer-Verlag, New York, 1991.
+
+\bibitem{GanHankeYu2001}
+W.~T.~Gan, J.~P.~Hanke, and J.-K.~Yu,
+\emph{On an exact mass formula of Shimura},
+Duke Math.\ J.\ \textbf{107} (2001), no.~1, 103--133.
+
+\bibitem{GanQiuTakeda2014}
+W.~T.~Gan, Y.~Qiu, and S.~Takeda,
+\emph{The regularized Siegel--Weil formula (the second term identity) and the Rallis inner product formula},
+Invent.\ Math.\ \textbf{198} (2014), no.~3, 739--831.
+
+\bibitem{GanTakeda2016}
+W.~T.~Gan and S.~Takeda,
+\emph{A proof of the Howe duality conjecture},
+J.\ Amer.\ Math.\ Soc.\ \textbf{29} (2016), no.~2, 473--493; and Ann.\ of Math.\ \textbf{183} (2016).
+
+\bibitem{Geraghty2019}
+D.~Geraghty,
+\emph{Modularity lifting theorems for ordinary Galois representations},
+Math.\ Ann.\ \textbf{373} (2019), no.~3--4, 1341--1427.
+
+\bibitem{GilletSoule1992}
+H.~Gillet and C.~Soul\'e,
+\emph{An arithmetic Riemann--Roch theorem},
+Invent.\ Math.\ \textbf{110} (1992), no.~3, 473--543; and Invent.\ Math.\ \textbf{109} (1992).
+
+\bibitem{Green1955}
+J.~A.~Green,
+\emph{The characters of the finite general linear groups},
+Trans.\ Amer.\ Math.\ Soc.\ \textbf{80} (1955), 402--447.
+
+\bibitem{HarishChandra1966}
+Harish-Chandra,
+\emph{Discrete series for semisimple Lie groups. II. Explicit determination of the characters},
+Acta Math.\ \textbf{116} (1966), 1--111.
+
+\bibitem{Harris1990}
+M.~Harris,
+\emph{Automorphic forms of $\bar{\partial}$-cohomology type as coherent cohomology classes},
+J.\ Differential Geom.\ \textbf{32} (1990), 1--63; and Invent.\ Math.\ \textbf{99} (1990).
+
+\bibitem{HarrisTaylor2001}
+M.~Harris and R.~Taylor,
+\emph{The Geometry and Cohomology of Some Simple Shimura Varieties},
+Ann.\ of Math.\ Stud., vol.~151, Princeton Univ.\ Press, Princeton, NJ, 2001.
+
+\bibitem{Henniart2000}
+G.~Henniart,
+\emph{Une preuve simple des conjectures de Langlands pour $\mathrm{GL}(n)$ sur un corps $p$-adique},
+Invent.\ Math.\ \textbf{139} (2000), no.~2, 439--455.
+
+\bibitem{Hironaka1964}
+H.~Hironaka,
+\emph{Resolution of singularities of an algebraic variety over a field of characteristic zero. I, II},
+Ann.\ of Math.\ (2) \textbf{79} (1964), 109--203 and 205--326.
+
+\bibitem{Honda1970}
+T.~Honda,
+\emph{On the theory of commutative formal groups},
+J.\ Math.\ Soc.\ Japan \textbf{22} (1970), 213--246.
+
+\bibitem{Howe1989}
+R.~Howe,
+\emph{Transcending classical invariant theory},
+J.\ Amer.\ Math.\ Soc.\ \textbf{2} (1989), no.~3, 535--552.
+
+\bibitem{Ichino2004}
+A.~Ichino,
+\emph{A regularized Siegel--Weil formula for unitary groups},
+Math.\ Z.\ \textbf{247} (2004), no.~2, 241--277.
+
+\bibitem{Ichino2007}
+A.~Ichino,
+\emph{On the Siegel--Weil formula for unitary groups},
+Math.\ Z.\ \textbf{255} (2007), no.~4, 721--729.
+
+\bibitem{IwaniecKowalski2004}
+H.~Iwaniec and E.~Kowalski,
+\emph{Analytic Number Theory},
+Amer.\ Math.\ Soc.\ Colloq.\ Publ., vol.~53, AMS, Providence, RI, 2004.
+
+\bibitem{Jacobowitz1962}
+R.~Jacobowitz,
+\emph{Hermitian forms over local fields},
+Amer.\ J.\ Math.\ \textbf{84} (1962), 441--465.
+
+\bibitem{JacquetShalika1976}
+H.~Jacquet and J.~A.~Shalika,
+\emph{A non-vanishing theorem for zeta functions of $\mathrm{GL}_n$},
+Invent.\ Math.\ \textbf{38} (1976), no.~1, 1--16.
+
+\bibitem{JacquetShalika1981}
+H.~Jacquet and J.~A.~Shalika,
+\emph{On Euler products and the classification of automorphic representations I, II},
+Amer.\ J.\ Math.\ \textbf{103} (1981), 499--558 and 777--815.
+
+\bibitem{Jaswal2026}
+M.~Jaswal,
+\emph{The Riemann hypothesis for Dirichlet $L$-functions [after Levent Alp\"oge]},
+Reader's Guide, Zenodo~24410057, November~2026.
+
+\bibitem{JiangSunZhu2010}
+D.~Jiang, B.~Sun, and C.-B.~Zhu,
+\emph{Uniqueness of Bessel models: the Archimedean case},
+Geom.\ Funct.\ Anal.\ \textbf{20} (2010), no.~3, 690--709.
+
+\bibitem{Kato2004}
+K.~Kato,
+\emph{$p$-adic Hodge theory and values of zeta functions of modular forms},
+in \emph{Cohomologies $p$-adiques et applications arithm\'etiques. III}, Ast\'erisque \textbf{295} (2004), 117--290.
+
+\bibitem{Katz1976}
+N.~M.~Katz,
+\emph{$p$-adic interpolation of real analytic Eisenstein series},
+Ann.\ of Math.\ (2) \textbf{104} (1976), no.~3, 459--571.
+
+\bibitem{Kawamata1982}
+Y.~Kawamata,
+\emph{A generalization of Kodaira--Ramanujam's vanishing theorem},
+Math.\ Ann.\ \textbf{261} (1982), no.~1, 43--46; and E.~Viehweg, J.\ Reine Angew.\ Math.\ \textbf{335} (1982), 1--8.
+
+\bibitem{KnappVogan1995}
+A.~W.~Knapp and D.~A.~Vogan, Jr.,
+\emph{Cohomological Induction and Unitary Representations},
+Princeton Math.\ Ser., vol.~45, Princeton Univ.\ Press, Princeton, NJ, 1995.
+
+\bibitem{Kneser1965}
+M.~Kneser,
+\emph{Starke Approximation in algebraischen Gruppen. I},
+J.\ Reine Angew.\ Math.\ \textbf{218} (1965), 190--203.
+
+\bibitem{Kudla1994}
+S.~S.~Kudla,
+\emph{Splitting metaplectic covers of dual reductive pairs},
+Israel J.\ Math.\ \textbf{87} (1994), 361--401; and Invent.\ Math.\ \textbf{115} (1994).
+
+\bibitem{Labesse2011}
+J.-P.~Labesse,
+\emph{Changement de base CM et s\'eries discr\`etes},
+in \emph{On the Stabilization of the Trace Formula}, Stab.\ Trace Formula Shimura Var.\ Arith.\ Appl., vol.~1, Int.\ Press, 2011, pp.~429--470.
+
+\bibitem{Lan2013}
+K.-W.~Lan,
+\emph{Arithmetic Compactifications of PEL-Type Shimura Varieties},
+London Math.\ Soc.\ Monogr.\ Ser., vol.~36, Princeton Univ.\ Press, Princeton, NJ, 2013.
+
+\bibitem{Landau1905}
+E.~Landau,
+\emph{\"Uber einen Satz von Tschebyschef},
+Math.\ Ann.\ \textbf{61} (1905), 527--550.
+
+\bibitem{Landherr1936}
+W.~Landherr,
+\emph{\"Aquivalenz Hermitescher Formen \"uber einem beliebigen algebraischen Zahlk\"orper},
+Abh.\ Math.\ Sem.\ Hansischen Univ.\ \textbf{11} (1936), 245--248.
+
+\bibitem{Langlands1976}
+R.~P.~Langlands,
+\emph{On the Functional Equations Satisfied by Eisenstein Series},
+Lecture Notes in Math., vol.~544, Springer-Verlag, Berlin, 1976.
+
+\bibitem{LapidRallis2005}
+E.~M.~Lapid and S.~Rallis,
+\emph{On the local factors of representations of classical groups},
+in \emph{Automorphic Representations, $L$-Functions and Applications}, Ohio State Univ.\ Math.\ Res.\ Inst.\ Publ., vol.~11, de~Gruyter, 2005, pp.~309--359.
+
+\bibitem{Li1992}
+J.-S.~Li,
+\emph{Non-vanishing theorems for the cohomology of certain arithmetic quotients},
+J.\ Reine Angew.\ Math.\ \textbf{428} (1992), 177--217; and \emph{Singular unitary spectrum}, Invent.\ Math.\ \textbf{108} (1992).
+
+\bibitem{LubinTate1965}
+J.~Lubin and J.~Tate,
+\emph{Formal complex multiplication in local fields},
+Ann.\ of Math.\ (2) \textbf{81} (1965), 380--387.
+
+\bibitem{Messing1972}
+W.~Messing,
+\emph{The Crystals Associated to Barsotti--Tate Groups: With Applications to Abelian Schemes},
+Lecture Notes in Math., vol.~264, Springer-Verlag, Berlin, 1972; and B.~Mazur and W.~Messing, Lecture Notes in Math., vol.~370 (1974).
+
+\bibitem{Milne2006}
+J.~S.~Milne,
+\emph{Arithmetic Duality Theorems},
+2nd ed., BookSurge, LLC, Charleston, SC, 2006.
+
+\bibitem{MoeglinWaldspurger1989}
+C.~M\oe glin and J.-L.~Waldspurger,
+\emph{Le spectre r\'esiduel de $\mathrm{GL}(n)$},
+Ann.\ Sci.\ \'Ecole Norm.\ Sup.\ (4) \textbf{22} (1989), no.~4, 605--674.
+
+\bibitem{MoeglinWaldspurger1995}
+C.~M\oe glin and J.-L.~Waldspurger,
+\emph{Spectral Decomposition and Eisenstein Series},
+Cambridge Tracts in Math., vol.~113, Cambridge Univ.\ Press, Cambridge, 1995.
+
+\bibitem{MontgomeryVaughan2007}
+H.~L.~Montgomery and R.~C.~Vaughan,
+\emph{Multiplicative Number Theory. I. Classical Theory},
+Cambridge Stud.\ Adv.\ Math., vol.~97, Cambridge Univ.\ Press, Cambridge, 2007.
+
+\bibitem{MoretBailly1985}
+L.~Moret-Bailly,
+\emph{Pinceaux de vari\'et\'es ab\'eliennes},
+Ast\'erisque \textbf{129} (1985), 266~pp.
+
+\bibitem{Moriwaki2009}
+A.~Moriwaki,
+\emph{Continuous extension of arithmetic volumes},
+Int.\ Math.\ Res.\ Not.\ IMRN (2009), no.~10, 1898--1920.
+
+\bibitem{MoyPrasad1994}
+A.~Moy and G.~Prasad,
+\emph{Unrefined minimal $K$-types for $p$-adic groups},
+Invent.\ Math.\ \textbf{116} (1994), 393--408; and Comment.\ Math.\ Helv.\ \textbf{71} (1996), 98--121.
+
+\bibitem{Mumford1977}
+D.~Mumford,
+\emph{Hirzebruch's proportionality theorem in the non-compact case},
+Invent.\ Math.\ \textbf{42} (1977), 239--272.
+
+\bibitem{Nadel1990}
+A.~M.~Nadel,
+\emph{Multiplier ideal sheaves and K\"ahler--Einstein metrics of positive scalar curvature},
+Ann.\ of Math.\ (2) \textbf{132} (1990), no.~3, 549--596.
+
+\bibitem{Neukirch1999}
+J.~Neukirch,
+\emph{Algebraic Number Theory},
+Grundlehren Math.\ Wiss., vol.~322, Springer-Verlag, Berlin, 1999.
+
+\bibitem{NSW2008}
+J.~Neukirch, A.~Schmidt, and K.~Wingberg,
+\emph{Cohomology of Number Fields},
+2nd ed., Grundlehren Math.\ Wiss., vol.~323, Springer-Verlag, Berlin, 2008.
+
+\bibitem{OhsawaTakegoshi1987}
+T.~Ohsawa and K.~Takegoshi,
+\emph{On the extension of $L^2$ holomorphic functions},
+Math.\ Z.\ \textbf{195} (1987), no.~2, 197--204.
+
+\bibitem{Page1935}
+A.~Page,
+\emph{On the number of primes in an arithmetic progression},
+Proc.\ London Math.\ Soc.\ (2) \textbf{39} (1935), 116--141.
+
+\bibitem{Paul1998}
+A.~Paul,
+\emph{Howe correspondence for real unitary groups},
+J.\ Funct.\ Anal.\ \textbf{159} (1998), no.~2, 384--431; and J.\ Funct.\ Anal.\ \textbf{173} (2000), 192--224.
+
+\bibitem{PSR1987}
+I.~Piatetski-Shapiro and S.~Rallis,
+\emph{$L$-Functions for the Classical Groups},
+in \emph{Explicit Constructions of Automorphic $L$-Functions}, Lecture Notes in Math., vol.~1254, Springer-Verlag, Berlin, 1987, pp.~1--52.
+
+\bibitem{PlatonovRapinchuk1994}
+V.~Platonov and A.~Rapinchuk,
+\emph{Algebraic Groups and Number Theory},
+Pure Appl.\ Math., vol.~139, Academic Press, Boston, MA, 1994.
+
+\bibitem{Rubinstein2026}
+M.~O.~Rubinstein et~al.,
+\emph{The Alp\"oge--Claude proof of the Riemann hypothesis explained for the Riemann zeta function},
+working exposition, November~2026.
+
+\bibitem{Scharlau1985}
+W.~Scharlau,
+\emph{Quadratic and Hermitian Forms},
+Grundlehren Math.\ Wiss., vol.~270, Springer-Verlag, Berlin, 1985.
+
+\bibitem{Schrijver1986}
+A.~Schrijver,
+\emph{Theory of Linear and Integer Programming},
+Wiley-Interscience, Chichester, 1986.
+
+\bibitem{Serre1956}
+J.-P.~Serre,
+\emph{G\'eom\'etrie alg\'ebrique et g\'eom\'etrie analytique},
+Ann.\ Inst.\ Fourier (Grenoble) \textbf{6} (1956), 1--42.
+
+\bibitem{SerreTate1968}
+J.-P.~Serre and J.~Tate,
+\emph{Good reduction of abelian varieties},
+Ann.\ of Math.\ (2) \textbf{88} (1968), 492--517.
+
+\bibitem{SGA7}
+A.~Grothendieck,
+\emph{Groupes de monodromie en g\'eom\'etrie alg\'ebrique (SGA~7~I)},
+Lecture Notes in Math., vol.~288, Springer-Verlag, Berlin, 1972.
+
+\bibitem{Shahidi1981}
+F.~Shahidi,
+\emph{On certain $L$-functions},
+Amer.\ J.\ Math.\ \textbf{103} (1981), no.~2, 297--355.
+
+\bibitem{Shimura1999}
+G.~Shimura,
+\emph{Arithmeticity in the Theory of Automorphic Forms},
+Math.\ Surveys Monogr., vol.~82, AMS, Providence, RI, 2000 (preprint 1999).
+
+\bibitem{Shin2011}
+S.~W.~Shin,
+\emph{Galois representations arising from some compact Shimura varieties},
+Ann.\ of Math.\ (2) \textbf{173} (2011), no.~3, 1645--1741.
+
+\bibitem{Siegel1935}
+C.~L.~Siegel,
+\emph{\"Uber die analytische Theorie der quadratischen Formen},
+Ann.\ of Math.\ (2) \textbf{36} (1935), no.~3, 527--606.
+
+\bibitem{Silverman1994}
+J.~H.~Silverman,
+\emph{The Arithmetic of Elliptic Curves} (GTM~106) and \emph{Advanced Topics in the Arithmetic of Elliptic Curves} (GTM~151),
+Springer-Verlag, New York, 1986 / 1994.
+
+\bibitem{Sinnott1984}
+W.~Sinnott,
+\emph{On the $\mu$-invariant of the $\Gamma$-transform of a rational function},
+Invent.\ Math.\ \textbf{75} (1984), no.~2, 273--282.
+
+\bibitem{Soule1999}
+C.~Soul\'e,
+\emph{On the $3$-torsion in $K_4(\mathbb{Z})$} and \emph{Perfect forms and the Vandiver conjecture},
+J.\ Reine Angew.\ Math.\ \textbf{517} (1999), 209--221.
+
+\bibitem{Stepanov1969}
+S.~A.~Stepanov,
+\emph{The number of points of a hyperelliptic curve over a finite prime field},
+Izv.\ Akad.\ Nauk SSSR Ser.\ Mat.\ \textbf{33} (1969), 1171--1181; and E.~Bombieri, \emph{Counting points on curves over finite fields (d'apr\`es S.~A.~Stepanov)}, S\'eminaire Bourbaki, Exp.\ No.~430 (1974).
+
+\bibitem{Tate1962}
+J.~Tate,
+\emph{Duality theorems in Galois cohomology over number fields},
+Proc.\ Internat.\ Congr.\ Mathematicians (Stockholm, 1962), 288--295.
+
+\bibitem{vanderKallen1980}
+W.~van~der~Kallen,
+\emph{Homology stability for linear groups},
+Invent.\ Math.\ \textbf{60} (1980), no.~3, 269--295.
+
+\bibitem{Wallach1988}
+N.~R.~Wallach,
+\emph{Real Reductive Groups. I, II},
+Pure Appl.\ Math., vols.~132 \& 132-II, Academic Press, Boston, MA, 1988 / 1992.
+
+\bibitem{Washington1997}
+L.~C.~Washington,
+\emph{Introduction to Cyclotomic Fields},
+2nd ed., Grad.\ Texts in Math., vol.~83, Springer-Verlag, New York, 1997.
+
+\bibitem{Weil1965}
+A.~Weil,
+\emph{Sur la formule de Siegel dans la th\'eorie des groupes classiques},
+Acta Math.\ \textbf{113} (1965), 1--87.
+
+\bibitem{Yamana2013}
+S.~Yamana,
+\emph{On the Siegel--Weil formula for quaternionic unitary groups} and \emph{The Siegel--Weil formula for unitary groups},
+Pacific J.\ Math.\ \textbf{264} (2013), no.~1, 235--256.
+
+\bibitem{Yuan2008}
+X.~Yuan,
+\emph{Big line bundles over arithmetic varieties},
+Invent.\ Math.\ \textbf{173} (2008), no.~3, 603--649.
+
+\bibitem{Zarhin1974}
+Yu.~G.~Zarhin,
+\emph{A remark on endomorphisms of abelian varieties over function fields of finite characteristic},
+Izv.\ Akad.\ Nauk SSSR Ser.\ Mat.\ \textbf{38} (1974), 471--474.
+
+\bibitem{Zelevinsky1980}
+A.~V.~Zelevinsky,
+\emph{Induced representations of reductive $\mathfrak{p}$-adic groups. II. On irreducible representations of $\mathrm{GL}(n)$},
+Ann.\ Sci.\ \'Ecole Norm.\ Sup.\ (4) \textbf{13} (1980), no.~2, 165--210.
+
+\bibitem{Zhang1995}
+S.~Zhang,
+\emph{Positive line bundles on arithmetic varieties},
+J.\ Amer.\ Math.\ Soc.\ \textbf{8} (1995), no.~1, 187--221.
+
+\end{thebibliography}

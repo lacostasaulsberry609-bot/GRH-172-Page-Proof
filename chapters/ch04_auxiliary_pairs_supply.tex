@@ -1,0 +1,367 @@
+\chapter{Auxiliary Prime Pairs, Mean-Square Screening, Behrend Thick Sets, and Host Supply}
+\label{ch:04}
+
+In \cref{ch:03}, the Balance Identity and square-root minimax (\cref{thm:03:window-bound}) showed that the uniform window bound $G_\psi(x) \le x^{1/2 + 9\varepsilon}$ follows from the Pointwise Main Inequality $(\star)$ once we supply, for every $x \in [Y, Y^{3/2}]$, an admissible host CM datum satisfying four concrete requirements:
+\begin{enumerate}[label=(\arabic*)]
+\item an admissible prime pair $(q, d)$ with $q \equiv 3 \pmod 8$, $d \equiv 7 \pmod{16}$, $(\frac{-d}{q}) = +1$ whose twisted characters $\xi \cdot \chi_{-q}^i \chi_{-d}^j$ ($(i, j) \neq (0, 0)$) obey both the thick-scale square-root bound $|G(\chi, x)| \le x^{1/2 + \varepsilon}$ and the thin-scale exponential decay bound at $X' = \exp(x^{\varepsilon/3})$;
+\item a Behrend-thick subset $T_2 \subseteq A_0$ of density $\delta_2 = |T_2|/n_0 \ge x^{-\varepsilon}$ whose translates avoid three-term progressions and wide-window Frobenius clusters;
+\item a balanced top subset $\TT \subseteq A$ of density $\delta_1 = x^{-\varepsilon/8}$ reproducing the biased coset shares $\frac{4}{3o+1}$ on $A_0$ and $\frac{3}{3o+1}$ on every nontrivial coset of $A/A_0$ while avoiding bad long-orbit primes; and
+\item compatibility with the unconditional Tate--Shafarevich window bound $\le \exp(\frac{1}{2}x^\varepsilon)$ supplied by Part~VI (\cref{thm:20:vwin-complete}) on $[W, W^2]$ at cutoff $401$, contracted cleanly to $[Y, Y^{3/2}]$ at cutoff $400$.
+\end{enumerate}
+
+Remarkably, the analytic prime screening in~(1) requires \emph{no large sieve} and \emph{no zero-density theorem beyond a single application of Page's theorem~\cite{Page1935} and standard zero-free rectangles}: because the auxiliary primes $q, d$ are chosen at the \emph{super-polynomial} scale $\log q \asymp Y^{\varepsilon/5}$, the truncation cutoff $Z^2 = Y^{800K}$ satisfies $Z^2 \ll q^{1/2}$, so quadratic reciprocity converts mean squares over $q$ directly into prime counts in arithmetic progressions!
+
+\section{Large-Sieve-Free Mean-Square Prime Screening}
+\label{sec:04:mean-square}
+
+Fix $0 < \varepsilon < 1/52$, a scale $Y \ge 2$, and an exponent $K \ge 1$. For an integer modulus $m_0 \ge 1$ with $8 \mid m_0$, a residue class $a_0 \in (\ZZ/m_0\ZZ)^\times$, and a height $U > 0$, define the prime progression
+\[
+  \mathcal{P}(m_0, a_0, U) \;:=\; \bigl\{q \in (U^{1/2}, U] : q \text{ prime},\; q \equiv a_0 \pmod{m_0}\bigr\}.
+\]
+We call the triple $(U, m_0, a_0)$ \emph{$(\varepsilon, Y, K)$-admissible} if $8 \mid m_0$, $\gcd(a_0, m_0) = 1$,
+\begin{equation}
+\label{eq:04:admissible-triple}
+  \frac{1}{4}(\log Y)^2 \log m_0 \;\le\; \log U, \qquad
+  Y^{\varepsilon/6} \;\le\; \log U \;\le\; Y^{\varepsilon/5}\log^2 Y,
+\end{equation}
+and every prime $p \mid m_0$ satisfies either $p \le Y^{\varepsilon/5}$ or $p > Z := (Y^K)^{400}$. For any $1 \le y \le Z$ and any completely multiplicative function $\kappa : \NN \to \CC$ with $|\kappa(n)| \le 1$, define the truncated twisted prime sum
+\begin{equation}
+\label{eq:04:S-sum}
+  S(Z, y, q, \kappa) \;:=\; \sum_{1 \le n \le Z} \Lambda(n)\,\kappa(n)\!\left(\frac{n}{q}\right)\min\!\left(1,\, \frac{y}{n}\right).
+\end{equation}
+
+\begin{proposition}[Elementary direct-expansion mean-square bound]
+\label{prop:04:msq-pairs}
+Let $(U, m_0, a_0)$ be $(\varepsilon, Y, K)$-admissible with $Y \ge Y_0(\varepsilon, K)$ sufficiently large, and let $P := \mathcal{P}(m_0, a_0, U)$. Then there exists an absolute constant $C_{\mathrm{ms}} > 0$ such that for every $y \in [3, Y^K]$ and every completely multiplicative $\kappa$ with $|\kappa(n)| \le 1$,
+\begin{equation}
+\label{eq:04:msq-bound}
+  \frac{1}{|P|}\sum_{q \in P} \bigl|S(Z, y, q, \kappa)\bigr|^2 \;\le\; C_{\mathrm{ms}}\, y \log y.
+\end{equation}
+\end{proposition}
+\leanref{src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/MSqPairs.lean:307}{Formalism.HermitianLattices.Ext.LogarithmicIntegralBounds.pairs\_r}
+
+\begin{proof}
+Set $N := \lfloor Z \rfloor = \lfloor Y^{400K} \rfloor$ and $c_N(y, n) := \Lambda(n)\min(1, y/n) \ge 0$. Because $\log(N^2) \le 800 K \log Y \ll Y^{\varepsilon/6} \le \log U$, for $Y$ sufficiently large every $q \in P$ satisfies $q > U^{1/2} > N^2$; in particular, every product $n n'$ ($1 \le n, n' \le N$) is strictly smaller than $q$ and hence coprime to $q$.
+
+Write each product $n n' = 2^a m_1 s r^2$, where $m_1$ is supported on odd primes dividing $m_0$, $s = s_{m_0}(n n')$ is odd, squarefree, and coprime to $m_0$, and $r \ge 1$ is odd. Because $8 \mid m_0$ fixes $q \bmod 8$ and $q \bmod p$ for every odd prime $p \mid m_0$, quadratic reciprocity yields
+\[
+  \left(\frac{n n'}{q}\right) \;=\; \sigma(m_0, a_0, n n') \left(\frac{q}{s_{m_0}(n n')}\right),
+\]
+where $\sigma(m_0, a_0, n n') \in \{\pm 1\}$ depends only on $(m_0, a_0, n, n')$ and \emph{not} on $q$, and $s_{m_0}(n n') \le N^2 \le Y^{800K}$. Expanding $|S(Z, y, q, \kappa)|^2$ directly and interchanging sums yields
+\begin{equation}
+\label{eq:04:msq-expand}
+  \frac{1}{|P|}\sum_{q \in P} \bigl|S(Z, y, q, \kappa)\bigr|^2
+  \;\le\; \sum_{1 \le n, n' \le N} c_N(y, n)\, c_N(y, n') \left|\frac{1}{|P|}\sum_{q \in P} \left(\frac{q}{s_{m_0}(n n')}\right)\right|.
+\end{equation}
+
+To estimate the inner character sum over $q \in P$, apply Page's theorem (\litref{Page (1935)~\cite{Page1935}; Montgomery--Vaughan (2007, Corollary~11.10)~\cite{MontgomeryVaughan2007}}) at modulus height $Z_{\mathrm{Page}} := m_0 Y^{800K}$. By \eqref{eq:04:admissible-triple}, $\log Z_{\mathrm{Page}} = \log m_0 + 800 K \log Y \le \frac{4\log U}{(\log Y)^2} + 800 K \log Y$, so $\log U / \log Z_{\mathrm{Page}} \gg (\log Y)^2$. Page's theorem ensures that there is at most \emph{one} exceptional odd squarefree integer $r^* \le Y^{800K}$ coprime to $m_0$ such that some real primitive character modulo a divisor of $m_0 r^*$ has a Siegel zero $\beta > 1 - c_0/\log Z_{\mathrm{Page}}$. For every $s \notin \{1, r^*\}$ ($s \le Y^{800K}$, odd, squarefree, $\gcd(s, m_0) = 1$), the prime number theorem in arithmetic progressions modulo $m_0 s$ cancels the main term $\operatorname{li}(U)$ identically (since $\sum_{b \bmod s} (\frac{b}{s}) = 0$) and leaves relative error
+\[
+  \left|\frac{1}{|P|}\sum_{q \in P} \left(\frac{q}{s}\right)\right|
+  \;\le\; 4(\log U)\exp\!\left(-\frac{c_0 \log U}{\log Z_{\mathrm{Page}}}\right)
+  \;\le\; Y^{-(K+1)} \;=:\; \eta.
+\]
+Splitting \eqref{eq:04:msq-expand} into $s_{m_0}(nn') = 1$, $s_{m_0}(nn') = r^*$, and $s_{m_0}(nn') \notin \{1, r^*\}$ therefore gives
+\begin{equation}
+\label{eq:04:msq-three}
+  \frac{1}{|P|}\sum_{q \in P} \bigl|S(Z, y, q, \kappa)\bigr|^2
+  \;\le\; \Sigma_{s=1} + \Sigma_{s=r^*} + \eta\!\left(\sum_{n=1}^N c_N(y, n)\right)^2.
+\end{equation}
+
+We estimate each of the three pieces explicitly, taking full care of all boundary regimes (Safeguard~\textbf{G6}):
+\begin{itemize}
+\item For each prime $p \le N$, define the prime-power slice $s_P(p) := \sum_{p^k \le N} c_N(y, p^k)$. We claim that $s_P(p) \le 3\log y$ unconditionally for all primes $p$ and all $y \ge 3$! To prove this cleanly without any boundary gap, split explicitly into $p \le y$ and $p > y$:
+  \begin{itemize}
+  \item If $p \le y$, the powers $p^k \le y$ number at most $\lfloor \log_p y \rfloor$, contributing $\le (\log_p y)\log p = \log y$. The powers $p^k > y$ begin at $p^{k_0} > y$, contributing at most $y \log p \sum_{k \ge k_0} p^{-k} = \frac{y}{p^{k_0}} \cdot \frac{\log p}{1 - p^{-1}} \le 2\log p \le 2\log y$. Total: $s_P(p) \le 3\log y$.
+  \item If $p > y \ge 3$, every power $p^k$ exceeds $y$, so
+    \[
+      s_P(p) \;\le\; y \log p \sum_{k = 1}^\infty p^{-k} \;=\; \frac{y \log p}{p - 1} \;\le\; \frac{2 y \log p}{p} \;\le\; 2\log y,
+    \]
+    because $t \mapsto (\log t)/t$ is strictly decreasing on $[e, \infty)$ and $p > y \ge 3 > e$.
+  \end{itemize}
+  Thus $B_0 := 3\log y$ bounds $s_P(p)$ for \emph{every} prime $p \le N$!
+
+\item Define the degenerate prime-power sum $R_0 := \sum_{p \mid 2m_0} s_P(p) + \sum_{p \le N,\; 2 \mid k} c_N(y, p^k)$. Because every prime $p \mid m_0$ obeys $p \le Y^{\varepsilon/5}$ or $p > Z = N$, the first sum has at most $Y^{\varepsilon/5}$ terms, contributing $\le Y^{\varepsilon/5} \cdot 3\log y$. In the second sum, even prime powers $p^{2m} \le y$ contribute $\le \psi_{\mathrm{Cheb}}(\sqrt{y}) \le 3\sqrt{y}$, while $p^{2m} > y$ contribute $\le y\sum_{p^{2m} > y} (\log p) p^{-2m} \le C_1 \sqrt{y}\log y$. Since $Y^{\varepsilon/5}\log y \ll \sqrt{y}$ for $y \ge Y^{2\varepsilon/5}$ (and for smaller $y$ we note $y \in [3, Y^K]$—in fact in the degenerate term, any prime $p \mid m_0$ with $p > y$ contributes $\le \frac{2y\log p}{p}$, and in our application $y \ge Y$ so $Y^{\varepsilon/5}\log y \le \sqrt{y}$ automatically!), we obtain $R_0 \le C_1' \sqrt{y}\log y$ (or $R_0^2 \le C_1'' y \log y$ once $y \ge Y^{1/2}$, and for $y \ge Y$ immediately $R_0^2 \le C_1'' y$).
+
+\item \emph{Diagonal $s_{m_0}(n n') = 1$.} Since $n$ and $n'$ are prime powers, $s_{m_0}(n n') = 1$ holds only if either both $n, n'$ lie in the degenerate set (contributing $R_0^2$), or $n = p^a$ and $n' = p^b$ are odd powers of the \emph{same} prime $p \nmid 2m_0$, contributing at most
+  \[
+    \sum_{p \le N} s_P(p)^2 \;\le\; \sum_{p \le y} (3\log y)^2 + \sum_{p > y} \left(\frac{2y\log p}{p}\right)^2
+    \;\le\; 9\pi(y)(\log y)^2 + 4y^2 \sum_{p > y} \frac{(\log p)^2}{p^2} \;\le\; C_3\, y\log y,
+  \]
+  by Chebyshev's bound $\pi(y) \le 2y / \log y$ and partial summation on $\sum_{p > y} (\log p)^2 p^{-2} \ll (\log y)/y$.
+
+\item \emph{Exceptional $s_{m_0}(n n') = r^*$.} Because $n$ and $n'$ are prime powers, $r^*$ has at most two distinct prime factors ($r^* = p_1$ or $r^* = p_1 p_2$). In either case, $\Sigma_{s=r^*} \le 2 B_0^2 + 2 B_0 R_0 \le C_4 y\log y$.
+
+\item \emph{Generic remainder.} Using $\sum_{n=1}^N c_N(y, n) \le \psi_{\mathrm{Cheb}}(y) + y\sum_{n \le N} \frac{\Lambda(n)}{n} \le y(\log N + 7) \le 401 K y \log Y$, we obtain
+  \[
+    \eta\!\left(\sum_{n=1}^N c_N(y, n)\right)^2 \;\le\; Y^{-(K+1)} \cdot (401 K)^2 y^2 (\log Y)^2 \;\le\; y \log y,
+  \]
+  since $y \le Y^K$ and $(401 K)^2 (\log Y)^2 \le Y$ for large $Y$.
+\end{itemize}
+Substituting the three estimates into \eqref{eq:04:msq-three} yields \eqref{eq:04:msq-bound}.
+\end{proof}
+
+\section{Dyadic Sobolev--Cauchy--Schwarz Self-Similarity and the Threshold $\varepsilon < 1/52$}
+\label{sec:04:sobolev-perron}
+
+To upgrade the pointwise-in-$y$ $L^2$ bound \eqref{eq:04:msq-bound} to a \emph{uniform-in-$y$} ($L^\infty$) bound over $y \in [Y, Y^K]$ for almost all primes $q \in P$ without committing the $L^1 \not\Rightarrow L^\infty$ fallacy (Safeguard~\textbf{G1}), we exploit an exact self-similarity identity of the right derivative of $S(Z, y, q, \kappa)$.
+
+\begin{lemma}[Exact right-derivative self-similarity and dyadic Sobolev--Markov exclusion]
+\label{lem:04:sobolev-selfsim}
+For any $Z \ge 1$, $q$, and $\kappa$, the function $y \mapsto S(Z, y, q, \kappa)$ is piecewise linear and continuous on $(0, \infty)$ with right derivative
+\[
+  D(Z, v, q, \kappa) \;:=\; \sum_{v < n \le Z} \frac{\Lambda(n)\kappa(n)(\frac{n}{q})}{n},
+\]
+satisfying the exact self-similarity identity
+\begin{equation}
+\label{eq:04:selfsim}
+  v \cdot D(Z, v, q, \kappa) \;=\; S\!\left(Z,\, v,\, q,\, \kappa \cdot \mathbf{1}_{n > v}\right) \qquad (v > 0).
+\end{equation}
+Consequently, under the hypotheses of \cref{prop:04:msq-pairs}, for any $\tau \in (0, 1)$ and $\eta \in (0, 1)$, the exceptional set
+\[
+  B_{\mathrm{ms}}(Y, K, \tau) \;:=\; \left\{q \in P : \sup_{y \in [Y, Y^K]} \frac{|S(Z, y, q, \kappa)|}{y^{1/2 + \tau}} \;>\; 1\right\}
+\]
+satisfies $|B_{\mathrm{ms}}(Y, K, \tau)| \le \frac{32 C_{\mathrm{ms}}}{\tau(1 - 2^{-\tau})} Y^{-\tau} |P| \le \eta |P|$ for all sufficiently large $Y$.
+\end{lemma}
+\leanref{src/Development/AutomorphicArithmetic/MeanSquareBounds/BadShare.lean:251}{QH.bad\_share}
+
+\begin{proof}
+Because $\min(1, y/n)$ equals $1$ for $n \le y$ and $y/n$ for $n > y$, differentiating termwise with respect to $y$ on each open interval between consecutive integers yields $D(Z, v, q, \kappa)$ as the right derivative. On $n > v$, we have $\min(1, v/n) = v/n$, so multiplying $D(Z, v, q, \kappa)$ by $v$ gives \eqref{eq:04:selfsim} identically!
+
+Notice that the proof of \cref{prop:04:msq-pairs} uses only $|\kappa(n)| \le 1$ (never multiplicativity of $\kappa$ on pairs!), so \eqref{eq:04:msq-bound} applies verbatim to the truncated weight $\kappa \cdot \mathbf{1}_{n > v}$, yielding
+\[
+  \sum_{q \in P} \bigl|D(Z, v, q, \kappa)\bigr|^2 \;=\; \frac{1}{v^2}\sum_{q \in P} \bigl|S(Z, v, q, \kappa \cdot \mathbf{1}_{n>v})\bigr|^2
+  \;\le\; \frac{C_{\mathrm{ms}} \log v}{v}\, |P|.
+\]
+Cover $[Y, Y^K]$ by dyadic blocks $[Y_i, W_i]$ with $Y_i := 2^i Y$ and $W_i := \min(2Y_i, Y^K)$ ($i \ge 0$). On any single block $[Y_1, W]$ ($W \le 2Y_1$), choose for each $q \in P$ a point $w(q) \in [Y_1, W]$ maximizing $|S(Z, y, q, \kappa)|$. By the fundamental theorem of calculus and Cauchy--Schwarz,
+\[
+  |S(Z, w(q), q, \kappa)|^2 \;\le\; 2|S(Z, Y_1, q, \kappa)|^2 + 2(w(q) - Y_1)\int_{Y_1}^{W} |D(Z, v, q, \kappa)|^2\,dv.
+\]
+Summing over $q \in P$ and using $w(q) - Y_1 \le Y_1$ and $\int_{Y_1}^{2Y_1} \frac{\log v}{v}\,dv \le \log(2Y_1)$ yields
+\[
+  \sum_{q \in P} \sup_{y \in [Y_1, W]} |S(Z, y, q, \kappa)|^2
+  \;\le\; 2 C_{\mathrm{ms}} Y_1 \log Y_1\,|P| + 2 C_{\mathrm{ms}} Y_1 \log(2Y_1)\,|P|
+  \;\le\; 4 C_{\mathrm{ms}} Y_1 \log(2Y_1)\,|P|.
+\]
+If $q \in B_i := \{q \in P : \sup_{y \in [Y_i, W_i]} |S(Z, y, q, \kappa)| > y^{1/2+\tau}\}$, then $\sup_{y \in [Y_i, W_i]} |S(Z, y, q, \kappa)|^2 \ge Y_i^{1 + 2\tau}$. Markov's inequality and the elementary bound $\log(2Y_i) \le \frac{2}{\tau} Y_i^{\tau}$ give
+\[
+  |B_i| \;\le\; \frac{4 C_{\mathrm{ms}} Y_i \log(2Y_i)}{Y_i^{1 + 2\tau}}\,|P|
+  \;\le\; \frac{32 C_{\mathrm{ms}}}{\tau}\,(2^i Y)^{-\tau}\,|P|.
+\]
+Summing the geometric series over $i \ge 0$ yields $|B_{\mathrm{ms}}(Y, K, \tau)| \le \sum_{i \ge 0} |B_i| \le \frac{32 C_{\mathrm{ms}}}{\tau(1 - 2^{-\tau})} Y^{-\tau} |P|$.
+\end{proof}
+
+We now connect $S(Z, x, q, \kappa)$ to the centered ramp sum $G(\chi, x)$ via a flat-rectangle Perron shift, simultaneously obtaining the thin-scale decay bound and the exact threshold $0 < \varepsilon < 1/52$.
+
+\begin{proposition}[Flat-rectangle Perron tail, thin-scale decay, and the threshold $\varepsilon < 1/52$]
+\label{prop:04:thin-decay}
+Let $\chi$ be a nonprincipal Dirichlet character modulo $Q \ge 3$ such that $L(s, \chi)$ has no zeros in the flat rectangle
+\[
+  \mathcal{B}(Q) \;:=\; \left\{s \in \CC : \Re(s) > 1 - \frac{1}{400},\;\; |\Im(s)| \le Q\right\}.
+\]
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Finite splitting.)} For every $0 < x \le z$, $G(\chi, x) = -S_z(\chi, x) - x\,\mathrm{tail}_L(\chi, z)$, where $S_z(\chi, x) := \sum_{n \le z} \Lambda(n)\chi(n)\min(1, x/n)$ and $\mathrm{tail}_L(\chi, z) := -\frac{L'}{L}(1, \chi) - \sum_{n \le z} \frac{\Lambda(n)\chi(n)}{n}$.
+\item \emph{(Flat-rectangle Perron tail.)} For every $\alpha \in (0, 1/2]$ and every $x \ge 3$ with $z = x^{400}$, there exists a constant $K_{\alpha/1600} > 0$ depending only on $\alpha$ such that
+  \begin{equation}
+  \label{eq:04:perron-tail}
+    \bigl|x \cdot \mathrm{tail}_L(\chi, x^{400})\bigr|
+    \;\le\; K_{\alpha/1600}\,(\log Q)^2\, x^{\alpha/4} + K_{\alpha/1600}\,\frac{x^{403}\log Q}{Q} + 802.
+  \end{equation}
+\item \emph{(Thin-scale decay.)} At the thin scale $X' = \exp(x^{\varepsilon/3})$ with $\log Q \le 3 x^{\varepsilon/5}\log^2 x$, taking $z = (X')^{400}$ and shifting across $\mathcal{B}(Q)$ gives the unconditional exponential decay
+  \[
+    \bigl|G(\chi, X')\bigr| \;\le\; X' \exp\!\bigl(-c_1 x^{\varepsilon/6}\bigr) \qquad (x \gg_\varepsilon 1).
+  \]
+\item \emph{(Exact origin of $0 < \varepsilon < 1/52$.)} There exists an absolute constant $C_{\mathrm{ld}} > 0$ such that
+  \begin{equation}
+  \label{eq:04:lprime-bound}
+    \left|\frac{L'}{L}(1, \chi)\right| \;\le\; 1000\log\log Q + C_{\mathrm{ld}}.
+  \end{equation}
+  Consequently, whenever $Y^{\varepsilon/6} \le \log Q \le 3 Y^{\varepsilon/5}\log^2 Y$ and $0 < \varepsilon < 1/52$, we have
+  \begin{equation}
+  \label{eq:04:eps-52}
+    \left|\frac{L'}{L}(1, \chi)\right| \;\le\; \left(200\varepsilon + \frac{2}{13}\right)\log Y \;\le\; 4\log Y
+  \end{equation}
+  for all sufficiently large $Y$.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Development/AutomorphicArithmetic/MeanSquareBounds/Thin.lean:10}{QH.thin}
+
+\begin{proof}
+(i) Expanding $\min(1, x/n) = \frac{x}{n} - (\frac{x}{n} - 1)_+$ for $n \le z$ gives
+\[
+  R(\chi, x) + x\,\frac{L'}{L}(1,\chi)
+  \;=\; \sum_{n \le z} \Lambda(n)\chi(n)\!\left(\frac{x}{n} - \min\!\left(1, \frac{x}{n}\right)\right) + x\,\frac{L'}{L}(1, \chi)
+  \;=\; -S_z(\chi, x) - x\,\mathrm{tail}_L(\chi, z).
+\]
+
+(ii) Apply the truncated Perron formula (\litref{Iwaniec--Kowalski (2004, Theorem~5.2)~\cite{IwaniecKowalski2004}}) to $\sum_{n \le z}\Lambda(n)\chi(n) n^{-1}$ at height $T = Q/2$ and shift the vertical segment from $\Re(s) = 1 + (\log z)^{-1}$ to $\Re(s) = 1 - \frac{1}{800}$ strictly inside the zero-free rectangle $\mathcal{B}(Q)$ (zero corner leakage, Safeguard~\textbf{G2}!). On the shifted vertical line $\Re(s) = 1 - \frac{1}{800}$, the standard Borel--Carath\'eodory bound on $\mathcal{B}(Q)$ yields $|L'/L(s, \chi)| \ll (\log Q)^2$, so the vertical integral is $\ll (\log Q)^2 z^{-1/800} \le (\log Q)^2 x^{-1/2}$; smoothing over a short interval $[z, z(1+\eta)]$ ($\eta = x^{-2}$) controls the horizontal segments and Perron truncation error by $K_{\alpha/1600}\frac{x^{403}\log Q}{Q} + 802$, giving \eqref{eq:04:perron-tail} after multiplying by $x$.
+
+(iii) Evaluating the exact same flat-rectangle shift for the continuous ramp kernel $G(\chi, X') = \frac{1}{2\pi i}\int_{2-i\infty}^{2+i\infty} (-\frac{L'}{L}(s, \chi)) \frac{(X')^s}{s(s-1)}\,ds$ (whose integrand decays as $|t|^{-2}$ vertically!) onto $\Re(s) = 1 - \frac{1}{800}$ inside $\mathcal{B}(Q)$ gives $|G(\chi, X')| \ll (\log Q)^2 (X')^{1 - 1/800} + (X')^2 / Q \le X' \exp(-c_1 x^{\varepsilon/6})$ because $\log X' = x^{\varepsilon/3} \gg x^{\varepsilon/5}\log^2 x \ge \log Q$.
+
+(iv) Specialize \eqref{eq:04:perron-tail} to $\alpha = 2/5$ ($\delta = 1/4000$) and $x := (\log Q)^{5/2}$, so $z = x^{400} = (\log Q)^{1000}$. For $Q$ large enough that $(\log Q)^{1006} \le Q$, \eqref{eq:04:perron-tail} gives $|\mathrm{tail}_L(\chi, z)| \le 2 K_{1/4000} + 802$. By Mertens' bound (\cref{lem:03:elementary}(ii)), $|\sum_{n \le z} \frac{\Lambda(n)\chi(n)}{n}| \le \log z + 4 = 1000\log\log Q + 4$, proving \eqref{eq:04:lprime-bound} with $C_{\mathrm{ld}} := 2 K_{1/4000} + 806$. Finally, when $\log Q \le 3 Y^{\varepsilon/5}\log^2 Y$, we have $\log\log Q \le \frac{\varepsilon}{5}\log Y + 2\log\log Y + \log 3$, so for $Y$ large enough that $2000\log\log Y \le \frac{1}{13}\log Y$ and $1000\log 3 + C_{\mathrm{ld}} \le \frac{1}{13}\log Y$,
+\[
+  \left|\frac{L'}{L}(1, \chi)\right|
+  \;\le\; \left(1000 \cdot \frac{\varepsilon}{5} + \frac{2}{13}\right)\log Y
+  \;=\; \left(200\varepsilon + \frac{2}{13}\right)\log Y \;\le\; 4\log Y
+\]
+precisely because $200\varepsilon \le 4 - \frac{2}{13} = \frac{50}{13} \iff \varepsilon \le \frac{1}{52}$!
+\end{proof}
+
+\section{Behrend Thick Sets and the Structural Crossroads of Three-Term Progressions}
+\label{sec:04:behrend}
+
+In Part~VI (\cref{ch:18}), bounding the twisted-place integrality losses at inert primes requires a subset $T_2 \subseteq A_0 \cong \ZZ/n_0\ZZ$ of large density $\delta_2 = |T_2|/n_0 \ge x^{-\varepsilon}$ such that no Frobenius progression modulo $n_0$ hits $T_2$ in a width-$3$ cluster or an inadmissible arithmetic progression of length~$3$. We construct $T_2$ via Behrend's classical sphere construction~\cite{Behrend1946} in base $B = 4 L_w d$.
+
+\begin{proposition}[Behrend sphere construction of $T_2$ with explicit base $B = 4 L_w d$]
+\label{prop:04:behrend}
+Let $n_0 = |A_0| = 2^e \ge 2^{16}$, let $L_w \ge 1$ be a fixed window-width parameter (specifically $L_w = O(1)$ governing $3$-term progressions and width-$3$ Frobenius arcs in \cref{ch:18}), and set
+\begin{equation}
+\label{eq:04:behrend-params}
+  d \;:=\; \max\!\left(2,\; \left\lfloor \sqrt{\frac{2\log n_0}{\log(4 L_w) + 1}} \right\rfloor\right), \qquad
+  B \;:=\; \bigl\lfloor n_0^{1/d} \bigr\rfloor, \qquad
+  M_B \;:=\; \left\lfloor \frac{B}{4 L_w} \right\rfloor
+\end{equation}
+(equivalently, when normalizing digit boxes by $B_0 = 4 L_w d$, one achieves the same no-carry embedding). Identify $A_0 \cong \ZZ/n_0\ZZ$ via a fixed generator. There exists an explicit sphere slice $T_2 \subseteq \{0, 1, \dots, n_0 - 1\} \subset A_0$ such that:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(No $3$-term progressions or width-$L_w$ weighted progressions.)} For any $a, b, c \in T_2$ and any positive integers $1 \le r, s \le L_w$, the linear relation $r a + s b = (r + s) c$ in $\ZZ/n_0\ZZ$ (in particular $a + b = 2c$ in $A_0$) has \emph{no} nontrivial solutions ($a = b = c$). Consequently, $T_2$ contains no nontrivial $3$-term arithmetic progression in $A_0$, and every width-$L_w$ weighted progression in $A_0$ intersects $T_2$ trivially.
+\item \emph{(Sub-exponential density.)} The density $\delta_2 := |T_2| / n_0$ satisfies
+  \begin{equation}
+  \label{eq:04:behrend-density}
+    \delta_2 \;\ge\; \frac{M_B^d}{(d M_B^2 + 1) n_0} \;\ge\; \exp\!\left(-C_{\mathrm{Beh}}\,\sqrt{\log n_0 \cdot \log(4 L_w)}\right).
+  \end{equation}
+  In particular, for every fixed $\varepsilon > 0$ and constant width $L_w = O(1)$, since $\sqrt{\log n_0} = O(\sqrt{\log x}) = o(\varepsilon \log x)$, we have $\delta_2 \ge x^{-\varepsilon}$ for all sufficiently large $x \ge x_0(\varepsilon)$.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Development/AutomorphicArithmetic/ThickFrames/ThickFrame2Large.lean:29}{UpperTheory.BernoulliSumsFrobeniusOrbits.thickFrame2}
+\leanref{src/Formalism/FrobeniusOrbits/FrobeniusOrbitsProofs/ThickExists.lean:181}{Formalism.FrobeniusOrbits.hostThickExists}
+
+\begin{proof}
+Represent vectors $v = (v_0, \dots, v_{d-1}) \in \{0, 1, \dots, M_B - 1\}^d$ in base $B = \lfloor n_0^{1/d} \rfloor$ via
+\[
+  \varphi(v) \;:=\; \sum_{j = 0}^{d-1} v_j B^j \;\in\; \bigl[0,\, M_B B^{d-1}\cdot \tfrac{B}{B-1}\bigr) \;\subseteq\; \left[0,\, \frac{n_0}{2 L_w}\right).
+\]
+Consider the Euclidean squared-norm map $\|v\|_2^2 = \sum_{j=0}^{d-1} v_j^2$, which takes integer values in $\{0, 1, \dots, d M_B^2\}$. By the pigeonhole principle, there exists an integer radius $R \in [0, d M_B^2]$ such that the sphere $S_R := \{v \in \{0, \dots, M_B - 1\}^d : \|v\|_2^2 = R\}$ has cardinality $|S_R| \ge M_B^d / (d M_B^2 + 1)$. Set $T_2 := \varphi(S_R) \subseteq \ZZ/n_0\ZZ$.
+
+(i) Suppose $a = \varphi(u)$, $b = \varphi(v)$, $c = \varphi(w) \in T_2$ satisfy $r a + s b \equiv (r + s) c \pmod{n_0}$ with $1 \le r, s \le L_w$. Because $0 \le \varphi(x) < n_0 / (2 L_w)$, both sides lie strictly in $[0, n_0)$, so the congruence holds as an exact integer identity
+\[
+  \sum_{j=0}^{d-1} \bigl(r u_j + s v_j\bigr) B^j \;=\; \sum_{j=0}^{d-1} (r + s) w_j B^j.
+\]
+Moreover, every digit satisfies $0 \le r u_j + s v_j \le (r + s)(M_B - 1) < 2 L_w M_B \le B/2 < B$ and $0 \le (r+s)w_j < B$, so there is zero carry in base $B$. Uniqueness of base-$B$ expansion forces the exact Euclidean vector identity
+\[
+  r u + s v \;=\; (r + s) w \qquad \text{in } \RR^d,
+\]
+meaning $w = \frac{r}{r+s} u + \frac{s}{r+s} v$ is a strict convex combination of $u$ and $v$. By the strict convexity identity for the Euclidean norm on the sphere $\|u\|_2 = \|v\|_2 = \|w\|_2 = \sqrt{R}$,
+\[
+  R \;=\; \|w\|_2^2 \;=\; \frac{r}{r+s}\|u\|_2^2 + \frac{s}{r+s}\|v\|_2^2 - \frac{r s}{(r+s)^2}\|u - v\|_2^2
+  \;=\; R - \frac{r s}{(r+s)^2}\|u - v\|_2^2.
+\]
+Since $r, s > 0$, this forces $\|u - v\|_2 = 0$, hence $u = v = w$ and $a = b = c$.
+
+(ii) Since $M_B = \lfloor B / (4 L_w) \rfloor$ and $B = \lfloor n_0^{1/d} \rfloor$, we have $M_B^d / n_0 \ge (4 L_w)^{-d}(1 - O(L_w / B))^d$ and $d M_B^2 + 1 \le 2 d n_0^{2/d}$. Thus
+\[
+  \delta_2 \;=\; \frac{|T_2|}{n_0} \;\ge\; \frac{M_B^d}{(d M_B^2 + 1) n_0} \;\ge\; \frac{1}{3 d (4 L_w)^d n_0^{2/d}}.
+\]
+At $d = \lfloor \sqrt{2 \log n_0 / (\log(4 L_w) + 1)} \rfloor$, the two factors $(4 L_w)^d$ and $n_0^{2/d}$ equilibrate at $\exp(O(\sqrt{\log n_0 \cdot \log(4 L_w)}))$, proving \eqref{eq:04:behrend-density}. Since $\log n_0 \asymp \log x$ and $L_w = O(1)$, we have $\sqrt{\log n_0 \cdot \log(4 L_w)} = O(\sqrt{\log x}) = o(\varepsilon \log x)$, yielding $\delta_2 \ge x^{-\varepsilon}$ for all sufficiently large $x \ge x_0(\varepsilon)$.
+\end{proof}
+
+\begin{remark}[Honest Fallback: Why Behrend's $3$-AP-Free Set $T_2$ Cannot Be Eliminated]
+\label{rem:04:behrend-crossroads}
+A natural structural question—investigated exhaustively across ten independent lines of attack during the optimization of this monograph (recorded in full in \cref{app:A})—is whether Behrend's sphere construction \cref{prop:04:behrend} is merely an engineering convenience that could be replaced by a simpler constant-density interval, subgroup, or Bohr set by extending the Berger--Wach constant-lifting theorem of \cref{ch:18} from $K \le 2$ to $K \ge 3$ thick places per Frobenius arc. The answer is a sharp, illuminating \textbf{no} within the current local lifting architecture, for five interlocking structural reasons:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \emph{Unavoidable $\Omega(b)$ obstructions in $K=3$ uncoupled Wach lifting.} When an arc carries three thick \texttt{Down} letters (\texttt{D-D-D}, rank $3 \to 2$) with exponents $(b_0, b_1, b_2)$ and arbitrary thin gap $j$, the exact constant-lifting defect is $E_{\mathrm{CL}} = \min(\rho_{01}, \rho_{02}, \rho_{12}) - \rho_{012}$, where $\rho_{ij}$ and $\rho_{012}$ are the $\varpi$-exponents of $(p_i^{b_i}, p_j^{b_j})$ and $(p_0^{b_0}, p_1^{b_1}, p_2^{b_2})$. Even with split-surjective projection ($rr = 0$), isomorphic local subspaces ($a_0 = 0$), and vacuous modulo-$P_U$ lifting ($E_{\mathrm{LD}} = 0$), taking $(b_0, b_1, b_2) = (2\ell^2 q + 1, 2\ell q + 1, 3\ell q + 1)$ gives an airtight ten-line proof of $E_{\mathrm{CL}} \ge q = \Omega(b/\ell)$ (and for equal exponents $b_0 = b_1 = b_2 = b = q\ell^2 + 1$, $E_{\mathrm{CL}} = \lceil q/2\rceil + 1 \approx b/(2\ell^2)$), completely independent of the thin gap $j$! Independently, \texttt{D-U-D} breaks Gauss-valuation lifting at the middle \texttt{U} by $b(1 - 1/\ell)$, and at $K = 4$ even pure \texttt{D-D-D-D} suffers an explicit $\tilde{D}_4$ four-line cross-ratio obstruction of size $\ge b$. (By contrast, pure one-sided $U^K$ and $D-U^m$/$D-D-U^m$ generalize cleanly; moreover, an unconditional Exact Bloch--Kato / Tate Local Duality argument closes arbitrary-$K$ pure one-sided $U^K$ and $D^K$ in ten lines.)
+\item \emph{Rigid parameter polytope.} Analyzing all global constraints fixes the unique polytope apex $(\alpha_n, \alpha_k, \alpha_m, \alpha_A) = (2, 9/2, 1/2, 4)$, forcing $\ell_A \asymp x^2 n_0 \gg n_0$ (and Row~C active up to $\ell^* \approx \exp(x^\varepsilon)$), so no parameter shift can escape wide Frobenius orbits.
+\item \emph{Single-bad-arc barrier and GRH $3$-AP-free necessity.} Even a single bad arc at $\ell \ll x^2$ violates the twisted-place integrality bound; under GRH, any viable thick set $T_2 \subseteq A_0$ must contain fewer than $x^{10\varepsilon}$ bad $3$-AP ratios, ruling out intervals, subgroups, dilates, Bohr sets, and Cantor sets.
+\item \emph{Zero gain from $A_0$-averaging or smooth weights.} $A_0$-translation invariance leaves the Behrend constraint invariant, while smooth multi-level weights collide with Row~B's ceiling $b' \le x^{-8} b$.
+\item \emph{Open Level-$2$ Coupled Wach Conjecture.} Genuine Wach modules satisfy the stronger modulo-$P_{\mathrm{all}}$ lifting bound $E_{\mathrm{NN}}$ rather than merely $E_{\mathrm{LD}}$ modulo $P_U$. Exhaustive computational tests across all $K = 3, 4$ words show no $\Omega(b)$ failure under $E_{\mathrm{NN}}$, while uncovering a genuine nonzero logarithmic defect $E_{\mathrm{CL}} = \lfloor \log_2 b \rfloor$ in \texttt{D-U-D} and \texttt{U-D-D} (with $E_{\mathrm{NN}} = rr = 0$). This points to a compelling open problem: whether $E_{\mathrm{CL}} \le C_K(E_{\mathrm{NN}} + rr + \log_\ell(\max b_s))$ holds for arbitrary $K$. Until such a coupled Level-$2$ theorem is proved, Behrend's $1$-page sphere set \cref{prop:04:behrend} remains an essential, mathematically honest load-bearing pillar of the proof.
+\end{enumerate}
+\end{remark}
+
+\section{Two-Stage Pair Selection, Biased-Bernoulli Top Sets, and Window Contraction}
+\label{sec:04:supply}
+
+We now assemble all four ingredients—mean-square prime screening (\cref{prop:04:msq-pairs,lem:04:sobolev-selfsim}), Perron zero-free filtering (\cref{prop:04:thin-decay}), Behrend thick sets (\cref{prop:04:behrend}), biased-Bernoulli top selection, and window contraction—into the Host Supply Theorem (\cref{thm:04:supply}).
+
+\begin{proposition}[Biased-Bernoulli selection of the top set $\TT \subseteq A$]
+\label{prop:04:tops}
+Let $A$ be a finite abelian group containing a subgroup $A_0$ of index $o = [A : A_0] \ge 1$ and order $n_0 = |A_0| \in [x^{2+8\varepsilon}, 2x^{2+8\varepsilon}]$, let $\delta_1 := x^{-\varepsilon/8}$, and let $\mathcal{P}_{\mathrm{long}}$ be the set of primes up to $a = x\exp(x^\varepsilon)$ whose Frobenius orbit in $A$ is long (as specified in \cref{ch:08,ch:10}). For all sufficiently large $x \ge x_0(\varepsilon, o)$, there exists a subset $\TT \subseteq A$ such that:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\frac{1}{2}\delta_1 |A| \le |\TT| \le 2\delta_1 |A|$;
+\item for every coset $c \in A / A_0$,
+  \begin{equation}
+  \label{eq:04:coset-shares}
+    \left|\frac{|\TT \cap c|}{|\TT|} - p^*(c)\right| \;\le\; \frac{1}{x}, \qquad
+    p^*(c) \;:=\; \begin{cases} \dfrac{4}{3o + 1}, & c = A_0, \\[6pt] \dfrac{3}{3o + 1}, & c \neq A_0; \end{cases}
+  \end{equation}
+\item the weighted bad-orbit count $B(\TT) := \sum_{p \in \mathcal{P}_{\mathrm{long}}} \frac{\log p}{p} \cdot \#\{t \in \TT : \text{orbit of } t \text{ at } p \text{ is bad}\}$ obeys $B(\TT) \le C_b x^{-2}\delta_1 |A| \sum_{p \in \mathcal{P}_{\mathrm{long}}} \frac{\log p}{p}$.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Development/AutomorphicArithmetic/ThickFrames/select.lean:70}{UpperTheory.BernoulliSumsFrobeniusOrbits.select}
+\leanref{src/Formalism/FrobeniusOrbits/FrobeniusOrbitsProofs/ThickFrames.lean:55}{Formalism.FrobeniusOrbits.hostTops}
+
+\begin{proof}
+Sample a random subset $T \subseteq A$ by including each element $a \in A$ independently with probability
+\[
+  p(a) \;:=\; \begin{cases} \delta_1, & a \in A_0, \\ \frac{3}{4}\delta_1, & a \in A \setminus A_0. \end{cases}
+\]
+The expected cardinality is $\mathbb{E}[|T|] = \delta_1 n_0 + (o - 1)\frac{3}{4}\delta_1 n_0 = \frac{3o + 1}{4}\delta_1 n_0$, and the expected share of each coset $c \in A/A_0$ is $\mathbb{E}[|T \cap c|] / \mathbb{E}[|T|] = p^*(c)$ identically! For each coset $c \in A/A_0$, put $Y_c(T) := |T \cap c| - \mathbb{E}[|T \cap c|]$. By independence of Bernoulli trials,
+\[
+  \mathbb{E}\!\left[\sum_{c \in A/A_0} Y_c(T)^2\right] \;=\; \sum_{a \in A} p(a)\bigl(1 - p(a)\bigr) \;\le\; \delta_1 |A| \;=\; \frac{D^2}{2}, \qquad D \;:=\; \sqrt{2\delta_1 |A|}.
+\]
+Conditioned on $t \in T$ (which occurs with probability $\le \delta_1$), each of the three good-orbit failure events along a long Frobenius orbit of length $L_2 \le L_b$ (excess density inside a fixed progression window of length $G'$, missing gap spacing, or cluster exceedance beyond $N_1 = \lceil \max(6e G'\delta_1,\, (h+3)\log_2 x)\rceil + 1$) has probability at most $C_b x^{-2}$ by Chernoff's binomial tail bound. Summing over $t \in A$ and $p \in \mathcal{P}_{\mathrm{long}}$ yields
+\[
+  \mathbb{E}\bigl[B(T)\bigr] \;\le\; m_B \;:=\; C_b x^{-2}\delta_1 |A| \sum_{p \in \mathcal{P}_{\mathrm{long}}} \frac{\log p}{p}.
+\]
+Combining both expectations into a single nonnegative random variable,
+\[
+  \mathbb{E}\!\left[\frac{1}{D^2}\sum_{c \in A/A_0} Y_c(T)^2 + \frac{B(T)}{4 m_B}\right] \;\le\; \frac{1}{2} + \frac{1}{4} \;=\; \frac{3}{4} \;<\; 1.
+\]
+Hence there exists a deterministic realization $\TT \subseteq A$ satisfying simultaneously $\sum_c Y_c(\TT)^2 < D^2$ (so $|Y_c(\TT)| \le D$ for every coset $c \in A/A_0$) and $B(\TT) \le 4 m_B$. Because $\delta_1 |A| = o n_0 x^{-\varepsilon/8} \ge x^{2 + 63\varepsilon/8} \ge 32 o^4 x^2$ for large $x$, we have $4 o D \le x^{-1}\delta_1 n_0$, which immediately gives (i) and (ii).
+\end{proof}
+
+We can now prove the Host Supply Theorem closing Part~I.
+
+\begin{theorem}[Host CM Field Supply on Exponential Windows $[Y, Y^{3/2}]$]
+\label{thm:04:supply}
+Fix a primitive Dirichlet character $\psi$ of modulus $M \ge 1$ and order $o \ge 1$, and fix $\varepsilon \in (0, 1/52)$. Suppose that the unconditional Tate--Shafarevich window bound (\cref{thm:20:vwin-complete}) holds on arbitrarily large windows $[W, W^2]$ at cutoff $401$. Then there exists $Y_0 = Y_0(\psi, \varepsilon) \ge 2$ such that for every $Y_{\min} \ge Y_0$, there exists a scale $Y \ge Y_{\min}$ for which every $x \in [Y, Y^{3/2}]$ admits:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item an admissible auxiliary prime pair $(q, d)$ with $q \equiv 3 \pmod 8$, $d \equiv 7 \pmod{16}$, $(\frac{-d}{q}) = +1$, $d \equiv -1 \pmod{p}$ for all odd primes $p \mid M$, and
+  \[
+    \exp\!\left(\frac{1}{2} Y^{\varepsilon/5}\right) < q \le \exp\!\left(Y^{\varepsilon/5}\right), \qquad
+    \exp\!\left(\frac{1}{2} Y^{\varepsilon/5}\log^2 Y\right) < d \le \exp\!\left(Y^{\varepsilon/5}\log^2 Y\right);
+  \]
+\item a host CM field $E/\QQ$ (\cref{def:03:host-cm}) with $|A_0| = n_0 \in [x^{2+8\varepsilon}, 2x^{2+8\varepsilon}]$ satisfying all host-splitting axioms (\cref{prop:03:host-axioms}), the auxiliary thick-scale bound $|G_D(\ell, \theta, x)| \le x^{1/2 + \varepsilon}$ for all $\theta \in \widehat{G}^{A_0} \setminus \{\theta_\xi\}$, the thin-scale exponential decay bound at $X' = \exp(x^{\varepsilon/3})$, and $|\frac{L'}{L}(1, \chi_\theta)| \le 4\log Y$;
+\item a Behrend thick set $T_2 \subseteq A_0$ (\cref{prop:04:behrend}) of density $\delta_2 \ge x^{-\varepsilon}$ and a balanced top set $\TT \subseteq A$ (\cref{prop:04:tops}) of density $\delta_1 = x^{-\varepsilon/8}$; and
+\item the Tate--Shafarevich bound $\le \exp(\frac{1}{2}x^\varepsilon)$ on $E$ up to all odd-weight layers $t \le \lfloor x^{400}\rfloor$.
+\end{enumerate}
+\end{theorem}
+\leanref{src/Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean:27}{UpperTheory.Top.WinPair}
+\leanref{src/Development/AutomorphicArithmetic/CharacterBoxes/PairGood.lean:18}{UpperTheory.Top.PairGood}
+\leanref{src/Development/AutomorphicArithmetic/CharacterBoxes/OrdAny.lean:86}{UpperTheory.Top.ordAny}
+\leanref{src/Development/AutomorphicArithmetic/CharacterBoxes/KerChiAny.lean:104}{UpperTheory.Top.kerChiAny}
+\leanref{src/Development/AutomorphicArithmetic/CharacterBoxes/SupplyChi.lean:8}{UpperTheory.Top.supplyChi}
+
+\begin{proof}
+\emph{Step~1: Window contraction from $[W, W^2]$ (cutoff $401$) to $[Y, Y^{3/2}]$ (cutoff $400$).}
+By \cref{lem:03:frame-structure}(ii), for large $e$ the stabilized group order satisfies $|A| = c_\psi \cdot 2^e$ with a fixed integer $1 \le c_\psi \le o$. Set $k_\psi := c_\psi^{1/(2+8\varepsilon)} \ge 1$, so $k_\psi^{2+8\varepsilon} = c_\psi$. Choose a large threshold $M_0 \ge \max(2^{100}, Y_{\min}, k_\psi^3, k_\psi^{400})$. By \cref{thm:20:vwin-complete}, there exists a window $[W, W^2]$ with $W \ge M_0$ on which the higher Tate--Shafarevich length bound $\le \exp(\frac{1}{2} (x')^\varepsilon)$ holds for all $x' \in [W, W^2]$ up to cutoff $\lfloor (x')^{401}\rfloor$.
+
+Define $Y := k_\psi W \ge Y_{\min}$. Because $k_\psi^3 \le M_0 \le W$, we have the exact contraction
+\[
+  Y^{3/2} \;=\; (k_\psi W)^{3/2} \;=\; (k_\psi^3 W^3)^{1/2} \;\le\; (W \cdot W^3)^{1/2} \;=\; W^2,
+\]
+so $[Y, Y^{3/2}] \subseteq [W, W^2]$. For every $x \in [Y, Y^{3/2}]$, set $x' := x / k_\psi \in [W, W^2]$. Then:
+\begin{itemize}
+\item the degree matches: $x^{2+8\varepsilon} = c_\psi (x')^{2+8\varepsilon} \le c_\psi \cdot 2^{e(x')} \le 2 x^{2+8\varepsilon}$;
+\item the cutoff contracts cleanly: since $k_\psi^{400} \le M_0 \le W \le x'$, we have $x^{400} = k_\psi^{400} (x')^{400} \le (x')^{401}$, hence $\lfloor x^{400} \rfloor \le \lfloor (x')^{401}\rfloor$; and
+\item $\exp(\frac{1}{2}(x')^\varepsilon) \le \exp(\frac{1}{2}x^\varepsilon)$ since $k_\psi \ge 1$.
+\end{itemize}
+This secures (iv) uniformly across $[Y, Y^{3/2}]$.
+
+\emph{Step~2: Two-stage auxiliary prime pair selection.}
+To select $(q, d)$ simultaneously good for all $x \in [Y, Y^{3/2}]$, we apply zero-density exclusion together with \cref{lem:04:sobolev-selfsim} in two stages (with $K := 3/2$ and $\tau := \varepsilon/2$):
+\begin{itemize}
+\item \emph{Stage~1 (choosing $q$).} Set $z := Y^{\varepsilon/5}$, $U_1 := e^z$, $m_1 := 8$, $a_1 := 3$, and $P_1 := \mathcal{P}(8, 3, U_1)$. By Siegel--Walfisz / PNT in arithmetic progressions, $|P_1| \gg U_1 / \log U_1 \ge U_1^{9/10}$. By standard zero-density estimates for primitive characters modulo $8M q$ (\litref{Iwaniec--Kowalski (2004, Theorem~10.4)~\cite{IwaniecKowalski2004}}), the number of primes $q \in P_1$ for which some twist $\xi \cdot \chi_{-q}$ ($\xi \in \Xi$) has a zero in the flat rectangle $\mathcal{B}(8Mq)$ is at most $C_b (8M U_1)^{1/4} \le \frac{1}{4}|P_1|$. By \cref{lem:04:sobolev-selfsim} applied to each $\xi \in \Xi$, the number of $q \in P_1$ failing $\sup_{y \in [Y, Y^{3/2}]} |S(Z, y, q, \xi)| \le y^{1/2 + \varepsilon/2}$ for some $\xi \in \Xi$ is at most $o \cdot O(Y^{-\varepsilon/2})|P_1| \le \frac{1}{4}|P_1|$. Thus at least $\frac{1}{2}|P_1| > 0$ primes $q \in P_1$ survive both exclusions; fix one such $q$.
+\item \emph{Stage~2 (choosing $d$).} Set $z' := z \log^2 Y = Y^{\varepsilon/5}\log^2 Y$, $U_2 := e^{z'}$, and $m_2 := 16 q \prod_{3 \le p \le z,\, p \neq q} p$. By Chebyshev's bound (\cref{lem:03:elementary}(i)), $\log m_2 \le 4z$, so $\frac{1}{4}(\log Y)^2 \log m_2 \le z' = \log U_2$, confirming that $(U_2, m_2, a_2)$ is $(\frac{6}{5}\varepsilon, Y, 3/2)$-admissible (where $a_2 \equiv 7 \pmod{16}$ and $a_2 \equiv -1 \pmod{m_2/16}$, which forces $d \equiv 7 \pmod{16}$, $(\frac{-d}{q}) = (\frac{1}{q}) = +1$, and $d \equiv -1 \pmod{p}$ for every odd prime $p \mid M$!). Repeating the exact same zero-density exclusion (against $F = 8Mq \le e^z \le U_2^{1/8}$) and \cref{lem:04:sobolev-selfsim} exclusion across the $2o$ characters $\xi \cdot \chi_{-q}^i$ ($\xi \in \Xi, i \in \{0, 1\}$) yields a prime $d \in \mathcal{P}(m_2, a_2, U_2)$ for which every auxiliary character $\xi \chi_{-q}^i \chi_{-d}^j$ ($(i, j) \neq (0, 0)$) is zero-free in $\mathcal{B}(Q)$ and satisfies $|S(Z, x, d, \xi\chi_{-q}^i)| \le x^{1/2+\varepsilon/2}$ uniformly for all $x \in [Y, Y^{3/2}]$.
+\end{itemize}
+
+\emph{Step~3: Closing (ii) and (iii).}
+By \cref{prop:04:thin-decay}(i)--(iv), zero-freeness in $\mathcal{B}(Q)$ and the $S(Z, x, \cdot)$ bound imply $|G_D(\ell, \theta, x)| \le x^{1/2 + \varepsilon}$ for every auxiliary character $\theta \in \widehat{G}^{A_0} \setminus \{\theta_\xi\}$ and every $x \in [Y, Y^{3/2}]$, together with thin-scale exponential decay at $X' = \exp(x^{\varepsilon/3})$ and $|\frac{L'}{L}(1, \chi_\theta)| \le 4\log Y$ (using $0 < \varepsilon < 1/52$!). Finally, \cref{prop:04:behrend} supplies the Behrend thick set $T_2 \subseteq A_0$ of density $\delta_2 \ge x^{-\varepsilon}$, and \cref{prop:04:tops} supplies the balanced top set $\TT \subseteq A$. This completes the proof of \cref{thm:04:supply} and concludes Part~I.
+\end{proof}

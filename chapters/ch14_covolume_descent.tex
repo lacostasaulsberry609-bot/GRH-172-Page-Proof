@@ -1,0 +1,154 @@
+\chapter{Arakelov Covolume Descent on Deep Shimura Covers}
+\label{ch:14}
+
+In \cref{ch:13} we established the unsquared Arakelov mean height lower bound (\cref{thm:13:volume-pq}) on unitary Shimura flag towers of signature $(p_j, q_j)$ whenever $p_j \ge 2q_j + 1$. We now descend that geometric lower bound along deep Shimura covers to produce the \emph{Arakelov Covolume Upper Bound} (\cref{thm:14:covolume}) for the automorphic row lattices $\mathcal{R}_u$, closing the upper face \eqref{eq:06:upper-face} of the Two-Sided Arakelov Slope Sandwich.
+
+Three structural highlights organize this chapter cleanly:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Four explicit factor-of-$2$ checkpoints}: Every transition from \cref{ch:13}'s unsquared Gillet--Soul\'e intersection numbers $\widehat{\deg}, \widehat{\mu}_{\mathcal{T}}$ to our monograph's locked squared-norm slope $\mu = 2\widehat{\mu}_{\mathrm{Bost}} - \log 2 + [L:\QQ]^{-1}\log|\Delta_L|$ (\eqref{eq:00:squared-slope}) is marked and verified explicitly.
+\item \emph{Active resolution-and-GAGA flat-determinant route}: Rather than relying on prismatic $p$-adic comparison theorems for flat twists, the flat-determinant Arakelov degree is proved purely from characteristic-$0$ resolution/principalization and Serre's GAGA (\cref{prop:13:six-clusters}, Cluster~I) via Kronecker-character constant sections and geometric connectedness.
+\item \emph{Algebraic descent toolkit and four linear arrows}: We encapsulate the lattice-slope descent and exponential bad-locus excision into a self-contained algebraic toolkit (\cref{prop:14:descent-toolkit}) and execute the geometric descent for $1 \le j < m$ in four transparent linear arrows, followed by the definite terminal layer $j = m$.
+\end{enumerate}
+
+\section{The Algebraic Slope Descent and Good/Bad Splitting Toolkit}
+\label{sec:14:algebraic-toolkit}
+
+Before entering the geometry of deep Shimura covers, we prove the pure Arakelov-lattice descent toolkit needed to pass from a lower bound on the slope of an auxiliary covering bundle $Y$ down to an upper bound on the logarithmic covolume $\operatorname{lcv}(\mathcal{R}) = -d\,\mu(\mathcal{R})$ of our automorphic row lattice.
+
+\begin{proposition}[Algebraic slope descent, spanning minimal slope, and good/bad splitting]
+\label{prop:14:descent-toolkit}
+Let $L$ be a totally complex number field, and let all slopes $\mu$ and map heights $h(\Phi)$ be in squared-norm normalization (\cref{def:05:squared-slope,prop:05:herm-properties}).
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Extension-filtration descent slope inequality.)} Let $0 = M_0 \subset M_1 \subset \cdots \subset M_s = M$ be a filtration of a Hermitian $\OO_L$-lattice $M$ by saturated sublattices, and let $B \subseteq M$ be a sublattice of rank $d_B$ mapped into a target lattice $N$ by a map $\Phi$ of squared-norm height $h(\Phi)$. Then
+  \begin{equation}
+  \label{eq:14:descent-slope}
+    \mu_{\min}(B) \;\ge\; \min_{1 \le i \le s} \mu_{\min}(M_i / M_{i-1}),
+    \qquad
+    \mu(B) \;\ge\; \frac{1}{d_B}\sum_{i=1}^s \rk\bigl((B \cap M_i)/(B \cap M_{i-1})\bigr)\,\mu_{\min}(M_i / M_{i-1}).
+  \end{equation}
+\item \emph{(Checkpoint~2 — Spanning vectors and metric clearing, factor of $2$.)}
+  Suppose a Hermitian $\OO_L$-lattice $B$ is generated over $L$ by vectors $x_\alpha \in B$ satisfying the \emph{unsquared} archimedean norm bound $\|x_\alpha\|_v \le e^{\Lambda}$ for every $v \in \Sigma_L$. Then every rank-$1$ sublattice $\OO_L x_\alpha$ has Gram height $\operatorname{ht}(\OO_L x_\alpha) \le e^{2 n_{\mathrm{Pl}}(L)\Lambda}$, hence squared-norm slope $\mu(\OO_L x_\alpha) \ge -2\Lambda$; consequently,
+  \begin{equation}
+  \label{eq:14:span-mumin}
+    \mu_{\min}(B) \;\ge\; -2\Lambda.
+  \end{equation}
+  Likewise: an operator bound $\sum_h \|\varphi_h(f)\|_v^2 \le e^{2P}\|f\|_v^2$ yields $h(\Phi) \le 2P$; clearing an integer denominator $g \ge 1$ ($g\cdot e(N) \subseteq N$) shifts squared-norm slope by $-2\log g$; passing along a base extension $F_2 / F_0$ incurs discriminant shift at most $2\frac{\log|\Delta_{F_2}|}{[F_2:\QQ]} \le 2\mathfrak{s}(F_2)$; and a core-to-host metric factor $e^{C_{\mathrm{meas}}\mathcal{E}(p)}$ shifts squared-norm slope by $2 C_{\mathrm{meas}}\mathcal{E}(p)$.
+\item \emph{(Exponential bad-locus excision.)} Suppose a Hermitian $\OO_L$-lattice $M$ of rank $D$ decomposes into a good-component part and a bad-locus quotient of rank share $\delta_{\mathrm{bad}} \le 3 e^{-x^{\varepsilon_0 / 7}}$ whose slope is bounded below by $-\Lambda_{\mathrm{bad}}$ (polynomial in $x$). Then excising the bad locus changes the average slope by at most $\delta_{\mathrm{bad}}\Lambda_{\mathrm{bad}} \ll x^{-10}$, giving $\operatorname{lcv}(M)/D = -\mu(M) \le -\mu(M_{\mathrm{good}}) + O(x^{-10})$.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Formalism/MeanHeightDescent/AverageDegreeBounds/DescentSlope.lean:128}{Formalism.ExtensionFiltration.descent\_slope}
+
+\begin{proof}
+(i) For any saturated filtration $0 = M_0 \subset M_1 \subset \cdots \subset M_s = M$ and any surjection (modulo finite index) $\Phi : M \to B$ of squared-norm height $h(\Phi)$, let $Q$ be any nonzero torsion-free quotient of $B$ with projection $\pi : B \twoheadrightarrow Q$. Choose the smallest index $i \ge 1$ such that $\pi \circ \Phi(M_i) \neq 0$; then $\pi \circ \Phi$ factors through a nonzero $\OO_L$-linear map $M_i / M_{i-1} \to Q$ of height at most $h(\Phi)$. By \cref{prop:05:herm-properties}(iii), $\mu(Q) \ge \mu_{\min}(M_i / M_{i-1}) - h(\Phi) \ge \min_i \mu_{\min}(M_i / M_{i-1}) - h(\Phi)$; minimizing over all quotients $Q$ and integrating along the induced filtration $B_i := \overline{\Phi(M_i)}$ yields \eqref{eq:14:descent-slope} (with $h(\Phi) = 0$ for metric quotients). In our geometric descent, the evaluation map goes precisely from covering global sections $H^0(Y, \mathcal{V})$ onto the automorphic row space, so the quotient slope bound applies directly.
+
+(ii) If $\|x_\alpha\|_v \le e^\Lambda$ for all $v \in \Sigma_L$, then $\langle x_\alpha, x_\alpha \rangle_v = \|x_\alpha\|_v^2 \le e^{2\Lambda}$, so $\operatorname{ht}(\OO_L x_\alpha) \le \prod_{v \in \Sigma_L} e^{2\Lambda} = e^{2 n_{\mathrm{Pl}}(L)\Lambda}$. Substituting into \eqref{eq:05:mu-def} gives $\mu(\OO_L x_\alpha) = -\frac{1}{n_{\mathrm{Pl}}(L)}\log\operatorname{ht}(\OO_L x_\alpha) \ge -2\Lambda$. Because $B$ is spanned over $L$ by $\{x_\alpha\}$ (equivalently, $\bigoplus_\alpha \OO_L x_\alpha \to B$ has full-rank image), every nonzero quotient $Q$ of $B$ receives a nonzero map from at least one $\OO_L x_\alpha$ of operator norm $\le 1$, giving $\mu(Q) \ge \mu(\OO_L x_\alpha) \ge -2\Lambda$, which proves \eqref{eq:14:span-mumin}! The four companion factor-of-$2$ rules follow identically from squaring unsquared norms inside \eqref{eq:05:mu-def} and \eqref{eq:05:map-height}.
+
+(iii) Follows immediately from additivity of Arakelov degree $\mu(M) = (1 - \delta_{\mathrm{bad}})\mu(M_{\mathrm{good}}) + \delta_{\mathrm{bad}}\mu(M_{\mathrm{bad}})$ and super-polynomial decay $3 e^{-x^{\varepsilon_0/7}}\Lambda_{\mathrm{bad}} \ll x^{-10}$.
+\end{proof}
+
+\section{Active Resolution-and-GAGA Flat Determinant Degree (Zero Prismatic Overhead)}
+\label{sec:14:flat-degree}
+
+A critical geometric ingredient in covolume descent is computing the exact Arakelov degree of the \emph{flat determinant twist} $G_s(-c_0)$ that shifts the Hodge bundle of the PEL unitary Shimura variety of signature $(p_j, q_j)$ to match the Chowla--Selberg period $\log\Omega_E$. Notice that in the active proof chain, this flat degree requires \emph{no} prismatic-to-Hodge comparison theorem: it uses solely Hironaka's characteristic-$0$ resolution and principalization together with Serre's GAGA (\cref{prop:13:six-clusters}, Cluster~I)!
+
+\begin{proposition}[Active flat determinant degree via resolution and Serre GAGA]
+\label{prop:14:flat-deg}
+Let $Y$ be a deep neat covering of the toroidal compactification $\overline{\mathcal{S}}_K$ of our PEL unitary Shimura variety of signature $(p_j, q_j)$ ($1 \le j < m$), and let $\mathcal{L}_{\mathrm{flat}}(\tau)$ be the flat determinant line bundle attached to a CM embedding $\tau \in \Phi$ with Kronecker character twist. Using exclusively characteristic-$0$ resolution/principalization (\cite{Hironaka1964}) and Serre's GAGA (\cite{Serre1956}):
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item There exists a global algebraic flat section $t_{Z, \tau}$ on each connected component $Z \in \mathrm{Comp}(Y)$ constructed by relativizing a Kronecker-character constant section against the boundary divisor defect, and geometric connectedness of $Z$ locks every flat section to the exact same unsquared Arakelov degree:
+  \begin{equation}
+  \label{eq:14:unsquared-flat}
+    \widehat{\deg}\bigl(t_{Z, \tau}\bigr) \;=\; \frac{p_j - q_j}{2}\log\Omega_E \;+\; q_j\bigl(\log d - \log\rd_E\bigr),
+  \end{equation}
+  yielding $|c_1(\tau) + \frac{p_j - q_j}{2}\log\Omega_E| \le 3 q_j x^\varepsilon$.
+\item \emph{(Checkpoint~3 — Factor-of-$2$ flat twist cancellation.)} Passing from unsquared Arakelov degree to our squared-norm slope $\mu_Y(G_s(-c_0))$ multiplies $c_1(\tau)$ by $2$:
+  \begin{equation}
+  \label{eq:14:twice-twist}
+    2 c_1(\tau) \;=\; -(p_j - q_j)\log\Omega_E \;+\; O\bigl(6 q_j x^\varepsilon\bigr),
+  \end{equation}
+  cancelling the factor $\frac{1}{2}$ in \eqref{eq:14:unsquared-flat} identically to reproduce the exact Chowla--Selberg main term $-\mathcal{M}_j(p) := -\sum_{\rho} (p_j - q_j) e_j(\rho)\log\Omega_E$ with total flat-twist error at most $(11 C_A + 83)\mathcal{E}(p)$!
+\end{enumerate}
+\end{proposition}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FlatDegreeStatement.lean:12}{GlobalTheory.CovTop.FlatDegProof.flatDeg\_alt\_alt}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/HodgeBundleWeights/FlatTensorSwapIsIso.lean:7}{UpperTheory.Lit.Flat.flat\_tensor\_swap\_isIso}
+
+\begin{proof}
+(i) Over $\CC$, the flat automorphic line bundle $\mathcal{L}_{\mathrm{flat}}(\tau)$ carries a canonical flat unitary connection whose monodromy factors through the finite Kronecker character on the neat level cover $Y$; hence on the smooth toroidal compactification $Y(\CC)$ (obtained via resolution and principalization of the boundary ideal, \cite{Hironaka1964}) it admits a nonzero holomorphic constant section $s$ of constant pointwise Petersson norm normalized by the CM period ratio $\Omega_E^{(p_j - q_j)/2}$. By Serre's GAGA~\cite{Serre1956} on the projective variety $Y(\CC)$, $s$ is algebraic and defines a global algebraic section $t_{Z, \tau}$ on each connected component $Z$ after relativizing against the integral boundary defect (which contributes $q_j(\log d - \log\rd_E)$ from the different splitting \cref{lem:12:rd-and-diff}(ii)). Because $Z$ is geometrically connected, any two nonzero flat sections differ by a constant scalar of norm $1$, locking the unsquared Arakelov degree to \eqref{eq:14:unsquared-flat}. Since $0 \le \log d - \log\rd_E \le 3 x^\varepsilon$ (by \cref{lem:12:rd-and-diff}(i), $2\sqrt{d} \le \rd_E$, and $\log d \le Y^{\varepsilon/5}\log^2 Y$), we obtain $|c_1(\tau) + \frac{p_j - q_j}{2}\log\Omega_E| \le 3 q_j x^\varepsilon$.
+
+(ii) Twisting a Hermitian $\OO_L$-lattice by a rank-$1$ flat Hermitian bundle of unsquared Arakelov degree $c_1(\tau)$ shifts its squared-norm slope $\mu$ by exactly $2 c_1(\tau)$ (\cref{prop:05:herm-properties}(i)), yielding \eqref{eq:14:twice-twist} and matching the Chowla--Selberg main term $-\mathcal{M}_j(p)$ identically!
+\end{proof}
+
+\section{Four Linear Arrows of Covolume Descent and the Definite Endpoint}
+\label{sec:14:covolume-theorem}
+
+We now assemble all four geometric arrows for the indefinite layers $1 \le j < m$, together with the definite terminal layer $j = m$, to prove the unconditional \emph{Arakelov Covolume Upper Bound} (\cref{thm:14:covolume}) closing Part~IV.
+
+\begin{theorem}[Arakelov covolume upper bound for automorphic row lattices and upper slope face]
+\label{thm:14:covolume}
+Fix $0 < \varepsilon < 1/52$ and an admissible host CM datum at scale $x \in [Y, Y^{3/2}]$ ($Y \ge Y_0(\psi, \varepsilon)$) with tower layers $0 \le j \le m$ of ranks $N_j = k + j(t+1)$ and indefinite signature $(p_j, q_j)$ satisfying $p_j \ge 2q_j + 1$ for $1 \le j < m$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Layer-by-layer covolume bound.)} For every layer $1 \le j \le m$, the automorphic row lattice $\Lambda_{\mathrm{type}, j}$ of rank $D_j$ satisfies the squared-norm logarithmic covolume upper bound
+  \begin{equation}
+  \label{eq:14:covol-layer}
+    \frac{\operatorname{lcv}(\Lambda_{\mathrm{type}, j})}{D_j}
+    \;=\; -\mu\bigl(\Lambda_{\mathrm{type}, j}\bigr)
+    \;\le\; \mathcal{M}_j(p) + C_{\mathrm{cov}}\,\mathcal{E}(p),
+  \end{equation}
+  where $\mathcal{M}_j(p) = \sum_\rho (p_j - q_j) e_j(\rho)\log\Omega_E$ (with $q_m = 0$ at the definite terminal layer $j = m$) and $C_{\mathrm{cov}} > 0$ is an explicit absolute constant.
+\item \emph{(Dual-slope transfer to the glued target lattice — Checkpoint~4.)} Summing \eqref{eq:14:covol-layer} across all layers $1 \le j \le m$ and combining with \cref{thm:12:size-inputs} (Block~III, \eqref{eq:12:indef-boundsmu}) establishes the upper face \eqref{eq:06:upper-face} of the Two-Sided Arakelov Slope Sandwich:
+  \[
+    \mu(\mathcal{N}^\vee) \;=\; -\mu(\mathcal{N})
+    \;\ge\; -\frac{1}{m\, n_T}\sum_{u \in \TT} \MAIN(\ell, a, w_{u_0}) - \mathcal{C}_{\mathrm{per}}(u_0) - \mathcal{E}_{\mathrm{cov}}(x),
+  \]
+  together with the maximal-slope bound $\mu_{\max}(\mathcal{N}^\vee) \le \mathcal{B}_{\mathrm{cov}}(x)$.
+\end{enumerate}
+\end{theorem}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LiftLambdaBound.lean:60}{GlobalTheory.CovTop.CovolumeBoundOfX}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean:16}{SelfIntersectionVolumeEstimates.topCovolSlim2\_use\_alt\_alt}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/CoveringDegreeMultiplicative.lean:25}{GlobalTheory.CovTop.DegProof.covering\_degree\_eq\_alt}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ShareStatementOfKnownTheorems.lean:30}{GlobalTheory.CovTop.ShareRowsNef.share\_alt\_alt}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/HilbertSamuelLowerBoundOfComponents.lean:25}{GlobalTheory.CovTop.ShortRoad.hilbertSamuel\_of\_component\_estimates\_alt}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExistsSectionBoundedByBergmanKernel.lean:24}{GlobalTheory.CovHt.KeySection.theta\_function\_le\_bergman\_kernel\_alt}
+\leanref{src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EventualL3OfCovolume.lean:14}{GlobalTheory.Fc.Ind.eventual\_L3\_of\_covolume\_alt}
+
+\begin{proof}
+For each indefinite layer $1 \le j < m$, we execute the descent in \emph{four linear arrows}, marking every factor-of-$2$ checkpoint explicitly:
+
+\medskip\noindent
+\emph{Arrow~1 (Deep cover, Bergman/Hilbert--Samuel lower bound, and Checkpoint~1 \texttt{SumAt}).}
+Pass to a deep neat prime-power covering $Y \to \overline{\mathcal{S}}_K$ whose covering degree is computed multiplicatively via Grothendieck--Messing crystalline deformation theory (\cref{prop:13:six-clusters}, Cluster~V). On each connected component $Z \in \mathrm{Comp}(Y)$, compare the global theta sections directly against the Bergman kernel of the tautological line bundle $\overline{\mathcal{L}}(u_M)$ and apply the arithmetic Hilbert--Samuel lower bound (\cref{prop:13:six-clusters}, Cluster~II) together with \cref{thm:13:volume-pq} (which uses $p_j \ge 2q_j + 1$!). Summing the unsquared component degrees $\widehat{\deg}_Z(u_M)$ over $Z \in \mathrm{Comp}(Y)$ and converting to our squared-norm slope $\mu_Y(u_M)$ executes \textbf{Checkpoint~1}:
+\[
+  \mu_Y(u_M) \;\ge\; 2\,\frac{\sum_{Z \in \mathrm{Comp}(Y)} \widehat{\deg}_Z(u_M)}{\sum_{Z \in \mathrm{Comp}(Y)} \rk_Z(u_M)}
+  \;\ge\; -C_U\,\mathcal{E}(p),
+  \qquad C_U \;:=\; 2\bigl(3 C_{\mathrm{ht}} + C_{\mathrm{HS}} + 4\bigr).
+\]
+
+\medskip\noindent
+\emph{Arrow~2 (Active \texttt{ResK}+GAGA flat determinant twist — Checkpoint~3).}
+Twist the bundle on $Y$ by the flat determinant line bundle $\mathcal{L}_{\mathrm{flat}}(-c_0)$ of \cref{prop:14:flat-deg}. By \textbf{Checkpoint~3} \eqref{eq:14:twice-twist}, multiplying $c_1(\tau)$ by $2$ yields the squared-norm lower bound
+\[
+  \mu_Y\bigl(G_s(-c_0)\bigr) \;\ge\; -\mathcal{M}_j(p) - (C_F + C_U)\,\mathcal{E}(p),
+  \qquad C_F := 11 C_A + 83.
+\]
+
+\medskip\noindent
+\emph{Arrow~3 (Group-determinant Hecke descent and base-field transfer $F_2 \to F_0 \to L$ — Checkpoint~2).}
+Project $H^0(Y, G_s(-c_0))$ onto the Hecke-isotypic automorphic row lattice $\Lambda_{\mathrm{type}, j}$ via the seesaw theta evaluation map of \cref{thm:11:seesaw-chain} and descend from the covering splitting field $F_2$ through $F_0$ down to the host coefficient field $L$. Applying \cref{prop:14:descent-toolkit}(i)--(ii) (\textbf{Checkpoint~2}: doubling the spanning norm bound, operator height, integer clearing, discriminant shift, and core-to-host metric factor $2C_{\mathrm{meas}}\mathcal{E}(p)$) yields
+\[
+  \mu\bigl(\Lambda_{\mathrm{type}, j}^{\mathrm{good}}\bigr) \;\ge\; -\mathcal{M}_j(p) - \bigl(C_{\mathrm{low}} + 2 C_{\mathrm{meas}}\bigr)\mathcal{E}(p).
+\]
+
+\medskip\noindent
+\emph{Arrow~4 (Exponential bad-locus excision and Checkpoint~4 covolume identity).}
+By the component rank-share bound on deep covers, the exceptional bad locus of components has rank share at most $3 e^{-x^{\varepsilon_0/7}}$. Applying \cref{prop:14:descent-toolkit}(iii) excises the bad locus with negligible $O(x^{-10})$ loss, and invoking \textbf{Checkpoint~4} ($\operatorname{lcv}(\Lambda_{\mathrm{type}, j})/D_j = -\mu(\Lambda_{\mathrm{type}, j})$ by \eqref{eq:05:mu-def}) yields \eqref{eq:14:covol-layer} for every $1 \le j < m$!
+
+\medskip\noindent
+\emph{Terminal definite layer ($j = m$).}
+At the top layer $j = m$, the unitary group is totally definite ($q_m = 0$, $p_m = N_m$), so the Shimura variety is $0$-dimensional (a finite set of CM points of cardinality $|\mathcal{C}_0|$ given by \cref{thm:12:size-inputs}, Block~IV!). Directly evaluating the unsquared definite terminal height $\beta_{\mathrm{def}}(p, m)$ and doubling it into squared-norm slope gives
+\[
+  -\sum_{\tau} p_m \alpha_m(\tau)\log\Omega_E - C_3\mathcal{E}(p)
+  \;\le\; 2\beta_{\mathrm{def}}(p, m)
+  \;\le\; \mu_{\mathrm{core}}(p, m) + C_0\mathcal{E}(p),
+\]
+establishing \eqref{eq:14:covol-layer} at $j = m$ as well. Summing \eqref{eq:14:covol-layer} over $1 \le j \le m$ and transferring via dual-slope additivity into \eqref{eq:12:indef-boundsmu} establishes part~(ii), completing Part~IV.
+\end{proof}

@@ -1,0 +1,196 @@
+% ============================================================================
+% Preamble for the ~300-Page Structuralist AMS Book Monograph (`paper_300p/`)
+% Title: Arakelov-Filtered Automorphic Period Towers and the Generalized
+%        Riemann Hypothesis
+% Dual-engine compatible: pdfLaTeX (\ifPDFTeX) and XeLaTeX / LuaLaTeX
+% ============================================================================
+\documentclass[11pt,oneside]{amsbook}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+  % Safe Unicode compatibility macros for pdfLaTeX
+  \DeclareUnicodeCharacter{00A0}{~}
+  \DeclareUnicodeCharacter{00B1}{\ensuremath{\pm}}
+  \DeclareUnicodeCharacter{00B7}{\ensuremath{\cdot}}
+  \DeclareUnicodeCharacter{00D7}{\ensuremath{\times}}
+  \DeclareUnicodeCharacter{2013}{--}
+  \DeclareUnicodeCharacter{2014}{---}
+  \DeclareUnicodeCharacter{2018}{`}
+  \DeclareUnicodeCharacter{2019}{'}
+  \DeclareUnicodeCharacter{201C}{``}
+  \DeclareUnicodeCharacter{201D}{''}
+  \DeclareUnicodeCharacter{2026}{\ldots}
+  \DeclareUnicodeCharacter{2032}{\ensuremath{'}}
+  \DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+  \DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+  \DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+  \DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+  \DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+  \DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+  \DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+  \DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+  \DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+  \DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+  \DeclareUnicodeCharacter{2192}{\ensuremath{\to}}
+  \DeclareUnicodeCharacter{21A6}{\ensuremath{\mapsto}}
+  \DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
+  \DeclareUnicodeCharacter{2209}{\ensuremath{\notin}}
+  \DeclareUnicodeCharacter{2212}{\ensuremath{-}}
+  \DeclareUnicodeCharacter{221E}{\ensuremath{\infty}}
+  \DeclareUnicodeCharacter{2229}{\ensuremath{\cap}}
+  \DeclareUnicodeCharacter{222A}{\ensuremath{\cup}}
+  \DeclareUnicodeCharacter{2248}{\ensuremath{\approx}}
+  \DeclareUnicodeCharacter{224D}{\ensuremath{\asymp}}
+  \DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
+  \DeclareUnicodeCharacter{2261}{\ensuremath{\equiv}}
+  \DeclareUnicodeCharacter{2264}{\ensuremath{\le}}
+  \DeclareUnicodeCharacter{2265}{\ensuremath{\ge}}
+  \DeclareUnicodeCharacter{2282}{\ensuremath{\subset}}
+  \DeclareUnicodeCharacter{2286}{\ensuremath{\subseteq}}
+  \DeclareUnicodeCharacter{2295}{\ensuremath{\oplus}}
+  \DeclareUnicodeCharacter{2297}{\ensuremath{\otimes}}
+  \DeclareUnicodeCharacter{22C6}{\ensuremath{\star}}
+\else
+  \usepackage{fontspec}
+\fi
+
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs,bm}
+\usepackage{enumitem}
+\usepackage{booktabs,longtable,array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=teal!70!black,urlcolor=blue!70!black]{hyperref}
+\usepackage[nameinlink,capitalize]{cleveref}
+
+\allowdisplaybreaks
+\setcounter{tocdepth}{2}
+
+% Zero-dependency averaged integral (\fint)
+\def\Xint#1{\mathchoice
+  {\XXint\displaystyle\textstyle{#1}}%
+  {\XXint\textstyle\scriptstyle{#1}}%
+  {\XXint\scriptstyle\scriptscriptstyle{#1}}%
+  {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+  \!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}\vcenter{\hbox{$#2#3$}}\kern-.5\wd0}}
+\providecommand{\fint}{\Xint-}
+
+% Theorem environments (numbered within chapters)
+\numberwithin{equation}{chapter}
+\numberwithin{section}{chapter}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% ----------------------------------------------------------------------------
+% Provenance, Literature, and Simplification Macros (verified by audit_300p.py)
+% ----------------------------------------------------------------------------
+% \leanref{src/Relative/Path.lean:line}{Full.DeclName}
+% Always escape underscores as \_ in both arguments.
+\newcommand{\leanref}[2]{%
+  \par\smallskip\noindent{\footnotesize\textcolor{gray!55!black}{%
+  \textbf{[Lean Archive]} \texttt{#1} --- \texttt{#2}}}\par\smallskip%
+}
+
+% \litref{Author (Year), Exact Theorem / Section}
+% Marks classical published theorems with verified hypotheses.
+\newcommand{\litref}[1]{%
+  \par\smallskip\noindent{\footnotesize\textcolor{teal!65!black}{%
+  \textbf{[Literature]} #1}}\par\smallskip%
+}
+
+% \newsimplification{Short Descriptive Title}
+% Explicitly flags every newly invented mathematical simplification deviating
+% from the Lean archive route; ALWAYS followed by a 100% self-contained proof
+% and logged in paper_300p/OPTIMIZATION_LOG.md.
+\newcommand{\newsimplification}[1]{%
+  \par\smallskip\noindent{\footnotesize\textcolor{violet!75!black}{%
+  \textbf{[New Simplification]} #1}}\par\smallskip%
+}
+
+% ----------------------------------------------------------------------------
+% Standard Mathematical Macros
+% ----------------------------------------------------------------------------
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\AAf}{\mathbb{A}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\PPb}{\mathbb{P}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\PP}{\mathfrak{p}}
+\newcommand{\QQq}{\mathfrak{q}}
+\newcommand{\MM}{\mathfrak{m}}
+\newcommand{\DD}{\mathfrak{D}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PGL}{\mathrm{PGL}}
+\newcommand{\GSp}{\mathrm{GSp}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\UU}{\mathrm{U}}
+\newcommand{\GU}{\mathrm{GU}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Gal}{\mathrm{Gal}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Frob}{\mathrm{Frob}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Nm}{\operatorname{Nm}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\len}{\operatorname{len}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\covol}{\operatorname{covol}}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\cond}{\operatorname{cond}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\rd}{\mathrm{rd}}
+\newcommand{\HT}{\mathrm{HT}}
+\newcommand{\WD}{\mathrm{WD}}
+\newcommand{\rec}{\mathrm{rec}}
+\newcommand{\Sha}{\mathrm{Sha}}
+\newcommand{\Sel}{\mathrm{Sel}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\cris}{\mathrm{cris}}
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\pst}{\mathrm{pst}}
+\newcommand{\ur}{\mathrm{ur}}
+\newcommand{\std}{\mathrm{std}}
+\newcommand{\ram}{\mathrm{ram}}
+\newcommand{\inert}{\mathrm{inert}}
+\newcommand{\spl}{\mathrm{split}}
+\newcommand{\sig}{\mathrm{sig}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\ASK}{\mathrm{ASK}}
+\newcommand{\MAIN}{\mathrm{MAIN}}
+\newcommand{\TT}{\mathcal{T}}

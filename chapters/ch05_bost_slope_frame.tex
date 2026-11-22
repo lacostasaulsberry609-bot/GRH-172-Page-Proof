@@ -1,0 +1,316 @@
+\chapter{Squared-Norm Bost Slope Inequalities and the Tight Frame Engine}
+\label{ch:05}
+
+Part~II establishes the central geometric engine of this monograph: the \emph{Stepanov--Bost slope principle} on Hermitian vector bundles over a totally complex number field $L$. While Bost's classical slope inequality~\cite{Bost1996} bounds the maximal slope of a single morphism between Hermitian $\OO_L$-lattices, an automorphic period tower produces an entire \emph{family} of evaluation maps $B_i : M_i \to N$ ($i \in I$) into a common target lattice $N$ whose archimedean images are only \emph{approximately isometric} and \emph{nearly tight} as a complex frame.
+
+This chapter constructs the complete slope-and-frame toolkit in four clean stages:
+\begin{enumerate}[label=(\roman*)]
+\item We develop Euclidean and Hermitian Arakelov lattices under our locked squared-norm slope convention $\mu(M) = 2\widehat{\mu}_{\mathrm{Bost}}(M) - \log 2 + [L:\QQ]^{-1}\log|\Delta_L|$, establishing supermodularity of degree, the canonical Harder--Narasimhan filtration, single-map Bost slope bounds, and exact Hermitian duality $\mu(M^\vee) = -\mu(M)$.
+\item We prove \emph{once for the entire monograph} the \emph{isometric column compression lemma} (\cref{prop:05:isometric-compression}), showing how to compress an over-complete automorphic evaluation matrix while preserving both near-isometry and the frame trace-square ratio.
+\item We give a ten-line, completely basis-free Hilbert--Schmidt Paley--Zygmund proof of the \emph{Frame Codimension Inequality} (\cref{thm:05:frame-codim}), tightening the classical AM--GM constants to $\dim_{\CC} W \le (\frac{\eta}{1+\eta} + 4\varepsilon + 2\sqrt{e})D$.
+\item We assemble these ingredients via an exact layer-cake integration into the \emph{Sharpened Multi-Map Bost Slope Inequality} (\cref{thm:05:bost-slope}) with \emph{zero $-\log|I|$ loss}, which serves directly as the fulcrum of the Two-Sided Arakelov Slope Sandwich in \cref{ch:06}.
+\end{enumerate}
+
+\section{Euclidean Lattices, Supermodularity, and the Harder--Narasimhan Filtration}
+\label{sec:05:euclidean-hn}
+
+Let $(V, \|\cdot\|)$ be a finite-dimensional real Euclidean space, and let $\Lambda \subset V$ be a $\ZZ$-lattice of rank $d = \rk_\ZZ(\Lambda) \ge 1$ spanning a subspace $V_\Lambda := \Lambda \otimes_\ZZ \RR \subseteq V$. Choose any $\ZZ$-basis $e_1, \dots, e_d$ of $\Lambda$, and define its \emph{covolume}, \emph{Arakelov degree}, and \emph{slope} by
+\begin{equation}
+\label{eq:05:euc-covol}
+  \covol(\Lambda) \;:=\; \sqrt{\det\bigl(\langle e_i, e_j \rangle\bigr)_{1 \le i, j \le d}} \;>\; 0,
+  \qquad
+  \widehat{\deg}(\Lambda) \;:=\; -\log \covol(\Lambda),
+  \qquad
+  \widehat{\mu}(\Lambda) \;:=\; \frac{\widehat{\deg}(\Lambda)}{\rk_\ZZ(\Lambda)}.
+\end{equation}
+We adopt the conventions $\covol(0) = 1$ and $\widehat{\deg}(0) = 0$. A sublattice $\Lambda' \subseteq \Lambda$ is \emph{saturated} (or \emph{primitive}) if $\Lambda / \Lambda'$ is torsion-free; in that case $\Lambda / \Lambda'$ inherits the quotient Euclidean metric on $V_\Lambda / V_{\Lambda'} \cong V_{\Lambda'}^\perp$, and the exact sequence $0 \to \Lambda' \to \Lambda \to \Lambda / \Lambda' \to 0$ is metrically exact:
+\begin{equation}
+\label{eq:05:deg-add}
+  \widehat{\deg}(\Lambda) \;=\; \widehat{\deg}(\Lambda') + \widehat{\deg}(\Lambda / \Lambda').
+\end{equation}
+If $\Lambda' \subseteq \Lambda$ has full rank ($\rk_\ZZ \Lambda' = \rk_\ZZ \Lambda$), then $\covol(\Lambda') = [\Lambda : \Lambda']\,\covol(\Lambda)$, so $\widehat{\deg}(\Lambda') = \widehat{\deg}(\Lambda) - \log[\Lambda : \Lambda'] \le \widehat{\deg}(\Lambda)$.
+
+\begin{lemma}[Supermodularity of Euclidean Arakelov degree]
+\label{lem:05:supermod}
+Let $\Lambda_1, \Lambda_2 \subseteq \Lambda$ be saturated sublattices of a Euclidean lattice $\Lambda$. Then $\Lambda_1 \cap \Lambda_2$ is saturated, and letting $\overline{\Lambda_1 + \Lambda_2} := (\Lambda_1 + \Lambda_2)_{\mathrm{sat}}$ denote the saturation of $\Lambda_1 + \Lambda_2$ in $\Lambda$, we have
+\begin{equation}
+\label{eq:05:supermod}
+  \widehat{\deg}(\Lambda_1 \cap \Lambda_2) + \widehat{\deg}(\overline{\Lambda_1 + \Lambda_2})
+  \;\ge\; \widehat{\deg}(\Lambda_1) + \widehat{\deg}(\Lambda_2).
+\end{equation}
+\end{lemma}
+\leanref{src/Formalism/LatticeSlopes/Statement.lean:15}{Formalism.F.covol}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/DegSupermod.lean:52}{Formalism.HN.degree\_supermodular}
+
+\begin{proof}
+Set $I := \Lambda_1 \cap \Lambda_2$ and $S := \overline{\Lambda_1 + \Lambda_2}$. Since $\Lambda_1$ and $\Lambda_2$ are saturated, $I$ is saturated in both. The induced injection $\varphi : \Lambda_1 / I \hookrightarrow S / \Lambda_2$ has finite cokernel of index $q := [S : \Lambda_1 + \Lambda_2] \ge 1$ and is norm-decreasing: for every $x \in V_{\Lambda_1}$, the orthogonal distance from $x$ to $V_{\Lambda_2}$ is at most its distance to $V_I \subseteq V_{\Lambda_2}$. By Hadamard's inequality on a Gram--Schmidt orthogonal basis of $V_{\Lambda_1}/V_I$, a norm-decreasing linear isomorphism decreases covolumes, giving
+\[
+  \covol(S / \Lambda_2) \;=\; q^{-1}\covol\bigl(\varphi(\Lambda_1 / I)\bigr) \;\le\; \covol(\Lambda_1 / I).
+\]
+Taking $-\log$ gives $\widehat{\deg}(S / \Lambda_2) \ge \widehat{\deg}(\Lambda_1 / I)$, and applying \eqref{eq:05:deg-add} to $I \subseteq \Lambda_1$ and $\Lambda_2 \subseteq S$ yields \eqref{eq:05:supermod}.
+\end{proof}
+
+By Minkowski's discreteness of covolumes among sublattices of $\Lambda$ of a given rank, the upper convex hull of $\{(\rk_\ZZ \Lambda', \widehat{\deg}(\Lambda')) : \Lambda' \subseteq \Lambda\}$ is realized by a unique flag of saturated sublattices—the \emph{canonical Harder--Narasimhan filtration} (\litref{Bost (1996, \S2)~\cite{Bost1996}}):
+\[
+  0 \;=\; \Lambda_0 \;\subsetneq\; \Lambda_1 \;\subsetneq\; \cdots \;\subsetneq\; \Lambda_r \;=\; \Lambda,
+\]
+with strictly decreasing successive slopes $\widehat{\mu}_{\max}(\Lambda) = \widehat{\mu}_1 > \widehat{\mu}_2 > \cdots > \widehat{\mu}_r = \widehat{\mu}_{\min}(\Lambda)$, where $\widehat{\mu}_j := \widehat{\mu}(\Lambda_j / \Lambda_{j-1})$.
+
+\begin{proposition}[Harder--Narasimhan characterization and single-map Euclidean Bost slope inequality]
+\label{prop:05:euc-bost}
+Let $\Lambda$ and $N$ be nonzero Euclidean lattices.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Maximal, minimal, and threshold sublattices.)} One has $\widehat{\mu}_{\max}(\Lambda) = \max_{0 \neq \Lambda' \subseteq \Lambda} \widehat{\mu}(\Lambda')$ and $\widehat{\mu}_{\min}(\Lambda) = \min_{\Lambda' \subsetneq \Lambda\text{ sat.}} \widehat{\mu}(\Lambda / \Lambda')$. For every $\tau \in \RR$, there is a unique maximal saturated sublattice $\Lambda_\tau \subseteq \Lambda$ (namely $\Lambda_j$ for the largest $j$ with $\widehat{\mu}_j \ge \tau$, or $0$) satisfying $\widehat{\mu}_{\min}(\Lambda_\tau) \ge \tau$ and $\widehat{\mu}_{\max}(\Lambda / \Lambda_\tau) < \tau$.
+\item \emph{(Single-map Euclidean Bost slope inequality.)} Let $\varphi : \Lambda \to N$ be any nonzero $\ZZ$-linear map with operator norm $\|\varphi\|_{\op} := \sup_{0 \neq v \in V_\Lambda} \|\varphi(v)\|_N / \|v\|_\Lambda > 0$. For every $\tau \in \RR$, the saturated image $\overline{\varphi(\Lambda_\tau)} \subseteq N$ satisfies
+  \begin{equation}
+  \label{eq:05:euc-step}
+    \widehat{\mu}_{\min}\bigl(\overline{\varphi(\Lambda_\tau)}\bigr) \;\ge\; \tau - \log\|\varphi\|_{\op},
+    \qquad\text{whence}\qquad
+    \overline{\varphi(\Lambda_\tau)} \;\subseteq\; N_{\tau - \log\|\varphi\|_{\op}}.
+  \end{equation}
+  In particular, if $\varphi$ is nonzero on a saturated sublattice $\Lambda' \subseteq \Lambda$, then $\widehat{\mu}_{\min}(\Lambda') \le \widehat{\mu}_{\max}(N) + \log\|\varphi\|_{\op}$.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/MuChar.lean:173}{Formalism.HN.slope\_characterization}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/SlopeIneq.lean:507}{Formalism.HN.slope\_inequality\_general}
+
+\begin{proof}
+(i) If two saturated sublattices $\Lambda', \Lambda'' \subseteq \Lambda$ both realize $\widehat{\mu}_{\max}(\Lambda)$, supermodularity (\cref{lem:05:supermod}) implies $\widehat{\deg}(\overline{\Lambda' + \Lambda''}) \ge \widehat{\mu}_{\max}(\Lambda)\,\rk(\overline{\Lambda' + \Lambda''})$, so $\overline{\Lambda' + \Lambda''}$ also achieves $\widehat{\mu}_{\max}(\Lambda)$. Thus there is a unique maximal destabilizing sublattice $\Lambda_1$; iterating on $\Lambda/\Lambda_1$ yields the canonical filtration and characterizes $\Lambda_\tau$.
+
+(ii) Let $Q$ be any nonzero torsion-free quotient of $\overline{\varphi(\Lambda_\tau)}$ via $\pi : \overline{\varphi(\Lambda_\tau)} \twoheadrightarrow Q$, and set $K := \ker(\pi \circ \varphi|_{\Lambda_\tau})$, a proper saturated sublattice of $\Lambda_\tau$. The induced map $\Lambda_\tau / K \hookrightarrow Q$ is injective onto a full-rank sublattice with operator norm $\le \|\varphi\|_{\op}$, so its top exterior power has norm $\le \|\varphi\|_{\op}^{\rk Q}$. Hence $\covol(Q) \le \covol(\varphi(\Lambda_\tau / K)) \le \|\varphi\|_{\op}^{\rk Q}\covol(\Lambda_\tau / K)$, and taking $-\frac{1}{\rk Q}\log$ gives
+\[
+  \widehat{\mu}(Q) \;\ge\; \widehat{\mu}(\Lambda_\tau / K) - \log\|\varphi\|_{\op} \;\ge\; \widehat{\mu}_{\min}(\Lambda_\tau) - \log\|\varphi\|_{\op} \;\ge\; \tau - \log\|\varphi\|_{\op}.
+\]
+Taking the minimum over all quotients $Q$ yields the first assertion of \eqref{eq:05:euc-step}. If $\overline{\varphi(\Lambda_\tau)}$ were not contained in $N_{\tau - \log\|\varphi\|_{\op}}$, its nonzero image in $N / N_{\tau - \log\|\varphi\|_{\op}}$ would have slope simultaneously $\ge \tau - \log\|\varphi\|_{\op}$ and $< \tau - \log\|\varphi\|_{\op}$, a contradiction. Taking $\tau = \widehat{\mu}_{\min}(\Lambda')$ when $\varphi|_{\Lambda'} \neq 0$ forces $N_{\tau - \log\|\varphi\|_{\op}} \neq 0$, yielding $\widehat{\mu}_{\max}(N) \ge \widehat{\mu}_{\min}(\Lambda') - \log\|\varphi\|_{\op}$.
+\end{proof}
+
+\section{Totally Complex Hermitian Lattices and Squared-Norm Slope Duality}
+\label{sec:05:hermitian-duality}
+
+Let $L$ be a totally complex number field of degree $[L:\QQ] = 2 r_2(L)$ with $n_{\mathrm{Pl}}(L) := r_2(L)$ archimedean places $v \in \Sigma_L$ and absolute discriminant $|\Delta_L|$. A \emph{Hermitian $\OO_L$-lattice} $M$ of rank $d = \rk_{\OO_L}(M) \ge 1$ is a finitely generated projective $\OO_L$-module of rank $d$ equipped with a positive-definite Hermitian inner product $\langle \cdot, \cdot \rangle_v$ on $M_v := M \otimes_{\OO_L, v} \CC$ for every $v \in \Sigma_L$.
+
+\begin{definition}[Squared-norm Arakelov slope, Gram height, and logarithmic covolume]
+\label{def:05:squared-slope}
+Let $M$ be a Hermitian $\OO_L$-lattice of rank $d \ge 1$ over a totally complex field $L$ with $n_{\mathrm{Pl}}(L) = r_2(L)$. Choose an $L$-basis $b = (b_1, \dots, b_d)$ of $M \otimes_{\OO_L} L$, and let $\mathfrak{a}_b(M) := \det_{\OO_L}(M / \bigoplus_i \OO_L b_i)$ denote its fractional $\OO_L$-ideal index (so $\Nm(\mathfrak{a}_b(M)) = [\bigoplus_i \OO_L b_i : M]$ as a generalized index). Define the \emph{Gram height}, \emph{squared-norm Arakelov slope}, and \emph{logarithmic covolume} of $M$ by
+\begin{equation}
+\label{eq:05:mu-def}
+  \operatorname{ht}(M) \;:=\; \Nm(\mathfrak{a}_b(M))^{-1} \prod_{v \in \Sigma_L} \det\bigl(\langle b_i, b_j \rangle_v\bigr)_{1 \le i,j \le d},
+  \qquad
+  \mu(M) \;:=\; -\frac{1}{n_{\mathrm{Pl}}(L)\, d}\log \operatorname{ht}(M),
+  \qquad
+  \operatorname{lcv}(M) \;:=\; -d\,\mu(M).
+\end{equation}
+\end{definition}
+\leanref{src/Formalism/HarderNarasimhan/StatementPl.lean:64}{Formalism.HN.muDef}
+
+Notice that $\operatorname{ht}(M)$ is strictly independent of the choice of $L$-basis $b$: replacing $b$ by $g b$ ($g \in \GL_d(L)$) multiplies $\prod_{v \in \Sigma_L} \det(\langle b_i, b_j \rangle_v)$ by $\prod_{v \in \Sigma_L} |\det g|_v^2 = |\Nm_{L/\QQ}(\det g)|$ and divides $\Nm(\mathfrak{a}_b(M))$ by $|\Nm_{L/\QQ}(\det g)|$, leaving the ratio unchanged.
+
+\begin{proposition}[Realification Gram determinant identity, Hermitian duality, and single-map slope inequality]
+\label{prop:05:herm-properties}
+Let $M$ and $N$ be nonzero Hermitian $\OO_L$-lattices over the totally complex number field $L$ of degree $[L:\QQ] = 2n$ ($n = n_{\mathrm{Pl}}(L) = r_2(L)$).
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Realification Gram determinant identity.)} Equip $M_\RR = \bigoplus_{v \in \Sigma_L} M_v$ with the canonical Euclidean inner product $\langle x, y \rangle_\RR := \sum_{v \in \Sigma_L} \Re\langle x_v, y_v \rangle_v$ (or Bost's trace inner product $\langle x, y \rangle_{\mathrm{tr}} := 2\langle x, y \rangle_\RR$). Setting $\operatorname{ht}(M) := \Nm(\mathfrak{a}_b(M))^{-1} \prod_{v \in \Sigma_L} \det(\langle b_i, b_j \rangle_v)$ (which is strictly independent of the $L$-basis $b$, since rescaling $b_i \mapsto \alpha b_i$ multiplies both numerator and denominator by $|\Nm_{L/\QQ}(\alpha)|$), the underlying rank-$2nd$ Euclidean $\ZZ$-lattice $M_\ZZ$ satisfies
+  \begin{equation}
+  \label{eq:05:realif-gram}
+    \covol_\ZZ(M_\ZZ) \;=\; \left(\frac{|\Delta_L|^{1/2}}{2^n}\right)^d \operatorname{ht}(M),
+    \qquad
+    \mu(M) \;:=\; -\frac{1}{n d}\log\operatorname{ht}(M) \;=\; 2\,\widehat{\mu}(M_\ZZ) - 2\log 2 + \frac{\log|\Delta_L|}{n}.
+  \end{equation}
+  With Bost's normalized metric $\frac{1}{\sqrt{2}}$ (where $\langle \cdot, \cdot \rangle_{\mathrm{Bost}} = \sqrt{2}\langle \cdot, \cdot \rangle_\RR$ scales $\covol$ by $2^{nd/2}$), $\mu(M) = 2\,\widehat{\mu}_{\mathrm{Bost}}(M) - \log 2 + \frac{\log|\Delta_L|}{[L:\QQ]}$; in all cases, $\mu(M)$ differs from $2\widehat{\mu}(M_\ZZ)$ by a fixed additive constant depending only on $L$ and the realification factor.
+\item \emph{(Hermitian duality.)} Let $M^\vee := \Hom_{\OO_L}(M, \OO_L)$ carry the dual Hermitian metrics $\langle \xi, \eta \rangle_v^\vee$ on $M_v^\vee = \Hom_\CC(M_v, \CC)$. Then $\operatorname{ht}(M^\vee) = \operatorname{ht}(M)^{-1}$, and hence
+  \begin{equation}
+  \label{eq:05:duality}
+    \mu(M^\vee) \;=\; -\mu(M), \qquad \mu_{\max}(M^\vee) \;=\; -\mu_{\min}(M), \qquad \mu_{\min}(M^\vee) \;=\; -\mu_{\max}(M).
+  \end{equation}
+\item \emph{(Totally complex single-map slope inequality.)} Let $\varphi : M \to N$ be a nonzero $\OO_L$-linear map, with squared-norm average logarithmic height
+  \begin{equation}
+  \label{eq:05:map-height}
+    h(\varphi) \;:=\; \frac{1}{n_{\mathrm{Pl}}(L)} \sum_{v \in \Sigma_L} \log\bigl(\|\varphi_v\|_{\op}^2\bigr).
+  \end{equation}
+  For every $\tau \in \RR$, the saturated $\OO_L$-sublattice $\overline{\varphi(M_\tau)} \subseteq N$ satisfies $\overline{\varphi(M_\tau)} \subseteq N_{\tau - h(\varphi)}$. In particular, if $\varphi$ is nonzero on a saturated $\OO_L$-sublattice $M' \subseteq M$, then $\mu_{\min}(M') \le \mu_{\max}(N) + h(\varphi)$.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/HtGram.lean:411}{Formalism.HN.height\_gram\_determinant}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/SlopeIneqMean.lean:249}{Formalism.HN.slope\_inequality\_mean}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/Duality.lean:340}{Formalism.HN.slope\_duality\_formula}
+
+\begin{proof}
+(i) For any $d \times d$ positive-definite Hermitian matrix $H = A + iB$, the $2d \times 2d$ real Gram matrix on $\CC^d \cong \RR^{2d}$ under $\Re\langle \cdot, \cdot \rangle$ has determinant $(\det H)^2$, so its square root is $\det H$. For $M = \OO_L$ with standard metric $|z|_v^2$ at each $v \in \Sigma_L$, Minkowski's embedding $\OO_L \hookrightarrow \CC^n \cong \RR^{2n}$ has real covolume $2^{-n}|\Delta_L|^{1/2}$. Consequently, the free sublattice $F := \bigoplus_{i=1}^d \OO_L b_i$ has Euclidean covolume $\covol_\ZZ(F) = (2^{-n}|\Delta_L|^{1/2})^d \prod_{v \in \Sigma_L} \det(\langle b_i, b_j \rangle_v)$. Since $\covol_\ZZ(M) = [F : M]^{-1}\covol_\ZZ(F) = \Nm(\mathfrak{a}_b(M))^{-1}\covol_\ZZ(F)$, we obtain \eqref{eq:05:realif-gram} immediately; taking $-\frac{1}{nd}\log$ gives $\mu(M) = -\frac{1}{nd}\log\covol_\ZZ(M_\ZZ) + \frac{\log|\Delta_L|}{n} - 2\log 2 = 2\widehat{\mu}(M_\ZZ) - 2\log 2 + \frac{\log|\Delta_L|}{n}$ (since $\rk_\ZZ(M_\ZZ) = 2nd$). Notice that every $\OO_L$-sublattice $M' \subseteq M$ has the \emph{exact same} additive field shift, so the canonical $\OO_L$-Harder--Narasimhan filtration of $M$ coincides with the $\OO_L$-invariant steps of the Euclidean filtration, and every slope difference $\mu(M') - \mu(N')$ equals $2(\widehat{\mu}(M'_\ZZ) - \widehat{\mu}(N'_\ZZ))$ identically!
+
+(ii) Dualizing an $L$-basis $b$ gives the dual basis $b^*$ of $M^\vee \otimes L$ with inverse Gram matrices $H_v(b^*) = H_v(b)^{-1}$ and inverse fractional ideal index $\mathfrak{a}_{b^*}(M^\vee) = \mathfrak{a}_b(M)^{-1}$, yielding $\operatorname{ht}(M^\vee) = \operatorname{ht}(M)^{-1}$ and $\mu(M^\vee) = -\mu(M)$. Saturated $\OO_L$-sublattices $M' \subseteq M$ correspond bijectively via $M' \mapsto (M/M')^\vee$ to saturated sublattices of $M^\vee$, interchanging $\mu_{\max}$ and $-\mu_{\min}$.
+
+(iii) Rescale the Hermitian inner product at each place $v \in \Sigma_L$ by $\lambda_v > 0$ with $\prod_{v \in \Sigma_L} \lambda_v = 1$; this leaves $\operatorname{ht}$ and all slopes $\mu$ invariant on every $\OO_L$-sublattice. Choosing $\lambda_v := \|\varphi_v\|_{\op}^{-2}\bigl(\prod_{w \in \Sigma_L} \|\varphi_w\|_{\op}^2\bigr)^{1/n}$ equalizes the rescaled operator norms across all $v \in \Sigma_L$ to $\exp(\frac{1}{2} h(\varphi))$. Applying \cref{prop:05:euc-bost}(ii) to the rescaled Euclidean lattices and multiplying slopes by $2$ (which cancels the additive field shift identically and converts $2\log\exp(\frac{1}{2}h(\varphi))$ into $h(\varphi)$) yields $\overline{\varphi(M_\tau)} \subseteq N_{\tau - h(\varphi)}$.
+\end{proof}
+
+\section{Isometric Column Compression and the Basis-Free Frame Codimension Inequality}
+\label{sec:05:frame-engine}
+
+We now prove the two archimedean linear-algebra pillars that control a \emph{family} of evaluation maps $B_i : V_i \to H$ ($i \in I$) between finite-dimensional complex inner-product spaces. First, we establish isometric column compression once for the entire book (invoked both in \cref{ch:06} for actual period matrices and in \cref{ch:16} for spectral near-orthogonality).
+
+\begin{proposition}[Isometric column compression]
+\label{prop:05:isometric-compression}
+Let $(V, \langle \cdot, \cdot \rangle_V)$ and $(H, \langle \cdot, \cdot \rangle_H)$ be finite-dimensional complex inner-product spaces, let $B : V \to H$ be a linear map, and let $U : W \hookrightarrow V$ be an isometric embedding ($U^* U = I_W$). Set $B' := B U : W \to H$, $K := B^* B$, $K' := (B')^* B' = U^* K U$, $Q := B B^*$, and $Q' := B' (B')^*$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Contraction of near-isometry defect.)} $\|K' - I_W\|_{\HS}^2 \le \|K - I_V\|_{\HS}^2$.
+\item \emph{(Contraction of trace-square and trace lower bound.)} $0 \le Q' \le Q$ as positive semidefinite operators on $H$, $\Tr_H((Q')^2) \le \Tr_H(Q^2)$, and
+  \begin{equation}
+  \label{eq:05:compress-trace}
+    \Tr_H(Q') \;=\; \Tr_W(K') \;\ge\; \dim_{\CC}(W) - \sqrt{\dim_{\CC}(W)}\,\|K' - I_W\|_{\HS}
+    \;\ge\; \dim_{\CC}(W) - \sqrt{\dim_{\CC}(W)}\,\|K - I_V\|_{\HS}.
+  \end{equation}
+\end{enumerate}
+\end{proposition}
+\leanref{src/Formalism/SizeWindowBrackets/ChainSlopeWindows/TraceConjTransposeMulSelf.lean:414}{Formalism.LFunctionChainParameters.HilbertSchmidtNormSquare.compressTraceLowerBound}
+
+\begin{proof}
+(i) Since $U^* U = I_W$, we have $K' - I_W = U^*(K - I_V)U$, and $P := U U^*$ is the orthogonal projection onto $\im(U) \subseteq V$. Because isometric conjugation preserves Hilbert--Schmidt norms and $P \le I_V$,
+\[
+  \|K' - I_W\|_{\HS}^2 \;=\; \|U^*(K - I_V)U\|_{\HS}^2 \;=\; \|P(K - I_V)P\|_{\HS}^2 \;\le\; \|K - I_V\|_{\HS}^2.
+\]
+
+(ii) Since $U U^* = P \le I_V$, we have $0 \le Q' = B P B^* \le B B^* = Q$ in the Loewner order on $H$. Since $Q' \ge 0$ and $Q - Q' \ge 0$, cyclicity of trace yields $\Tr_H((Q')^2) \le \Tr_H(Q' Q) \le \Tr_H(Q^2)$. Finally, $\Tr_H(Q') = \Tr_W(K') = \dim_{\CC}(W) + \langle I_W, K' - I_W \rangle_{\HS}$; applying Cauchy--Schwarz and (i) gives \eqref{eq:05:compress-trace}.
+\end{proof}
+
+We now prove our flagship linear-algebra simplification: a ten-line, completely basis-free Hilbert--Schmidt Paley--Zygmund proof of the Frame Codimension Inequality that simultaneously sharpens both the $\eta$- and $\sqrt{e}$-constants over the archive's AM--GM proof.
+
+\newsimplification{Ten-Line Basis-Free Hilbert--Schmidt Paley--Zygmund Proof of the Frame Codimension Inequality}
+
+\begin{theorem}[Frame Codimension Inequality]
+\label{thm:05:frame-codim}
+Let $I$ be a finite index set, let $(V_i)_{i \in I}$ and $H$ be finite-dimensional complex inner-product spaces with $D := \dim_{\CC} H \ge 0$ and $R := \sum_{i \in I} \dim_{\CC} V_i > 0$, let $B_i : V_i \to H$ be $\CC$-linear maps with positive real weights $c_i > 0$ ($i \in I$), and let $N_i \subseteq V_i$ be subspaces. Put
+\[
+  K_i \;:=\; c_i B_i^* B_i \;\in\; \End_{\CC}(V_i), \qquad
+  Q \;:=\; \sum_{i \in I} c_i B_i B_i^* \;\in\; \End_{\CC}(H), \qquad
+  W \;:=\; \left(\sum_{i \in I} B_i(N_i)\right)^{\!\perp} \;\subseteq\; H.
+\]
+Suppose $0 \le e \le 1/4$, $\eta \ge 0$, and $\varepsilon \in \RR$ satisfy:
+\begin{enumerate}[label=\textup{(F\arabic*)}]
+\item \emph{(Near-isometry.)} $\sum_{i \in I} \|K_i - I_{V_i}\|_{\HS}^2 \le e R$;
+\item \emph{(Frame tightness.)} $\Tr_H(Q^2) \le (1 + \eta)\,(\Tr_H Q)^2 / D$ (vacuous when $D = 0$);
+\item \emph{(Source codimension share.)} $\sum_{i \in I} (\dim_{\CC} V_i - \dim_{\CC} N_i) \le \varepsilon R$.
+\end{enumerate}
+Then $\varepsilon \ge 0$, and the orthogonal complement $W$ satisfies the sharp codimension bound
+\begin{equation}
+\label{eq:05:frame-codim}
+  \dim_{\CC}(W) \;\le\; \left(\frac{\eta}{1 + \eta} + 4\varepsilon + 2\sqrt{e}\right) D
+  \;\le\; \bigl(\eta + 4\varepsilon + 4\sqrt{e}\bigr) D.
+\end{equation}
+\end{theorem}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/FrameLinearAlgebraFirst.lean:77}{Formalism.HN.frame\_linear\_algebra\_first}
+
+\begin{proof}
+Set $w := \dim_{\CC} W$. If $D = 0$, then $w = 0$ and \eqref{eq:05:frame-codim} is trivial; assume henceforth $D > 0$. Since $\dim V_i - \dim N_i \ge 0$ and $R > 0$, (F3) forces $\varepsilon \ge 0$. If $\varepsilon \ge 1/4$, then $\frac{\eta}{1+\eta} + 4\varepsilon + 2\sqrt{e} \ge 4\varepsilon \ge 1$, so $w \le D$ gives \eqref{eq:05:frame-codim} trivially; assume henceforth $0 \le \varepsilon < 1/4$. Replacing $B_i$ by $\widetilde{B}_i := \sqrt{c_i}\, B_i$ ($c_i > 0$) preserves $K_i = \widetilde{B}_i^* \widetilde{B}_i$, $Q = \sum_i \widetilde{B}_i \widetilde{B}_i^*$, and $W = (\sum_i \widetilde{B}_i(N_i))^\perp$.
+
+\emph{Step~1 (Trace lower bound).} Since $K_i, Q \ge 0$, we have $t := \Tr_H(Q) = \sum_i \Tr_{V_i}(K_i) \ge 0$ and $\Tr_H(Q^2) = \|Q\|_{\HS}^2 \ge 0$. Applying Hilbert--Schmidt Cauchy--Schwarz twice with (F1):
+\[
+  t \;=\; R + \sum_{i \in I} \langle I_{V_i},\, K_i - I_{V_i}\rangle_{\HS}
+  \;\ge\; R - \sum_{i \in I} \sqrt{\dim V_i}\,\|K_i - I_{V_i}\|_{\HS}
+  \;\ge\; R - \sqrt{R}\sqrt{e R} \;=\; (1 - \sqrt{e}) R.
+\]
+Because $e \le 1/4$ and $R > 0$, we have $1 - \sqrt{e} \ge 1/2$, hence $R \le 2t$ and $t > 0$.
+
+\emph{Step~2 (Restricted trace upper bound).} Let $P_W \in \End_{\CC}(H)$ and $P_i^\perp \in \End_{\CC}(V_i)$ be the orthogonal projections onto $W$ and $N_i^\perp$ (ranks $w$ and $r_i^\perp := \dim V_i - \dim N_i$). Because $P_W \widetilde{B}_i|_{N_i} = 0$, we have $P_W \widetilde{B}_i = P_W \widetilde{B}_i P_i^\perp$, so the Pythagorean identity $\|P_W A\|_{\HS}^2 \le \|A\|_{\HS}^2$ applied to $A = \widetilde{B}_i P_i^\perp$ yields
+\[
+  t_W \;:=\; \Tr_H(P_W Q) \;=\; \sum_{i \in I} \|P_W \widetilde{B}_i P_i^\perp\|_{\HS}^2
+  \;\le\; \sum_{i \in I} \|\widetilde{B}_i P_i^\perp\|_{\HS}^2
+  \;=\; \sum_{i \in I} \Tr_{V_i}(P_i^\perp K_i)
+  \;=\; \sum_{i \in I} \bigl(r_i^\perp + \langle P_i^\perp,\, K_i - I_{V_i}\rangle_{\HS}\bigr).
+\]
+Applying Cauchy--Schwarz on each $V_i$ ($\|P_i^\perp\|_{\HS} = \sqrt{r_i^\perp}$) and over $i \in I$ with (F1) and (F3) gives
+\[
+  t_W \;\le\; \sum_{i \in I} r_i^\perp + \sqrt{\sum_{i \in I} r_i^\perp}\sqrt{\sum_{i \in I} \|K_i - I_{V_i}\|_{\HS}^2}
+  \;\le\; \bigl(\varepsilon + \sqrt{\varepsilon e}\bigr) R.
+\]
+
+\emph{Step~3 (Four-line Paley--Zygmund closure).} Put $P := I_H - P_W$ (orthogonal projection of rank $D - w$) and $\theta := t_W / t$. Because $Q \ge 0$, both $t_W = \Tr_H(P_W Q P_W) \ge 0$ and $t - t_W = \Tr_H(P Q P) \ge 0$, so $\theta \in [0, 1]$ unconditionally. By Hilbert--Schmidt Cauchy--Schwarz on $\langle P, Q \rangle_{\HS} = \Tr_H(P Q) = t - t_W \ge 0$ together with (F2),
+\[
+  (1 - \theta)^2 t^2 \;=\; (t - t_W)^2 \;=\; \langle P, Q \rangle_{\HS}^2
+  \;\le\; \|P\|_{\HS}^2 \|Q\|_{\HS}^2 \;=\; (D - w)\Tr_H(Q^2)
+  \;\le\; (D - w)(1 + \eta)\frac{t^2}{D}.
+\]
+Dividing by $(1 + \eta)t^2 / D > 0$ gives
+\[
+  w \;\le\; \left(1 - \frac{(1 - \theta)^2}{1 + \eta}\right) D
+  \;=\; \frac{\eta + 2\theta - \theta^2}{1 + \eta}\, D
+  \;\le\; \left(\frac{\eta}{1 + \eta} + 2\theta\right) D.
+\]
+Finally, since $R \le 2t$ and $0 \le \varepsilon < 1/4$ (so $\sqrt{\varepsilon} < 1/2$), we have $2\theta = 2 t_W / t \le 4(\varepsilon + \sqrt{\varepsilon e}) \le 4\varepsilon + 2\sqrt{e}$, establishing \eqref{eq:05:frame-codim}.
+\end{proof}
+
+\section{The Sharpened Multi-Map Bost Slope Inequality}
+\label{sec:05:multi-bost}
+
+Combining \cref{prop:05:herm-properties} with \cref{thm:05:frame-codim} via an exact five-line layer-cake integration yields the sharpened multi-map Bost slope inequality. Crucially, because all images $B_i(M_{i,\tau})$ land simultaneously inside the \emph{single} supermodular Harder--Narasimhan step $N_{\tau - H^*}$, the cardinality $|I|$ never enters the inequality!
+
+\newsimplification{Direct Sharpened Multi-Map Bost Slope Inequality (Zero $-\log|I|$ Loss)}
+
+\begin{theorem}[Sharpened Multi-Map Bost Slope Inequality]
+\label{thm:05:bost-slope}
+Let $L$ be a totally complex number field, let $I$ be a finite index set, let $(M_i)_{i \in I}$ and $N$ be nonzero Hermitian $\OO_L$-lattices with $D := \rk_{\OO_L}(N) \ge 1$ and $R := \sum_{i \in I} \rk_{\OO_L}(M_i) > 0$, and let $B_i : M_i \to N$ be $\OO_L$-linear maps with positive real weights $c_i > 0$ ($i \in I$). Assume that at every archimedean place $v \in \Sigma_L$, the induced complex linear maps $B_{i,v} : M_{i,v} \to N_v$ satisfy hypotheses \textup{(F1)} and \textup{(F2)} of \cref{thm:05:frame-codim} with uniform parameters $0 \le e \le 1/4$ and $\eta \ge 0$. Set
+\[
+  H^* \;:=\; \max_{i \in I} h\bigl(\sqrt{c_i}\, B_i\bigr) \;=\; \max_{i \in I} \frac{1}{n_{\mathrm{Pl}}(L)}\sum_{v \in \Sigma_L} \log\bigl(c_i \|B_{i,v}\|_{\op}^2\bigr),
+  \qquad
+  \delta \;:=\; \frac{\eta}{1 + \eta} + 2\sqrt{e},
+\]
+and write $\mu(M_{\mathrm{tot}}) := \frac{1}{R}\sum_{i \in I} \rk_{\OO_L}(M_i)\,\mu(M_i)$ and $M_+ := \max_{i \in I} \mu_{\max}(M_i)$. Then, with \emph{zero $-\log|I|$ loss},
+\begin{equation}
+\label{eq:05:multi-bost}
+  \mu(M_{\mathrm{tot}})
+  \;\le\; \mu(N) + H^* + \delta\,\bigl(M_+ - \mu_{\min}(N) - H^*\bigr)_+
+  + 3\bigl(M_+ - \mu(M_{\mathrm{tot}})\bigr).
+\end{equation}
+In particular, since $\mu_{\min}(N) = -\mu_{\max}(N^\vee)$ by \eqref{eq:05:duality} and $c_i \|B_{i,v}\|_{\op}^2 \le \|K_{i,v}\|_{\op} \le 1 + \|K_{i,v} - I_{V_i}\|_{\HS}$, if $H^* \le \log(1 + \sqrt{e R})$, then
+\begin{equation}
+\label{eq:05:multi-bost-dual}
+  \mu(M_{\mathrm{tot}}) + \mu(N^\vee)
+  \;\le\; H^* + \delta\,\bigl(M_+ + \mu_{\max}(N^\vee) - H^*\bigr)_+
+  + 3\bigl(M_+ - \mu(M_{\mathrm{tot}})\bigr).
+\end{equation}
+\end{theorem}
+\leanref{src/Formalism/HarderNarasimhan/HarderNarasimhanProofs/TheoremFSharp.lean:388}{Formalism.HN.frame\_theorem\_sharp}
+
+\begin{proof}
+For each real threshold $\tau \in \RR$, let $M_{i,\tau} \subseteq M_i$ and $N_\tau \subseteq N$ denote the canonical Harder--Narasimhan threshold sublattices of \cref{prop:05:euc-bost}(i) (in squared-norm slope normalization), and define the two non-increasing step functions $F, G : \RR \to [0, 1]$ by
+\[
+  F(\tau) \;:=\; \frac{\rk_{\OO_L}(N_{\tau - H^*})}{D}, \qquad
+  G(\tau) \;:=\; \frac{1}{R}\sum_{i \in I} \rk_{\OO_L}(M_{i,\tau}),
+\]
+so that the source codimension share is $\varepsilon(\tau) := 1 - G(\tau) \in [0, 1]$. Both $F(\tau)$ and $G(\tau)$ equal $1$ for $\tau \ll 0$ and $0$ for $\tau \gg 0$; by Abel summation (layer-cake integration of the Harder--Narasimhan polygon),
+\begin{equation}
+\label{eq:05:layer-cake}
+  \mu(M_{\mathrm{tot}}) - \bigl(\mu(N) + H^*\bigr) \;=\; \int_{-\infty}^{\infty} \bigl(G(\tau) - F(\tau)\bigr)\,d\tau,
+  \qquad
+  M_+ - \mu(M_{\mathrm{tot}}) \;=\; \int_{-\infty}^{M_+} \bigl(1 - G(\tau)\bigr)\,d\tau.
+\end{equation}
+
+Fix any $\tau \in \RR$. By \cref{prop:05:herm-properties}(iii) applied to the rescaled map $\sqrt{c_i}\, B_i : M_i \to N$ (noting $h(\sqrt{c_i} B_i) \le H^*$), for \emph{every} $i \in I$ we have $\overline{B_i(M_{i,\tau})} \subseteq N_{\tau - H^*}$. Because $N_{\tau - H^*}$ is closed under sums, $\sum_{i \in I} B_i(M_{i,\tau}) \subseteq N_{\tau - H^*}$—with \emph{no factor of $|I|$}! Choosing any archimedean place $v \in \Sigma_L$ and putting $W_v := (\sum_{i \in I} B_{i,v}(M_{i,\tau,v}))^\perp \subseteq N_v$, we have $D - \rk_{\OO_L}(N_{\tau - H^*}) \le \dim_{\CC}(W_v)$. Applying \cref{thm:05:frame-codim} at $v$ yields
+\[
+  1 - F(\tau) \;=\; \frac{D - \rk_{\OO_L}(N_{\tau - H^*})}{D}
+  \;\le\; \frac{\dim_{\CC}(W_v)}{D}
+  \;\le\; \delta + 4\bigl(1 - G(\tau)\bigr) \qquad \text{for every } \tau \in \RR.
+\]
+Subtracting $1 - G(\tau)$ from both sides gives the exact pointwise bound
+\begin{equation}
+\label{eq:05:GF-pointwise}
+  G(\tau) - F(\tau) \;\le\; \delta + 3\bigl(1 - G(\tau)\bigr) \qquad \text{for every } \tau \in \RR.
+\end{equation}
+
+Now put $A := \mu_{\min}(N) + H^*$. Observe the sign of $G(\tau) - F(\tau)$ on the three intervals partitioning $\RR$:
+\begin{itemize}
+\item For $\tau \le A$, we have $F(\tau) = 1 \ge G(\tau)$, so $G(\tau) - F(\tau) \le 0$.
+\item For $\tau > M_+$, we have $G(\tau) = 0 \le F(\tau)$, so $G(\tau) - F(\tau) \le 0$.
+\item For $\tau \in (A, M_+]$ (empty if $M_+ \le A$), \eqref{eq:05:GF-pointwise} applies pointwise.
+\end{itemize}
+Integrating over $\RR$ via \eqref{eq:05:layer-cake} and using $1 - G(\tau) \ge 0$ on $(-\infty, M_+]$ gives
+\begin{align*}
+  \mu(M_{\mathrm{tot}}) - \bigl(\mu(N) + H^*\bigr)
+  &\;\le\; \int_{A}^{\max(A, M_+)} \Bigl(\delta + 3\bigl(1 - G(\tau)\bigr)\Bigr)\,d\tau \\
+  &\;\le\; \delta\,(M_+ - A)_+ + 3\int_{-\infty}^{M_+} \bigl(1 - G(\tau)\bigr)\,d\tau
+  \;=\; \delta\,\bigl(M_+ - \mu_{\min}(N) - H^*\bigr)_+ + 3\bigl(M_+ - \mu(M_{\mathrm{tot}})\bigr),
+\end{align*}
+which is \eqref{eq:05:multi-bost}. Substituting $\mu(N) = -\mu(N^\vee)$ and $\mu_{\min}(N) = -\mu_{\max}(N^\vee)$ from \eqref{eq:05:duality} yields \eqref{eq:05:multi-bost-dual}.
+\end{proof}
+
+\begin{remark}[Structural payoff for \cref{ch:06}]
+Look at the left-hand side of \eqref{eq:05:multi-bost-dual}: $\mu(M_{\mathrm{tot}}) + \mu(N^\vee)$! In \cref{ch:06}, we take $M_i$ to be the glued Hermitian lattices constructed in Part~III (whose slope $\mu(M_{\mathrm{tot}})$ carries the inert-prime divisibility functional $\ASK$ plus $-\mu(R R^\vee)$), and we take $N^\vee$ to be the automorphic row-lattice dual whose slope $\mu(N^\vee)$ is bounded above in Part~IV via covolume descent (carrying $-\MAIN$ plus $+\mu(R R^\vee)$). Adding the two slopes cancels the unknown archimedean period term $\mu(R R^\vee)$ \emph{identically}, while the absence of any $-\log|I|$ loss makes the resulting seven-term error bound $\mathrm{Err}_5$ completely independent of the translate $u_0 \in A_0$!
+\end{remark}

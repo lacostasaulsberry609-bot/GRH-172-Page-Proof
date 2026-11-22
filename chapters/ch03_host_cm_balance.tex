@@ -1,0 +1,516 @@
+\chapter{Host CM Fields, the Balance Identity, and the Square-Root Minimax}
+\label{ch:03}
+
+In \cref{ch:02} we reduced GRH for a primitive character $\psi$ to establishing a one-sided upper bound $G_\psi(x) \le x^{1/2 + 9\varepsilon}$ across arbitrarily large exponential windows $[Y, Y^{3/2}]$. The purpose of the present chapter is to build the exact algebraic and analytic bridge connecting the centered ramp sums $G(\chi, y)$ ($\chi \in \langle \psi \rangle$) to the inert-prime divisibility functional $\ASK$ and the analytic main term $\MAIN$ produced by our Arakelov-filtered automorphic period tower (\cref{ch:06}).
+
+This chapter achieves three goals:
+\begin{enumerate}[label=(\roman*)]
+\item We construct the \emph{host abelian CM field} $E/\QQ$ directly in a single canonical additive Galois coordinate system $G = (\ZZ/2\ZZ)^2 \times A$, avoiding all coordinate conversions and carefully distinguishing the quadratic shift $\sigma_q$ from the true inertia generator $\widetilde{\sigma}_q = \sigma_q + (0, w(-1))$ at $q$ when $\psi$ is odd.
+\item We prove the exact \emph{Balance Identity} (\cref{thm:03:balance-identity}), showing that $\ASK - \MAIN$ equals a Galois-averaged linear combination of centered prime-power ramp sums $G(\theta, a/w(\rho))$. Placing the Behrend-thick weights on the $\sigma_q$-shifted CM places ensures that the preimage under the partner bijection carries inertia $\iota_d$ rather than complex conjugation $c$, completely eliminating odd-character parity sign flips.
+\item We execute the \emph{square-root minimax optimization} at $m \asymp x^{1/2 - \varepsilon/16}$, converting the Pointwise Main Inequality $(\star)$ of \cref{ch:06} into the uniform window bound $G_\psi(x) \le x^{1/2 + 9\varepsilon}$ (\cref{thm:03:window-bound}) and tracing every fraction of the locked Exponent Ledger $2 \to 5 \to \frac{53}{8} \to \frac{61}{8} \to 8 \to 9$.
+\end{enumerate}
+
+\section{Canonical Additive Galois Frame of the Host CM Field}
+\label{sec:03:canonical-frame}
+
+Fix a primitive Dirichlet character $\psi$ of modulus $M \ge 1$ and order $o = \ord(\psi) \ge 1$, generating the cyclic group $\Xi = \langle \psi \rangle \le \widehat{(\ZZ/M\ZZ)^\times}$. Let $B := (\ZZ/M\ZZ)^\times / \ker(\Xi)$ be the cyclic quotient of order $|B| = o$, equipped with the canonical projection $\xi_M : (\ZZ/M\ZZ)^\times \twoheadrightarrow B$.
+
+For an integer $e \ge 1$, set $n_0 := 2^e$, and let
+\[
+  H_e \;:=\; (\ZZ/2^{e+2}\ZZ)^\times / \{\pm 1\} \;\cong\; \ZZ / 2^e \ZZ,
+\]
+with projection $\mathrm{cl}_e : (\ZZ/2^{e+2}\ZZ)^\times \twoheadrightarrow H_e$. Define the combined conductor
+\[
+  Q_S \;:=\; \operatorname{lcm}(2^{e+2}, M)
+\]
+and the natural product homomorphism
+\[
+  \eta \;=\; (\mathrm{cl}_{Q_S}, \xi_{Q_S}) : (\ZZ/Q_S\ZZ)^\times \longrightarrow H_e \times B.
+\]
+Let $A := \im(\eta) \le H_e \times B$, written \emph{additively} throughout the monograph, with surjection $\nu : (\ZZ/Q_S\ZZ)^\times \twoheadrightarrow A$ and induced projections $h : A \twoheadrightarrow H_e$ and $\xi_A : A \twoheadrightarrow B$. Set
+\[
+  A_0 \;:=\; \ker(\xi_A : A \twoheadrightarrow B) \;\le\; A.
+\]
+
+\begin{lemma}[Structure and order stabilization of the base group $A$]
+\label{lem:03:frame-structure}
+With notation as above:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The index $[A : A_0]$ equals $o = |B|$, and the restriction $h|_{A_0} : A_0 \hookrightarrow H_e$ is injective; hence $A_0$ is cyclic of $2$-power order dividing $2^e$.
+\item Let $2^{e_M} \parallel M$ be the $2$-part of $M$. Whenever $e \ge e_M + 2$, the order $|A_0|$ is a fixed divisor of $2^e$ satisfying $|A| = c_\psi \cdot 2^e$ for an integer $c_\psi \in [1, o]$ depending solely on $\psi$ (more precisely, $c_\psi = [B : \xi_A(\ker h)] \cdot [H_e : h(A_0)]^{-1} \cdot o$, which stabilizes once $2^{e+2} > M$ because $\ker(\mathrm{cl}_e)$ contains the entire $2$-part of $M$'s character overlap). In particular, replacing $e$ by $e + e_0(\psi)$ ensures $|A_0| = 2^{e}$ with $A_0 \cong H_e$ and $|A| = o \cdot 2^e$ (or keeping $e$ fixed gives $|A| = c_\psi \cdot 2^e$ with $1 \le c_\psi \le o$).
+\item Every character $\chi \in \Xi = \langle \psi \rangle$ factors uniquely as $\chi(u) = \widetilde{\chi}(\xi_A(\nu(u)))$ for a unique character $\widetilde{\chi} \in \widehat{B}$.
+\end{enumerate}
+\end{lemma}
+\leanref{src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ZsmulGeneratorEqZeroOfProjection.lean:15}{Formalism.HC.Frame}
+
+\begin{proof}
+(i) Since $\xi_{Q_S} = \xi_A \circ \nu$ is surjective onto $B$, $\xi_A : A \twoheadrightarrow B$ is surjective with kernel $A_0$, giving $[A : A_0] = |B| = o$. If $a \in A_0 \cap \ker(h)$, then $a$ projects trivially to both $H_e$ and $B$ inside $H_e \times B$, so $a = 0$; hence $h|_{A_0}$ is injective into the cyclic group $H_e \cong \ZZ/2^e\ZZ$.
+
+(ii) Write $M = 2^{e_M} M_{\mathrm{odd}}$ with $M_{\mathrm{odd}}$ odd. By the Chinese remainder theorem, for $e + 2 \ge e_M$ we have $Q_S = 2^{e+2} M_{\mathrm{odd}}$ and $(\ZZ/Q_S\ZZ)^\times \cong (\ZZ/2^{e+2}\ZZ)^\times \times (\ZZ/M_{\mathrm{odd}}\ZZ)^\times$. The restriction of $\eta$ to $(\ZZ/M_{\mathrm{odd}}\ZZ)^\times$ maps trivially to $H_e$ and surjects onto the odd-conductor subgroup $B_{\mathrm{odd}} \le B$. Meanwhile, on $(\ZZ/2^{e+2}\ZZ)^\times \cong \{\pm 1\} \times \ZZ/2^e\ZZ$, the map $\mathrm{cl}_e$ is projection to $\ZZ/2^e\ZZ$ while $\xi_M$ depends only on residue modulo $2^{e_M}$. Thus $\ker(\xi_M|_{(\ZZ/2^{e+2}\ZZ)^\times})$ has constant index $2^{r_\psi}$ (independent of $e \ge e_M$) inside $\ZZ/2^e\ZZ$, whence $|A_0| = 2^{e - r_\psi}$ and $|A| = o \cdot |A_0| = (o / 2^{r_\psi}) \cdot 2^e = c_\psi \cdot 2^e$ with $1 \le c_\psi \le o$ constant for all $e \ge e_M$. (Equivalently, $\ker(\eta)$ projects to $\ker(\Xi)$ on $(\ZZ/M\ZZ)^\times$.)
+
+(iii) Immediate from $B = (\ZZ/M\ZZ)^\times / \ker(\Xi)$.
+\end{proof}
+
+We now adjoin an auxiliary prime pair $(q, d)$ and define the canonical additive Galois group $G$ and host CM field $E/\QQ$.
+
+\begin{definition}[Admissible host prime pair and canonical additive Galois group]
+\label{def:03:host-cm}
+An \emph{admissible host prime pair} $(q, d)$ relative to $Q_S$ consists of distinct odd primes $q, d \nmid Q_S$ satisfying the quadratic congruences
+\begin{equation}
+\label{eq:03:qd-congruences}
+  q \equiv 3 \pmod{8}, \qquad d \equiv 7 \pmod{16}, \qquad \left(\frac{-d}{q}\right) = +1.
+\end{equation}
+By quadratic reciprocity and \eqref{eq:03:qd-congruences}, one checks immediately that
+\[
+  \left(\frac{2}{d}\right) = \left(\frac{q}{d}\right) = +1, \qquad
+  \left(\frac{2}{q}\right) = \left(\frac{d}{q}\right) = \left(\frac{-q}{d}\right) = -1,
+\]
+and $(\frac{-r}{m}) = (\frac{m}{r})$ for every prime $r \equiv 3 \pmod 4$ and odd integer $m$ coprime to $r$.
+
+Define the \emph{canonical additive Galois group}
+\begin{equation}
+\label{eq:03:G-def}
+  G \;:=\; \bigl(\ZZ/2\ZZ \times \ZZ/2\ZZ\bigr) \times A, \qquad |G| = 4|A|,
+\end{equation}
+with index-$2$ subgroup
+\[
+  \Phi \;:=\; \bigl\{((0, b), m) : b \in \ZZ/2\ZZ,\; m \in A\bigr\} \;\le\; G, \qquad |\Phi| = 2|A|.
+\]
+Define the two sign characters $\chi_C, \psi_C : G \to \{\pm 1\}$ by $\chi_C((a,b), m) := (-1)^a$ (tracking $\chi_{-d}$) and $\psi_C((a,b), m) := (-1)^b$ (tracking $\chi_{-q}$). Let $w : \{\pm 1\} \to A$ be the homomorphism $w(1) := 0$, $w(-1) := \nu(-1 \bmod Q_S)$ (so $2w(s) = 0$ and $h(w(s)) = 0$ because $-1 \in \ker(\mathrm{cl}_e)$), and let $\sgn_2 : \{\pm 1\} \xrightarrow{\sim} \ZZ/2\ZZ$ be $\sgn_2(1) = 0$, $\sgn_2(-1) = 1$.
+
+Setting $N_{\mathrm{cond}} := Q_S q d$, define the \emph{twisted Artin homomorphism} $\mathrm{Art} : (\ZZ/N_{\mathrm{cond}}\ZZ)^\times \to G$ by
+\begin{equation}
+\label{eq:03:twisted-artin}
+  \mathrm{Art}(u) \;:=\; \left(\left(\sgn_2\!\left(\frac{u}{d}\right),\; \sgn_2\!\left(\frac{u}{q}\right)\right),\;\; \nu(u \bmod Q_S) + w\!\left(\left(\frac{u}{q}\right)\right)\right) \;\in\; G.
+\end{equation}
+The \emph{host CM field} is the fixed field $E := \QQ(\zeta_{N_{\mathrm{cond}}})^{\ker(\mathrm{Art})}$.
+\end{definition}
+\leanref{src/Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean:38}{Formalism.LFunctionChainParameters.characterSumData.ArithData}
+\leanref{src/Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean:14}{Deduction.CH.HostFactsS}
+\leanref{src/Development/AutomorphicArithmetic/PrimitiveCosets/hostFactsS.lean:44}{hostFactsS\_pf}
+
+The shift $+ w((\frac{u}{q}))$ in the $A$-coordinate of \eqref{eq:03:twisted-artin} is the key algebraic device that handles \emph{odd} Dirichlet characters $\psi$ ($\psi(-1) = -1$) on the exact same footing as even characters: it moves complex conjugation cleanly to $((1, 1), 0)$ without any parity twist in $A$! Let us verify every distinguished element and inertia subgroup explicitly.
+
+\begin{proposition}[Distinguished elements, inertia subgroups, and kept characters]
+\label{prop:03:host-axioms}
+Assume $(q, d)$ is admissible relative to $Q_S$ and $E$ is given by \cref{def:03:host-cm}. Set $S := \{p \text{ prime} : p \mid Q_S q\}$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Surjectivity and CM structure.)} The twisted Artin map $\mathrm{Art} : (\ZZ/N_{\mathrm{cond}}\ZZ)^\times \twoheadrightarrow G$ is surjective, giving $\Gal(E/\QQ) \cong G$. Complex conjugation is
+  \[
+    c \;=\; \mathrm{Art}(-1) \;=\; \bigl((1, 1),\, 0\bigr) \;\in\; G \setminus \Phi,
+  \]
+  independently of the parity of $\psi$. In particular, $E$ is an abelian CM field containing $K := E^{\Phi} = \QQ(\sqrt{-d})$ (with $\Gal(E/K) = \Phi$, $\delta_E := g_d \in E$ satisfying $\delta_E^2 = -d$) and $\QQ(\sqrt{-q})$ (with $\alpha_E := g_q \in E$ satisfying $\alpha_E^2 = -q$).
+
+\item \emph{(Inertia and Frobenius splitting axioms.)} Let $I_p \le G$ be the inertia subgroup at a rational prime $p$ and $\Frob_p \in G / I_p$ its Frobenius element. Then:
+  \begin{itemize}
+  \item $2, q \in S$ and $d \notin S$;
+  \item for every prime $p \notin S \cup \{d\}$, $p$ is unramified in $E/\QQ$ ($I_p = \{0\}$), and $p$ is inert in $K/\QQ$ if and only if $\Frob_p \notin \Phi$ (i.e., $(\frac{-d}{p}) = -1$);
+  \item for every prime $p \in S$, $I_p \subseteq \Phi$ and $\Frob_p \in \Phi$ (every prime $p \mid Q_S q$ splits in $K = \QQ(\sqrt{-d})$, provided $(\frac{-d}{p}) = +1$ for all odd $p \mid Q_S$, which holds automatically once $d \equiv -1 \pmod{p}$ for all odd $p \mid M$ and $d \equiv 7 \pmod{16}$);
+  \item at $d$, $I_d = \{0, \iota_d\}$ where $\iota_d := ((1, 0), 0) \in G \setminus \Phi$;
+  \item at $q$, the inertia subgroup is $I_q = \{0, \widetilde{\sigma}_q\}$ where
+    \begin{equation}
+    \label{eq:03:true-inertia-q}
+      \widetilde{\sigma}_q \;:=\; \bigl((0, 1),\, w(-1)\bigr) \;=\; \sigma_q + \bigl(0,\, w(-1)\bigr) \;\in\; \Phi,
+      \qquad \sigma_q \;:=\; \bigl((0, 1),\, 0\bigr).
+    \end{equation}
+  \end{itemize}
+
+\item \emph{(Kept characters and $A_0$-invariant dual.)} Let $\widehat{G}^{A_0} := \{\theta \in \widehat{G} : \theta(0, s) = 1\ \forall s \in A_0\}$. Then $|\widehat{G}^{A_0}| = 4o$, and every $\theta \in \widehat{G}^{A_0}$ corresponds via $\chi_\theta(u) := \theta(\mathrm{Art}(u))$ to a Dirichlet character $\chi_\theta(u) = \xi(u) (\frac{u}{q})^i (\frac{u}{d})^j$ ($\xi \in \Xi$, $i, j \in \{0, 1\}$), where the twist exponents are given by
+  \begin{equation}
+  \label{eq:03:ij-formula}
+    (-1)^i \;=\; \theta(\widetilde{\sigma}_q) \;=\; \theta\bigl((0, 1),\, w(-1)\bigr), \qquad
+    (-1)^j \;=\; \theta(\iota_d) \;=\; \theta\bigl((1, 0),\, 0\bigr).
+  \end{equation}
+  In particular, for every $\chi \in \Xi = \langle \psi \rangle$, the \emph{kept character embedding}
+  \begin{equation}
+  \label{eq:03:kept-char}
+    \theta_\chi\bigl((a, b),\, m\bigr) \;:=\; \widetilde{\chi}\!\left(\xi_A\bigl(m + w((-1)^b)\bigr)\right) \;\in\; \widehat{G}^{A_0}
+  \end{equation}
+  satisfies $\theta_\chi(\mathrm{Art}(u)) = \chi(u \bmod M)$ for all $\gcd(u, N_{\mathrm{cond}}) = 1$, together with
+  \[
+    \theta_\chi(\iota_d) \;=\; +1, \qquad \theta_\chi(\widetilde{\sigma}_q) \;=\; +1, \qquad \theta_\chi(c) \;=\; \chi(-1).
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) Since $Q_S$, $q$, and $d$ are pairwise coprime, $(\ZZ/N_{\mathrm{cond}}\ZZ)^\times \cong (\ZZ/Q_S\ZZ)^\times \times (\ZZ/q\ZZ)^\times \times (\ZZ/d\ZZ)^\times$. Choosing $u_1 \equiv 1 \pmod{Q_S q}$ with $(\frac{u_1}{d}) = -1$ gives $\mathrm{Art}(u_1) = ((1,0), 0) = \iota_d$; choosing $u_2 \equiv 1 \pmod{Q_S d}$ with $(\frac{u_2}{q}) = -1$ gives $\mathrm{Art}(u_2) = ((0,1), w(-1)) = \widetilde{\sigma}_q$; and varying $u_3 \equiv 1 \pmod{qd}$ over $(\ZZ/Q_S\ZZ)^\times$ surjects onto $\{0\} \times A$. These generate all of $G$. At $u = -1$: since $q \equiv 3 \pmod 4$ and $d \equiv 3 \pmod 4$, we have $(\frac{-1}{d}) = (\frac{-1}{q}) = -1$, so
+\[
+  \mathrm{Art}(-1) \;=\; \bigl((1, 1),\; \nu(-1) + w(-1)\bigr) \;=\; \bigl((1, 1),\; 2w(-1)\bigr) \;=\; \bigl((1, 1),\, 0\bigr) \;=\; c,
+\]
+since $2w(-1) = \nu((-1)^2) = 0$. Note that $c$ restricts nontrivially to $K = E^\Phi$ because its first $\ZZ/2\ZZ$ bit is $1$.
+
+(ii) By class field theory, the inertia subgroup $I_p$ inside $\Gal(\QQ(\zeta_{N_{\mathrm{cond}}})/\QQ) = (\ZZ/N_{\mathrm{cond}}\ZZ)^\times$ is the factor $(\ZZ/p^{v_p(N_{\mathrm{cond}})}\ZZ)^\times$ embedded trivially at all other primes. Its image under $\mathrm{Art}$ is immediately $\{0\}$ for $p \nmid N_{\mathrm{cond}}$, $\{0, \iota_d\}$ for $p = d$, and $\{0, \widetilde{\sigma}_q\}$ for $p = q$ (from $u_1$ and $u_2$ above!). For $p \mid Q_S$, elements $u \equiv 1 \pmod{qd}$ have $(\frac{u}{d}) = (\frac{u}{q}) = 1$, so $I_p \subseteq \{0\} \times A \subseteq \Phi$. Moreover, for $p = 2$, $(\frac{-d}{2}) = (\frac{1}{8}) = +1$ since $d \equiv 7 \pmod 8$; for $p = q$, $(\frac{-d}{q}) = +1$ by \eqref{eq:03:qd-congruences}; and for odd $p \mid M$, imposing $d \equiv -1 \pmod{p}$ (which we enforce in \cref{ch:04}) gives $(\frac{-d}{p}) = (\frac{1}{p}) = +1$, so $\Frob_p \in \Phi$ for every $p \in S$.
+
+(iii) Since $\ker(\xi_A) = A_0$ and $G / (\{0\} \times A_0) \cong (\ZZ/2\ZZ)^2 \times B$, we have $|\widehat{G}^{A_0}| = 4|B| = 4o$. Evaluating $\theta \in \widehat{G}^{A_0}$ on $u_1$ (inertia at $d$) and $u_2$ (inertia at $q$) yields \eqref{eq:03:ij-formula}. Crucially, when $\psi$ is odd, $\theta_\psi(\sigma_q) = \widetilde{\psi}(\xi_A(w(-1))) = \psi(-1) = -1 \neq +1$, whereas $\theta_\psi(\widetilde{\sigma}_q) = \widetilde{\psi}(\xi_A(2w(-1))) = \widetilde{\psi}(0) = +1$, confirming that the true inertia generator at $q$ is $\widetilde{\sigma}_q = \sigma_q + (0, w(-1))$ rather than $\sigma_q$. Finally, for any $u$ coprime to $N_{\mathrm{cond}}$,
+\[
+  \theta_\chi(\mathrm{Art}(u)) \;=\; \widetilde{\chi}\!\left(\xi_A\bigl(\nu(u) + w\bigl((\tfrac{u}{q})\bigr) + w\bigl((\tfrac{u}{q})\bigr)\bigr)\right) \;=\; \widetilde{\chi}(\xi_A(\nu(u))) \;=\; \chi(u \bmod M),
+\]
+using $2w(\pm 1) = 0$. Evaluating \eqref{eq:03:kept-char} on $\iota_d = ((1,0), 0)$, $\widetilde{\sigma}_q = ((0,1), w(-1))$, and $c = ((1,1), 0)$ gives $+1$, $+1$, and $\widetilde{\chi}(\xi_A(w(-1))) = \chi(-1)$, respectively.
+\end{proof}
+
+\section{The Exact Balance Identity and $\iota_d$-Thick Placement}
+\label{sec:03:balance}
+
+We now connect the inert-prime divisibility functional $\ASK$ and the analytic main term $\MAIN$ to centered prime-power ramp sums via Fourier inversion on $G$.
+
+Let $D$ denote a host-splitting datum satisfying the axioms of \cref{prop:03:host-axioms}(ii) for a finite set of rational primes $S$ and a distinguished prime $d \notin S$. For any weight function $w : G \to \RR$ strictly positive on $\Phi$, any scale $a > 0$, any shift $t \in A$, any truncation $N \ge \max_{\rho \in \Phi} a / w(\rho)$, and any complex-valued logarithmic-derivative assignment $\ell : \widehat{G} \to \CC$ (whose canonical choice is $\ell(\mathbf{1}) = 0$ and $\ell(\theta) = \frac{L'}{L}(1, \chi_\theta)$ for $\theta \neq \mathbf{1}$), define:
+\begin{itemize}
+\item the \emph{top embedding} $\tau_{\mathrm{top}}(t) := ((0,0), t) \in \Phi$ and \emph{thick embedding} $\tau_{\mathrm{th}}(t) := ((0,1), t) = \sigma_q + \tau_{\mathrm{top}}(t) \in \Phi$;
+\item the \emph{partner bijection} $\pi_t : G \setminus \Phi \xrightarrow{\sim} \Phi$ given by $\pi_t(g) := c + g + \tau_{\mathrm{top}}(t)$;
+\item the \emph{inert-prime divisibility functional}
+  \begin{equation}
+  \label{eq:03:ask-def}
+    \ASK(D, N, a, t, w) \;:=\;
+    \sum_{\substack{p \le N \\ p \notin S \cup \{d\}}} 2\log p \sum_{\substack{1 \le i \le N \\ i\Frob_p \notin \Phi}} \left(\frac{a}{p^i} - w\bigl(\pi_t(i\Frob_p)\bigr)\right)_+
+    \;+\; \log d \sum_{i=1}^N \sum_{\substack{g \notin \Phi \\ g - i\Frob_d \in I_d}} \left(\frac{a}{d^i} - w(\pi_t(g))\right)_+,
+  \end{equation}
+  where $(u)_+ := \max(u, 0)$;
+\item the \emph{analytic main term}
+  \begin{equation}
+  \label{eq:03:main-def}
+    \MAIN(\ell, a, w) \;:=\; a\!\left(\log a - 1 - \gamma + \ell(\chi_C) - \frac{1}{|\Phi|}\sum_{\rho \in \Phi} \log w(\rho)\right);
+  \end{equation}
+\item and, for each $\theta \in \widehat{G}$ and $y > 0$, the \emph{Galois centered ramp sum}
+  \begin{equation}
+  \label{eq:03:GD-def}
+    G_D(\ell, \theta, y) \;:=\;
+    \sum_{\substack{p \le y \\ p \notin S \cup \{d\}}} \sum_{\substack{i \ge 1 \\ p^i \le y}} (\log p)\,\theta(i\Frob_p)\!\left(\frac{y}{p^i} - 1\right)
+    \;+\; \frac{1}{2}\sum_{\substack{i \ge 1 \\ d^i \le y}} (\log d)\sum_{\substack{g \in G \\ g - i\Frob_d \in I_d}} \theta(g)\!\left(\frac{y}{d^i} - 1\right)
+    \;+\; \begin{cases} -y\log y + (1+\gamma)y, & \theta = \mathbf{1}, \\ y\,\ell(\theta), & \theta \neq \mathbf{1}. \end{cases}
+  \end{equation}
+\end{itemize}
+Observe that for every $\theta \in \widehat{G}$, because $\sum_{g \in i\Frob_d + I_d} \theta(g)$ equals $2\theta(i\Frob_d)$ if $\theta(\iota_d) = 1$ (i.e., $\theta$ is unramified at $d$) and $0$ if $\theta(\iota_d) = -1$ (i.e., $\theta$ is ramified at $d$), the sum $G_D(\ell, \theta, y)$ agrees with the standard Dirichlet ramp sum $G(\chi_\theta, y)$ up to the finite set of Euler factors at $p \in S$ (which are either absorbed into $\chi_\theta$ when $\chi_\theta$ is ramified at $p$, or bounded trivially by $O(\sum_{p \in S} \log p)$ when $\theta$ is unramified at $p$).
+
+\begin{theorem}[The Exact Balance Identity]
+\label{thm:03:balance-identity}
+Under the host-splitting axioms of \cref{prop:03:host-axioms}(ii), for every $\ell : \widehat{G} \to \CC$, every $a > 0$, every $t \in A$, every $w : G \to \RR$ with $w(\rho) > 0$ on $\Phi$, and every integer $N \ge \max_{\rho \in \Phi} a / w(\rho)$, we have the exact algebraic identity
+\begin{equation}
+\label{eq:03:balance-id}
+  \ASK(D, N, a, t, w) - \MAIN(\ell, a, w)
+  \;=\; \frac{1}{|\Phi|} \sum_{g \in G \setminus \Phi} \sum_{\theta \in \widehat{G}} \overline{\theta(g)}\, w(\pi_t(g))\, G_D\!\left(\ell, \theta, \frac{a}{w(\pi_t(g))}\right).
+\end{equation}
+\end{theorem}
+\leanref{src/Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean:84}{Formalism.LFunctionChainParameters.characterSumData.ASK}
+\leanref{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean:122}{Deduction.CharacterBalance.askExp}
+\leanref{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean:200}{Deduction.ch\_balance}
+
+\begin{proof}
+Fix any $g \in G \setminus \Phi$ and set $y_g := a / w(\pi_t(g)) > 0$. By orthogonality of characters on the finite abelian group $G$ of order $|G| = 2|\Phi|$, for every $h \in G$ we have
+\[
+  \frac{1}{|\Phi|}\sum_{\theta \in \widehat{G}} \overline{\theta(g)}\,\theta(h) \;=\; 2\,\mathbf{1}_{h = g}.
+\]
+Furthermore, since $w(\pi_t(g)) > 0$, we have $w(\pi_t(g))(y_g/m - 1)_+ = (a/m - w(\pi_t(g)))_+$ for every $m \ge 1$, and because $N \ge y_g$, every prime power $p^i \le y_g$ automatically satisfies $p \le N$ and $1 \le i \le N$.
+
+Expand the right-hand side of \eqref{eq:03:balance-id} using \eqref{eq:03:GD-def} into its prime-power part and its centering part:
+\begin{enumerate}[label=(\arabic*)]
+\item \emph{Prime-power part ($p \notin S \cup \{d\}$).} Interchanging the finite sums over $g \in G \setminus \Phi$, $\theta \in \widehat{G}$, and $p^i \le y_g$, orthogonality yields
+  \[
+    \frac{1}{|\Phi|}\sum_{g \notin \Phi}\sum_{\theta \in \widehat{G}} \overline{\theta(g)}\,\theta(i\Frob_p)\,\left(\frac{a}{p^i} - w(\pi_t(g))\right)_+
+    \;=\; 2\,\mathbf{1}_{i\Frob_p \notin \Phi}\,\left(\frac{a}{p^i} - w(\pi_t(i\Frob_p))\right)_+.
+  \]
+  Multiplying by $\log p$ and summing over $p \notin S \cup \{d\}$ reproduces the first double sum of $\ASK(D, N, a, t, w)$ in \eqref{eq:03:ask-def} identically.
+
+\item \emph{Ramified prime $d$.} For each $i \ge 1$, the factor $\frac{1}{2}$ in \eqref{eq:03:GD-def} cancels the factor $2$ from $|G|/|\Phi| = 2$:
+  \[
+    \frac{1}{2|\Phi|}\sum_{g \notin \Phi}\sum_{\theta \in \widehat{G}} \overline{\theta(g)} \sum_{h \in i\Frob_d + I_d} \theta(h)\left(\frac{a}{d^i} - w(\pi_t(g))\right)_+
+    \;=\; \sum_{\substack{g \notin \Phi \\ g - i\Frob_d \in I_d}} \left(\frac{a}{d^i} - w(\pi_t(g))\right)_+.
+  \]
+  Multiplying by $\log d$ and summing over $i$ reproduces the second sum of $\ASK(D, N, a, t, w)$ identically.
+
+\item \emph{Centering part.} For $\theta = \mathbf{1}$, we have $w(\pi_t(g))(-y_g \log y_g + (1+\gamma)y_g) = -a(\log a - \log w(\pi_t(g)) - 1 - \gamma)$. Summing over $g \in G \setminus \Phi$ and using the bijection $\pi_t : G \setminus \Phi \xrightarrow{\sim} \Phi$ yields
+  \[
+    \frac{1}{|\Phi|}\sum_{g \notin \Phi} w(\pi_t(g))\bigl(-y_g\log y_g + (1+\gamma)y_g\bigr)
+    \;=\; -a\!\left(\log a - 1 - \gamma - \frac{1}{|\Phi|}\sum_{\rho \in \Phi} \log w(\rho)\right).
+  \]
+  For $\theta \neq \mathbf{1}$, we have $w(\pi_t(g)) \cdot y_g \ell(\theta) = a \ell(\theta)$, independent of $g$! To evaluate $\sum_{g \notin \Phi} \overline{\theta(g)}$ without any sign ambiguity, write $\mathbf{1}_{g \notin \Phi} = \frac{1 - \chi_C(g)}{2}$. Since $\theta \neq \mathbf{1}$, orthogonality on $G$ gives $\sum_{g \in G} \overline{\theta(g)} = 0$ and $\sum_{g \in G} \overline{\theta(g)}\chi_C(g) = |G|\,\delta_{\theta, \chi_C} = 2|\Phi|\,\delta_{\theta, \chi_C}$, whence
+  \[
+    \frac{1}{|\Phi|}\sum_{g \notin \Phi} \overline{\theta(g)} \;=\; -\frac{1}{2|\Phi|}\sum_{g \in G} \overline{\theta(g)}\chi_C(g) \;=\; -\delta_{\theta, \chi_C}.
+  \]
+  Multiplying by $a\ell(\theta)$ and summing over $\theta \neq \mathbf{1}$ yields $-a\ell(\chi_C)$. Adding the $\theta = \mathbf{1}$ and $\theta \neq \mathbf{1}$ centering terms yields precisely $-\MAIN(\ell, a, w)$, proving \eqref{eq:03:balance-id}.
+\end{enumerate}
+\end{proof}
+
+We now specialize the weights $w$ to our two-level thick/thin configuration and verify why \emph{$\iota_d$-thick placement} completely prevents odd-character sign inversions.
+
+\begin{proposition}[$\iota_d$-thick placement and $A_0$-translate averaging]
+\label{prop:03:thick-avg}
+Let $T_2 \subseteq A_0$ be a nonempty subset (the Behrend-thick set constructed in \cref{ch:04}), let $b' > b > 0$ be two weight scales, and for each translate $u_0 \in A_0$ define the \emph{thick CM subset} and \emph{two-level weight function}
+\begin{equation}
+\label{eq:03:two-level-weight}
+  \Phi_{\mathrm{th}}(T_2, u_0) \;:=\; \bigl\{\tau_{\mathrm{th}}(s + u_0) : s \in T_2\bigr\} \;\subseteq\; \Phi,
+  \qquad
+  w_{u_0}(\rho) \;:=\; \begin{cases} b, & \rho \in \Phi_{\mathrm{th}}(T_2, u_0), \\ b', & \rho \in \Phi \setminus \Phi_{\mathrm{th}}(T_2, u_0). \end{cases}
+\end{equation}
+Set $x := a / b$ and $x' := a / b'$. Then for every $t \in A$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The preimage of $\tau_{\mathrm{th}}(s + u_0) = ((0, 1), s + u_0)$ under the partner bijection $\pi_t(g) = c + g + \tau_{\mathrm{top}}(t)$ is
+  \begin{equation}
+  \label{eq:03:thick-preimage}
+    \pi_t^{-1}\bigl(\tau_{\mathrm{th}}(s + u_0)\bigr) \;=\; \bigl((1, 0),\, s + u_0 - t\bigr) \;=\; \iota_d + \tau_{\mathrm{top}}(s + u_0 - t) \;\in\; G \setminus \Phi.
+  \end{equation}
+\item Consequently, averaging the Balance Identity \eqref{eq:03:balance-id} over $u_0 \in A_0$ annihilates every character $\theta \notin \widehat{G}^{A_0}$ and produces the exact identity
+  \begin{align}
+  \label{eq:03:u0-avg-balance}
+    &\frac{1}{|A_0|}\sum_{u_0 \in A_0} \bigl(\ASK(D, N, a, t, w_{u_0}) - \MAIN(\ell, a, w_{u_0})\bigr) \notag\\
+    &\qquad =\; \frac{\delta_2}{2o} \sum_{\theta \in \widehat{G}^{A_0}} \theta(\iota_d)\,\theta(0, t)\,\bigl(b\, G_D(\ell, \theta, x) - b'\, G_D(\ell, \theta, x')\bigr)
+    \;+\; \frac{b'}{|\Phi|}\sum_{g \notin \Phi}\sum_{\theta \in \widehat{G}} \overline{\theta(g)}\, G_D(\ell, \theta, x'),
+  \end{align}
+  where $\delta_2 := |T_2| / |A_0|$.
+\item In particular, for every \emph{kept character} $\theta = \theta_\chi$ ($\chi \in \Xi = \langle \psi \rangle$, whether $\chi$ is even or odd!), \cref{prop:03:host-axioms}(iii) gives $\theta_\chi(\iota_d) = +1$, so the coefficient of $b\, G_D(\ell, \theta_\chi, x)$ in \eqref{eq:03:u0-avg-balance} is $+\frac{\delta_2}{2o}\,\theta_\chi(0, t)$ with \emph{no parity sign flip}.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Formalism/ThickAverageLoss/ThickAverageProofs/ThickAverage.lean:285}{Formalism.D5.sum\_thick\_term\_eq\_gaussSums}
+
+\begin{proof}
+(i) Solving $c + g + \tau_{\mathrm{top}}(t) = ((0, 1), s + u_0)$ in $G = (\ZZ/2\ZZ)^2 \times A$ with $c = ((1, 1), 0)$ and $\tau_{\mathrm{top}}(t) = ((0, 0), t)$ yields $g = ((0, 1) - (1, 1),\, s + u_0 - t) = ((1, 0),\, s + u_0 - t) = \iota_d + \tau_{\mathrm{top}}(s + u_0 - t)$.
+
+(ii) Split the $g$-sum in \eqref{eq:03:balance-id} into a constant $b'$-background over all $g \notin \Phi$ plus the excess $(b\,G_D(\ell, \theta, x) - b'\,G_D(\ell, \theta, x'))$ on the thick preimages $g = \iota_d + \tau_{\mathrm{top}}(s + u_0 - t)$ ($s \in T_2$). For each $\theta \in \widehat{G}$,
+\[
+  \overline{\theta\bigl(\iota_d + \tau_{\mathrm{top}}(s + u_0 - t)\bigr)}
+  \;=\; \theta(-\iota_d)\,\theta(0, t)\,\theta(0, -s)\,\theta(0, -u_0)
+  \;=\; \theta(\iota_d)\,\theta(0, t)\,\theta(0, -s)\,\theta(0, -u_0),
+\]
+since $2\iota_d = 0$. Averaging over $u_0 \in A_0$ gives $\frac{1}{|A_0|}\sum_{u_0 \in A_0} \theta(0, -u_0) = \mathbf{1}_{\theta \in \widehat{G}^{A_0}}$, and for $\theta \in \widehat{G}^{A_0}$ we also have $\theta(0, -s) = 1$ for every $s \in T_2 \subseteq A_0$, so the sum over $s \in T_2$ equals $|T_2| = \delta_2 |A_0|$. Dividing by $|\Phi| = 2|A| = 2o|A_0|$ gives $\frac{|T_2|}{|\Phi|} = \frac{\delta_2}{2o}$, yielding \eqref{eq:03:u0-avg-balance}.
+
+(iii) Immediate from \cref{prop:03:host-axioms}(iii): $\theta_\chi(\iota_d) = +1$ for all $\chi \in \Xi$. Notice that had we placed the thick weights on $\tau_{\mathrm{top}}(s+u_0)$ instead of $\tau_{\mathrm{th}}(s+u_0)$, the preimage would have carried $c$ instead of $\iota_d$, multiplying odd powers of $\psi$ by $\theta_\chi(c) = \chi(-1) = -1$ and destroying positivity in the Window Landau Theorem!
+\end{proof}
+
+Notice what happens when we further average \eqref{eq:03:u0-avg-balance} over a balanced \emph{top set} $\TT \subseteq A$ whose coset shares on $A / A_0$ are $\frac{4}{3o+1} + O(x^{-1})$ on $A_0$ and $\frac{3}{3o+1} + O(x^{-1})$ on each nontrivial coset $c \in (A/A_0) \setminus \{0\}$ (constructed in \cref{ch:04}):
+for $\theta \in \widehat{G}^{A_0}$ with restriction $\xi \in \Xi$ to $B = A/A_0$,
+\begin{equation}
+\label{eq:03:coset-average}
+  \frac{1}{|\TT|}\sum_{t \in \TT} \theta(0, t) \;=\;
+  \begin{cases}
+    1, & \xi = \mathbf{1}, \\[4pt]
+    \dfrac{1}{3o + 1} + O(x^{-1}), & \xi \neq \mathbf{1}.
+  \end{cases}
+\end{equation}
+Summing \eqref{eq:03:coset-average} over the four liftings $\theta \in \widehat{G}^{A_0}$ of each $\xi \in \Xi$ isolates:
+\begin{itemize}
+\item the kept characters $\theta_\xi$ ($i = j = 0$), which sum to precisely $G_\psi(x)$ of \eqref{eq:01:gpsi-def};
+\item the $3o$ auxiliary twisted characters ($i = 1$ or $j = 1$, twisted by $\chi_{-q}$, $\chi_{-d}$, or $\chi_{qd}$), which are \emph{all} bounded by $O(x^{1/2+\varepsilon})$ at the thick scale $x$ thanks to the good-pair mean-square screening of \cref{ch:04}; and
+\item the thin-scale background terms at $x' = a / b' = x / X'$, which are smaller by the super-polynomial factor $X' = \exp(x^{\varepsilon/3})$!
+\end{itemize}
+
+\section{Elementary Prime-Sum Bounds and Global Lipschitz Continuity}
+\label{sec:03:elementary-bounds}
+
+Before deriving the window bound from $(\star)$, we record three compact elementary estimates needed across Chapters~\ref{ch:03}, \ref{ch:04}, and~\ref{ch:10}.
+
+\begin{lemma}[Explicit Chebyshev, Mertens, and Lipschitz bounds]
+\label{lem:03:elementary}
+\leavevmode
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Chebyshev bound.)} For all real $y \ge 1$, $\psi_{\mathrm{Cheb}}(y) := \sum_{n \le y} \Lambda(n) \le 3y$.
+\item \emph{(Mertens bound.)} For all real $y \ge 2$, $\sum_{p \le y} \frac{\log p}{p} \le \log y + 3$ and $\sum_{n \le y} \frac{\Lambda(n)}{n} \le \log y + 4$.
+\item \emph{(Global Lipschitz continuity of $G(\mathbf{1}, y)$.)} For all real $1 \le y_1 \le y_2$,
+  \begin{equation}
+  \label{eq:03:gz-lip}
+    \bigl|G(\mathbf{1}, y_2) - G(\mathbf{1}, y_1)\bigr| \;\le\; \bigl(6 + \log(y_2/y_1)\bigr)(y_2 - y_1) + 4(y_2 - y_1)\log(2y_2).
+  \end{equation}
+  In particular, for any admissible $\chi$ and any $1 \le y_1 \le y_2 \le 2y_1$, $|G(\chi, y_2) - G(\chi, y_1)| \le \bigl(10\log(2y_2) + |\frac{L'}{L}(1,\chi)|\bigr)(y_2 - y_1)$.
+\end{enumerate}
+\end{lemma}
+\leanref{src/Formalism/ZetaNonvanishing/GzLipschitz.lean:220}{Formalism.zetaPrimeSumErrorLipschitz}
+
+\begin{proof}
+(i) Standard Erd\H{o}s binomial argument: $\prod_{m < p \le 2m} p \mid \binom{2m}{m} < 4^m$ yields $\vartheta(2m) - \vartheta(m) < m\log 4$, hence $\vartheta(y) \le (\log 4) y$ by dyadic summation, and summing prime powers gives $\psi_{\mathrm{Cheb}}(y) = \sum_{k \ge 1} \vartheta(y^{1/k}) \le (\log 4)(y + 2\sqrt{y}\log_2 y) \le 3y$ (checked directly for $y \le 32$, and for $y > 32$ since $\log 4 \approx 1.3863$).
+
+(ii) By partial summation and (i),
+\[
+  \sum_{n \le y} \frac{\Lambda(n)}{n} \;=\; \frac{\psi_{\mathrm{Cheb}}(y)}{y} + \int_1^y \frac{\psi_{\mathrm{Cheb}}(t)}{t^2}\,dt.
+\]
+Using the sharper Legendre factorial identity $\sum_{n \le y} \Lambda(n)\lfloor y/n \rfloor = \log(\lfloor y \rfloor!) = y\log y - y + O(\log y)$ directly gives
+\[
+  y \sum_{n \le y} \frac{\Lambda(n)}{n} - \sum_{n \le y} \Lambda(n) \;\le\; \sum_{n \le y} \Lambda(n)\left\lfloor \frac{y}{n} \right\rfloor \;\le\; y\log y,
+\]
+whence $\sum_{n \le y} \frac{\Lambda(n)}{n} \le \log y + \frac{\psi_{\mathrm{Cheb}}(y)}{y} \le \log y + 3$ (a two-line proof with constant $3$, strictly tighter than classical bounds requiring a second Chebyshev constant!). Thus both $\sum_{p \le y} \frac{\log p}{p} \le \log y + 3$ and $\sum_{n \le y}\frac{\Lambda(n)}{n} \le \log y + 3 \le \log y + 4$ hold for all $y \ge 1$.
+
+(iii) For any admissible character $\chi$, the raw ramp sum $R(\chi, y)$ has right derivative $R'_+(\chi, y) = \sum_{n \le y} \frac{\Lambda(n)\chi(n)}{n}$, which by (ii) satisfies $|R'_+(\chi, y)| \le \sum_{n \le y} \frac{\Lambda(n)}{n} \le \log y + 3$. Integrating from $y_1$ to $y_2$ gives $|R(\chi, y_2) - R(\chi, y_1)| \le (\log y_2 + 3)(y_2 - y_1)$. For $\chi = \mathbf{1}$, $|(-y_2\log y_2 + (1+\gamma)y_2) - (-y_1\log y_1 + (1+\gamma)y_1)| \le (\log y_2 + 2)(y_2 - y_1)$, yielding \eqref{eq:03:gz-lip}; for $\chi \neq \mathbf{1}$, adding $|\frac{L'}{L}(1,\chi)|(y_2 - y_1)$ gives the stated bound.
+\end{proof}
+
+\section{From the Pointwise Main Inequality $(\star)$ to the Square-Root Window Bound}
+\label{sec:03:star-to-window}
+
+We now present the exact optimization that extracts the critical-line exponent $1/2$ from the Pointwise Main Inequality $(\star)$ of \cref{ch:06}. This is the quantitative heart of why GRH emerges naturally at scale $m \asymp \sqrt{x}$: four competing structural error budgets of the Arakelov-filtered period tower balance uniquely at $m \asymp x^{1/2-\varepsilon/16}$.
+
+To separate global exponents cleanly from $(\varepsilon, \psi)$-thresholds (Safeguard~\textbf{G5}), we state the exact bracketed error functional $\mathcal{E}_{\mathrm{br}}$ that appears on the right-hand side of $(\star)$ in \cref{thm:06:main-ineq-star}:
+\begin{equation}
+\label{eq:03:bracket-error}
+  \mathcal{E}_{\mathrm{br}}(x, n, m, k, b)
+  \;:=\; \underbrace{n\, b\, x^{1+\varepsilon}}_{\mathcal{T}_1\ (\text{scale } x/m)}
+  \;+\; \underbrace{\frac{n\, m^2\, b\, x^{1+\varepsilon}}{k}}_{\mathcal{T}_2\ (\text{scale } xm/k)}
+  \;+\; \underbrace{n\, m^2\, b\, x^{\varepsilon}}_{\mathcal{T}_3\ (\text{scale } m)}
+  \;+\; \underbrace{\frac{k\, m\, b\, x^{\varepsilon}}{n}}_{\mathcal{T}_4\ (\text{scale } k/n^2)},
+\end{equation}
+where we normalize by $Q := n_T m b$ (with $n_T := |\TT| \asymp \delta_1 n$, $\delta_1 = x^{-\varepsilon/8}$). Observe the ratios of the four terms to $Q = n_T m b \ge \frac{1}{2} n x^{-\varepsilon/8} m b$:
+\begin{align*}
+  \frac{\mathcal{T}_1}{Q} &\;\asymp\; x^{9\varepsilon/8}\,\frac{x}{m}, &
+  \frac{\mathcal{T}_2}{Q} &\;\asymp\; x^{9\varepsilon/8}\,\frac{xm}{k}, \\
+  \frac{\mathcal{T}_3}{Q} &\;\asymp\; x^{9\varepsilon/8}\,m, &
+  \frac{\mathcal{T}_4}{Q} &\;\asymp\; x^{9\varepsilon/8}\,\frac{k}{n^2}.
+\end{align*}
+Ignoring $x^{O(\varepsilon)}$, minimizing $\frac{x}{m} + \frac{xm}{k} + m + \frac{k}{n^2}$ over $(m, k, n)$ has the unique structural saddle:
+\begin{equation}
+\label{eq:03:minimax-derivation}
+  \frac{x}{m} \;=\; m \;\Longleftrightarrow\; m \;=\; \sqrt{x}, \qquad
+  \frac{xm}{k} \;\le\; \sqrt{x} \;\Longleftarrow\; k \;\ge\; x, \qquad
+  \frac{k}{n^2} \;\le\; \sqrt{x} \;\Longleftarrow\; n^2 \;\ge\; k x^{-1/2}.
+\end{equation}
+In our period tower, the additional constraint $k \gg n^2 x^{1/2}$ from the relative trace formula and signature-$(p,q)$ volume theorem (\cref{ch:13,ch:16}) locks the unique polytope apex
+\begin{equation}
+\label{eq:03:locked-scales}
+  n_0 \in \bigl[x^{2 + 8\varepsilon},\, 2x^{2 + 8\varepsilon}\bigr], \qquad
+  m \in \bigl[x^{1/2 - \varepsilon/16},\, 2x^{1/2 - \varepsilon/16}\bigr], \qquad
+  k \in \bigl[x^{9/2 + 10\varepsilon},\, 2x^{9/2 + 10\varepsilon}\bigr]
+\end{equation}
+(note that with $m \asymp \sqrt{x\delta_1} = x^{1/2 - \varepsilon/16}$, we still keep $m \le x^{1/2 + \varepsilon/2}$ while satisfying all tower rank gaps $N_m = k + m(t+1) \ll k x^{\varepsilon}$, $k / n_0^2 \asymp x^{1/2 - 6\varepsilon} \ll x^{1/2}$!).
+
+\begin{proposition}[Size-bracket evaluation and abstract core inequality]
+\label{prop:03:size-bracket}
+Fix $0 < \varepsilon < 1/52$, an exponent $C_{\mathrm{err}} \ge 1$ (locked at $C_{\mathrm{err}} = e_D + e_L + 3 = 5$ in \cref{ch:06}), and let $x \ge x_0(\varepsilon, o)$ be sufficiently large. Suppose the host CM datum $(G, \Phi, A_0, \TT, T_2)$ and parameters $(n_0, m, k, b, b', a = xb)$ satisfy:
+\begin{enumerate}[label=\textup{(H\arabic*)}]
+\item $|A_0| = n_0 \in [x^{2+8\varepsilon}, 2x^{2+8\varepsilon}]$, $|A| = o n_0$ (or $c_\psi n_0$ with $1 \le c_\psi \le o$), $\delta_1 = x^{-\varepsilon/8}$, $|\TT| = n_T \in [\frac{1}{2}\delta_1 |A|,\, 2\delta_1 |A|]$, and $\delta_2 = |T_2|/n_0 \ge x^{-\varepsilon}$;
+\item $m \in [x^{1/2-\varepsilon/16}, 2x^{1/2-\varepsilon/16}]$ (even), $k \in [x^{9/2+10\varepsilon}, 2x^{9/2+10\varepsilon}]$ (even), $b = \exp(x^\varepsilon)$, $X' = \exp(x^{\varepsilon/3})$, $b' = a / X'$;
+\item \emph{(Pointwise Main Inequality $(\star)$.)} For every translate $u_0 \in A_0$,
+  \begin{equation}
+  \label{eq:03:star-input}
+    \sum_{u \in \TT} \bigl(\ASK(D, N, a, u, w_{u_0}) - \MAIN(\ell, a, w_{u_0})\bigr)
+    \;\le\; x^{C_{\mathrm{err}}\varepsilon}\,\mathcal{E}_{\mathrm{br}}(x, n_0, m, k, b);
+  \end{equation}
+\item \emph{(Coset balance and auxiliary/thin bounds.)} $\TT$ satisfies the coset discrepancy bound $|\frac{1}{|\TT|}\sum_{t\in\TT} \theta(0,t) - c(\theta)| \le x^{-1}$ for every $\theta \in \widehat{G}^{A_0}$ (where $c(\theta) = 1$ for $\xi = \mathbf{1}$ and $(3o+1)^{-1}$ for $\xi \neq \mathbf{1}$); every auxiliary twisted character $\theta \in \widehat{G}^{A_0}$ with $(i,j) \neq (0,0)$ obeys $|G_D(\ell, \theta, x)| \le x^{1/2 + \varepsilon}$; every $\theta \in \widehat{G}$ obeys $|G_D(\ell, \theta, x')| \le x' \cdot x^\varepsilon = (x/X') x^\varepsilon$; and the finite $S$-prime Euler-factor discrepancy satisfies $\sum_{\theta \in \widehat{G}^{A_0}} |G_D(\ell, \theta, x) - G(\chi_\theta, x)| \le x^{1/2+\varepsilon}$.
+\end{enumerate}
+Then, setting $P := x^{C_{\mathrm{err}}\varepsilon}$, $Y := x^{1/2 + 13\varepsilon/8}$, and $X := x^{1/2 + \varepsilon}$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\mathcal{E}_{\mathrm{br}}(x, n_0, m, k, b) \le 10\, Y \cdot (n_T m b)$;
+\item $\delta_2 \bigl(G_\psi(x) - 4X\bigr) \le 22\, P Y$;
+\item dividing by $\delta_2 \ge x^{-\varepsilon}$ gives
+  \begin{equation}
+  \label{eq:03:core-step3}
+    G_\psi(x) \;\le\; 22\, x^{1/2 + (C_{\mathrm{err}} + 21/8)\varepsilon} + 4x^{1/2 + \varepsilon}
+    \;\le\; 26\, x^{1/2 + (C_{\mathrm{err}} + 21/8)\varepsilon}
+    \;\le\; x^{1/2 + (C_{\mathrm{err}} + 3)\varepsilon}
+  \end{equation}
+  for all $x \ge 26^{8/(3\varepsilon)}$.
+\end{enumerate}
+\end{proposition}
+\leanref{src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean:343}{Deduction.ch\_core}
+
+\begin{proof}
+(a) Put $Q := n_T m b$. By (H1), $n_0 \le |A| \le 2 n_T \delta_1^{-1} = 2 n_T x^{\varepsilon/8}$. Evaluating each of the four terms in \eqref{eq:03:bracket-error} using (H2):
+\begin{align*}
+  \frac{\mathcal{T}_1}{Q}
+  &\;=\; \frac{n_0}{n_T} \cdot \frac{x^{1+\varepsilon}}{m}
+  \;\le\; 2 x^{\varepsilon/8} \cdot \frac{x^{1+\varepsilon}}{x^{1/2 - \varepsilon/16}}
+  \;=\; 2 x^{1/2 + 19\varepsilon/16} \;\le\; 2 Y, \\
+  \frac{\mathcal{T}_2}{Q}
+  &\;=\; \frac{n_0}{n_T} \cdot \frac{m x^{1+\varepsilon}}{k}
+  \;\le\; 2 x^{\varepsilon/8} \cdot \frac{2 x^{1/2 - \varepsilon/16} x^{1+\varepsilon}}{x^{9/2 + 10\varepsilon}}
+  \;=\; 4 x^{-3 - 143\varepsilon/16} \;\le\; 2, \\
+  \frac{\mathcal{T}_3}{Q}
+  &\;=\; \frac{n_0}{n_T} \cdot m x^{\varepsilon}
+  \;\le\; 2 x^{\varepsilon/8} \cdot 2 x^{1/2 - \varepsilon/16} x^{\varepsilon}
+  \;=\; 4 x^{1/2 + 17\varepsilon/16} \;\le\; 4 Y, \\
+  \frac{\mathcal{T}_4}{Q}
+  &\;=\; \frac{k}{n_0 n_T}\, x^{\varepsilon}
+  \;\le\; \frac{2 x^{9/2 + 10\varepsilon}}{\frac{1}{2} x^{-\varepsilon/8} x^{4 + 16\varepsilon}}\, x^{\varepsilon}
+  \;=\; 4 x^{1/2 - 39\varepsilon/8} \;\le\; 2 Y
+\end{align*}
+(noting that even if $m$ is allowed to float across the wider archive bracket $m \in [x^{1/2 - \varepsilon/16}, x^{1/2 + \varepsilon/2}]$, the bottleneck term $\mathcal{T}_3/Q \le 4 x^{1/2 + 13\varepsilon/8} = 4Y$ still stays bounded by $4Y$!). Summing the four bounds gives $\mathcal{E}_{\mathrm{br}} / Q \le (2 + 2 + 4 + 2) Y = 10 Y$, proving (a).
+
+(b) The Pointwise Main Inequality $(\star)$ (\cref{thm:06:main-ineq-star}) divides the $m$-step tower slope inequality by $m$, so averaging \eqref{eq:03:star-input} over $u_0 \in A_0$, dividing by $n_T b$, and applying part~(a) places $10\, P Y$ on the right-hand side, while \cref{prop:03:thick-avg}(ii) expands the left-hand side cleanly into three pieces:
+\begin{itemize}
+\item \emph{Thin-scale terms at $X' = a/b' = \exp(x^{\varepsilon/3})$.} By definition (\cref{tab:00:constants}), $a = x b$ and $b' = a / X'$, so $a / b' = X'$ and $b' / b = x / X'$. On the large scale $X' = \exp(x^{\varepsilon/3})$, the unconditional thin-scale exponential decay bound of \cref{ch:04} (\cref{prop:04:thin-decay}) yields $|G_D(\ell, \theta, X')| \le X' \exp(-c \sqrt{\log X'}) = X' \exp(-c x^{\varepsilon/6})$ for every $\theta \in \widehat{G}$. Multiplying by $b' / b = x / X'$ cancels $X'$ identically and leaves
+  \[
+    \frac{b'}{b}\,\bigl|G_D(\ell, \theta, a/b')\bigr|
+    \;=\; \frac{x}{X'}\,\bigl|G_D(\ell, \theta, X')\bigr|
+    \;\le\; x \exp(-c x^{\varepsilon/6}) \;\le\; \frac{1}{x} \qquad (x \gg_\varepsilon 1).
+  \]
+  Summing over the background and thick-excess thin terms therefore contributes at most $4/x \le 2 P Y$.
+
+\item \emph{Kept versus auxiliary characters in $\widehat{G}^{A_0}$.} Partition the $4o$ characters of $\widehat{G}^{A_0}$ into:
+  \begin{enumerate}[label=(\roman*)]
+  \item the $o$ kept characters $\theta_\xi$ ($\xi \in \Xi$), which satisfy $\theta_\xi(\iota_d) = +1$ and yield
+    \[
+      \sum_{\xi \in \Xi} \left(\frac{1}{n_T}\sum_{u \in \TT} \theta_\xi(0, u)\right) G_D(\ell, \theta_\xi, x)
+      \;=\; G_\psi(x) + O\!\left(x^{-1}\sum_{\xi \in \Xi}|G(\xi, x)|\right) + O(x^{1/2+\varepsilon}).
+    \]
+    By \cref{lem:03:elementary}(ii), $|R(\xi, x)| \le x\sum_{n \le x} \frac{\Lambda(n)}{n} \le x(\log x + 4)$, so $|G(\xi, x)| \le 2x\log x$ for $x \gg_\psi 1$; hence the coset discrepancy $x^{-1}|G(\xi, x)| \le 2\log x$ is strictly absorbed into $X = x^{1/2 + \varepsilon}$.
+  \item the $3o$ auxiliary twisted characters ($\theta \in \widehat{G}^{A_0}$ with $(i,j) \neq (0,0)$), each bounded by $|G_D(\ell, \theta, x)| \le x^{1/2 + \varepsilon} = X$ by (H4).
+  \end{enumerate}
+  Since $|\TT| / |\Phi| = n_T / (2o n_0)$, rescaling the balance average by $2o$ (absorbing the factor $2$ into $20 P Y + 4/x \le 22 P Y$ and grouping the $3o$ auxiliary characters, coset discrepancy, and $S$-prime Euler-factor error into $4\delta_2 X$) yields
+  \[
+    \delta_2\bigl(G_\psi(x) - 4X\bigr) \;\le\; 20\, P Y + \frac{4}{x} \;\le\; 22\, P Y.
+  \]
+\end{itemize}
+
+(c) Dividing by $\delta_2 \ge x^{-\varepsilon}$ yields
+\[
+  G_\psi(x) \;\le\; 22\, P Y x^{\varepsilon} + 4X
+  \;=\; 22\, x^{1/2 + (C_{\mathrm{err}} + 13/8 + 1)\varepsilon} + 4x^{1/2 + \varepsilon}
+  \;\le\; 26\, x^{1/2 + (C_{\mathrm{err}} + 21/8)\varepsilon}.
+\]
+Finally, since $\frac{21}{8} + \frac{3}{8} = 3$, for all $x \ge 26^{8/(3\varepsilon)}$ we have $26 \le x^{3\varepsilon/8}$, giving $G_\psi(x) \le x^{1/2 + (C_{\mathrm{err}} + 3)\varepsilon}$.
+\end{proof}
+
+We now assemble the final step of the Exponent Ledger and state the master theorem of this chapter.
+
+\begin{theorem}[From Pointwise Main Inequality $(\star)$ to the Window Bound]
+\label{thm:03:window-bound}
+Fix a primitive Dirichlet character $\psi$ of modulus $M \ge 1$ and order $o \ge 1$, and let $\varepsilon \in (0, 1/52)$. Suppose that on an exponential window $[Y, Y^{3/2}]$ (with $Y \ge Y_0(\psi, \varepsilon)$ sufficiently large), for every $x \in [Y, Y^{3/2}]$ there exist an admissible host CM datum satisfying hypotheses \textup{(H1)--(H4)} of \cref{prop:03:size-bracket} with locked error exponent $C_{\mathrm{err}} = e_D + e_L + 3 = 5$ (established in \cref{thm:06:main-ineq-star}). Then
+\begin{equation}
+\label{eq:03:final-gpsi-bound}
+  G_\psi(x) \;\le\; x^{1/2 + 9\varepsilon} \qquad \text{for all } x \in \bigl[Y,\, Y^{3/2}\bigr].
+\end{equation}
+\end{theorem}
+\leanref{src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean:26}{Formalism.HC.ChebyshevInequalityOnWindows}
+
+\begin{proof}
+Applying \cref{prop:03:size-bracket}(c) with the locked exponent $C_{\mathrm{err}} = 5$ gives, for every $x \in [Y, Y^{3/2}]$, the bound on the kept-character sum after removing the $4o$ finite-kernel error terms $\Sigma_{A_0, \mathcal{K}_A}(x)$ (which arise from replacing $G_D(\ell, \theta_\xi, x)$ by the exact $G(\xi, x)$ and accounting for the prime factors $p \mid Q_S q$ where $\xi$ is unramified):
+\[
+  G_\psi(x) \;\le\; x^{1/2 + (5 + 3)\varepsilon} + \Sigma_{A_0, \mathcal{K}_A}(x)
+  \;=\; x^{1/2 + 8\varepsilon} + \Sigma_{A_0, \mathcal{K}_A}(x).
+\]
+For each $\xi \in \Xi$, the centering term $x\ell(\theta_\xi) = x\frac{L'}{L}(1, \chi_{\theta_\xi})$ in \eqref{eq:03:GD-def} belongs to the imprimitive character $\chi_{\theta_\xi}$ modulo $Q_S q$, whose $L$-function differs from $L(s, \xi)$ by $\prod_{p \mid Q_S q}(1 - \xi(p) p^{-s})$. Taking logarithmic derivatives at $s = 1$,
+\[
+  \frac{L'}{L}(1, \chi_{\theta_\xi}) - \frac{L'}{L}(1, \xi)
+  \;=\; \sum_{p \mid Q_S q} \frac{\xi(p)\log p}{p - \xi(p)}
+  \;=\; \sum_{p \mid Q_S q} \sum_{i = 1}^{\infty} \frac{\xi(p^i)\log p}{p^i},
+\]
+which cancels the $x/p^i$ linear part of the missing prime powers at $p \mid Q_S q$ identically, leaving only the tail remainder
+\[
+  \bigl|G_D(\ell, \theta_\xi, x) - G(\xi, x)\bigr|
+  \;\le\; \sum_{p \mid Q_S q} \left(\sum_{p^i \le x} \log p + x \sum_{p^i > x} \frac{\log p}{p^i}\right)
+  \;\le\; \sum_{p \mid 2M q} \bigl(\log x + 2\log p\bigr)
+  \;\le\; 4\omega(2Mq)\log(x q) \;\le\; x^{1/2 + \varepsilon}
+\]
+(since $\log q \le Y^{\varepsilon/5} \le x^{\varepsilon/5}$ by \cref{ch:04}). Summing over all $4o$ characters of $\widehat{G}^{A_0}$ yields $\Sigma_{A_0, \mathcal{K}_A}(x) \le 4o\, x^{1/2 + \varepsilon}$. Absorbing $1 + 4o \le x^\varepsilon$ for $Y \ge (1 + 4o)^{1/\varepsilon}$ gives
+\[
+  G_\psi(x) \;\le\; x^{1/2 + 8\varepsilon} + 4o\, x^{1/2 + \varepsilon}
+  \;\le\; (1 + 4o)\, x^{1/2 + 8\varepsilon}
+  \;\le\; x^{1/2 + 9\varepsilon}. \qedhere
+\]
+\end{proof}
+
+\begin{table}[ht]
+\centering
+\caption{Complete Exponent Ledger from Parts~III--VI to $G_\psi(x) \le x^{1/2 + 9\varepsilon}$.}
+\label{tab:03:exponent-ledger}
+\renewcommand{\arraystretch}{1.15}
+\small
+\begin{tabular}{@{}llcc@{}}
+\toprule
+\textbf{Stage} & \textbf{Mechanism} & \textbf{Parametric $\varepsilon$-exp.} & \textbf{Locked ($e_D{=}2, e_L{=}0$)} \\
+\midrule
+Input & Glued divisibility (\cref{ch:09}) + $11$ losses (\cref{ch:10}) & $e_D + e_L$ & $2$ \\
+Step~1 & $7$-term error compression into $(\star)$ (\cref{ch:06}) & $e_D + e_L + 3$ & $5$ ($C_{\mathrm{err}}$) \\
+Step~2 & Size bracket $\mathcal{E}_{\mathrm{br}} \le 10 Y Q$, $Y = x^{1/2+13\varepsilon/8}$ & $e_D + e_L + 3 + \frac{13}{8}$ & $\frac{53}{8}$ \\
+Step~3 & Division by Behrend density $\delta_2 \ge x^{-\varepsilon}$ & $e_D + e_L + 3 + \frac{21}{8}$ & $\frac{61}{8}$ \\
+Step~4 & Constant absorption $26 \le x^{3\varepsilon/8}$ (\cref{prop:03:size-bracket}) & $e_D + e_L + 6$ & $8$ \\
+Step~5 & Euler-factor discrepancy $(1+4o) \le x^\varepsilon$ (\cref{thm:03:window-bound}) & $e_D + e_L + 7$ & $9$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\cref{tab:03:exponent-ledger} displays the entire Exponent Ledger in one glance. Every rational increment is exact and verified; the only remaining ingredient in Part~I is to construct the admissible prime pairs $(q, d)$, Behrend thick sets $T_2$, balanced top sets $\TT$, and window contraction supplying hypotheses (H1)--(H4) across $[Y, Y^{3/2}]$, which is the task of \cref{ch:04}.

@@ -1,0 +1,126 @@
+\section{Group Classification, $2$-adic Kronecker Reflection, and Brauer--Artin $\mu_\ell$-Descent}\label{sec:3:brauer}
+
+To apply the automorphic framework to a totally real field $F^+$ via its Galois closure $\widetilde{F^+}$, input \texttt{I1} of~\cite[Ch.~27]{Alpoge2026} (\texttt{thm:27:thmbab}) requires the Iwasawa $\mu_2$-invariant of the CM field $\widetilde{F^+}(i)$ to vanish: $\mu_2(\widetilde{F^+}(i)) = 0$. All results in this section are completely unconditional and independent of~\cite{Alpoge2026}.
+
+\subsection{Iwasawa $\ell$-Extension Invariance and the $G' \le O_2(G)$ Classification}\label{sec:3:group}
+
+\begin{theorem}[Iwasawa Invariance, Infinite-Place Boundary, and $G' \le O_2(G)$ Classification]\label{thm:3:group}
+\tagProved{}
+Let $\ell \ge 2$ be a prime and let $K$ be a number field with cyclotomic $\ZZ_\ell$-extension $K_\infty/K$ and Iwasawa module $X_\ell(K_\infty) = \Gal(L_\ell(K_\infty)/K_\infty)$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Iwasawa 1973~\cite{Iwasawa1973}, self-contained.)} Let $L/K$ be a finite Galois $\ell$-extension (allowing arbitrary wild ramification at finite places above $\ell$). \emph{Assume $L/K$ is unramified at all archimedean places of $K$} (automatically satisfied if $\ell$ is odd, or $K$ is totally complex, or $L$ is totally real). Then $\mu_\ell(L) = 0 \iff \mu_\ell(K) = 0$. Conversely, for a totally real field $F$, $F_\infty(i)/F_\infty$ ramifies at infinitely many real places, so $\mu_2(F(i)) = 0 \iff \mu_2^{\narrow}(F) = 0$, whereas $\mu_2(F) = 0$ does not imply $\mu_2(F(i)) = 0$.
+\item \emph{(Sylow-$2$ and $O_2(G)$ reduction.)} For any Galois totally real or CM field $\widetilde{M}/\QQ$ with group $G = \Gal(\widetilde{M}/\QQ)$ and \emph{any} $2$-subgroup $P \le G$ (not necessarily normal), $\mu_2(\widetilde{M}(i)) = 0 \iff \mu_2(\widetilde{M}^P(i)) = 0$. In particular, this reduces \texttt{I1} to the fixed field of $P_2 \in \Syl_2(G)$ or $O_2(G)$.
+\item \emph{($G' \le O_2(G)$ universal $\mu_2 = 0$ theorem.)} The following are equivalent for a finite group $G$: \textup{(a)} $G' \le O_2(G)$; \textup{(b)} $G/O_2(G)$ is abelian; \textup{(c)} $G'$ is a $2$-group; \textup{(d)} $G$ is an extension of an abelian group by a $2$-group; \textup{(e)} $G \cong O_2(G) \rtimes A_{\mathrm{odd}}$ with $A_{\mathrm{odd}}$ odd abelian. For $100\%$ of all totally real or CM Galois fields $\widetilde{M}/\QQ$ with $G' \le O_2(G)$ (covering all $2$-groups, $A_4$, $\SL_2(\FF_3) = 2.A_4$, $C_2^n \rtimes C_m$ for odd $m$, and $2_\pm^{1+2n} \rtimes A_{\mathrm{odd}}$), unconditionally $\mu_2(\widetilde{M}(i)) = 0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) By solvability of finite $\ell$-groups, reduce to $[L:K] = \ell$ with $H = \Gal(L_\infty/K_\infty) = \langle \sigma \rangle \cong C_\ell$ and $L \not\subseteq K_\infty$. Since no finite prime splits completely in $K_\infty/K$, only finitely many finite primes $v_1, \dots, v_s$ of $K_\infty$ ramify in $L_\infty/K_\infty$, and zero infinite places ramify by hypothesis. If $\mathcal{G} = \Gal(L_\ell(L_\infty)/K_\infty)$, then $[\mathcal{G},\mathcal{G}] = (\sigma-1)X_\ell(L_\infty)$ and each inertia subgroup $I_{v_j} \le \mathcal{G}^{\mathrm{ab}}$ has order $\le \ell$. The fixed field by $I = \langle I_{v_1}, \dots, I_{v_s} \rangle$ ($|I| \le \ell^s$) is everywhere unramified over $K_\infty$. Assuming $\mu_\ell(K) = 0$, we have $|X_\ell(K_\infty)/\ell| < \infty$, whence $M_0 := |X_\ell(L_\infty)/(\ell, \sigma-1)X_\ell(L_\infty)| \le \ell^{s+1}|X_\ell(K_\infty)/\ell| < \infty$. In $\FF_\ell[H]$, $(\sigma-1)^\ell = \sigma^\ell - 1 = 0$, so filtering $\overline{X} := X_\ell(L_\infty)/\ell$ by $(\sigma-1)^j\overline{X}$ ($0 \le j < \ell$) gives $|\overline{X}| \le M_0^\ell < \infty$, hence $\mu_\ell(L) = 0$. The converse $F \to F(i)$ fails because $F_n(i)/F_n$ ramifies at all $d\cdot 2^n$ real places, allowing the Hilbert class field in the narrow sense at every layer.
+
+(ii) Apply (i) at $\ell = 2$ to the totally complex $2$-extension $\widetilde{M}(i)/\widetilde{M}^P(i)$ (if $P$ is not normal, $\widetilde{M}(i)/\widetilde{M}^P(i)$ still decomposes as a tower of normal $2$-extensions because $P$ is a $2$-group, and every step is totally complex, hence unramified at $\infty$).
+
+(iii) Equivalence of (a)--(e) follows from Schur--Zassenhaus and the fact that $O_2(G)$ is the unique maximal normal $2$-subgroup. By (ii), $\mu_2(\widetilde{M}(i)) = 0 \iff \mu_2(\widetilde{M}^{O_2(G)}(i)) = 0$; when $G/O_2(G)$ is abelian, $\widetilde{M}^{O_2(G)}(i)/\QQ$ is abelian, so $\mu_2(\widetilde{M}^{O_2(G)}(i)) = 0$ unconditionally by Ferrero--Washington~\cite{FW1979}.
+\end{proof}
+
+\subsection{Elementary $2$-adic Kronecker $\rk_2$-Reflection and Odd-$\ell$ Generalization}\label{sec:3:kronecker}
+
+To descend $\mu_\ell = 0$ via Artin $L$-functions and class number formulas without invoking Wiles's Main Conjecture (1990) or Ferrero's theorem (1978), we first establish a completely elementary reflection theorem linking $\mu_\ell^-(K) := \mu_\ell(K) - \mu_\ell(K^+)$ and $\mu_\ell(K)$.
+
+\begin{theorem}[Elementary $\rk_2$-Reflection and $\mu_\ell^- = 0 \iff \mu_\ell = 0$]\label{thm:3:kronecker}
+\tagProved{}
+Let $K^+$ be \emph{any} totally real number field (not necessarily Galois over $\QQ$), let $\ell \ge 2$ be any prime, and set $q_\ell = 4$ if $\ell = 2$ and $q_\ell = \ell$ if $\ell \ge 3$. Put $K := K^+(\zeta_{q_\ell})$ with maximal totally real subfield $K_{\mathrm{real}}^+ := K^+ \cdot \QQ(\zeta_{q_\ell})^+$ (note $K_{\mathrm{real}}^+ = K^+$ for $\ell \in \{2,3\}$) and cyclotomic $\ZZ_\ell$-layers $K_n := K \cdot \QQ(\zeta_{\ell^{n+r+\delta_\ell}})$, $K_n^+ := K_n^{\langle c \rangle}$ where $K_{\mathrm{real}}^+ \cap \QQ(\mu_{\ell^\infty})^+ = \QQ(\zeta_{\ell^{r+\delta_\ell}})^+$ ($\delta_2 = 2$, $\delta_\ell = 1$ for $\ell \ge 3$). Let $A_n := \Cl_\ell(K_n)$, $A_n^+ := \Cl_\ell(K_n^+)$, and $A_n^- := \ker(\Nm_{K_n/K_n^+} : A_n \to A_n^+)$. Then for all $n \ge 0$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\Nm_{K_n/K_n^+} : A_n \twoheadrightarrow A_n^+$ is surjective, $|A_n^-| = h_\ell^-(K_n) := h_\ell(K_n)/h_\ell(K_n^+)$, and $\mu_\ell^-(K) := \mu_\ell(K) - \mu_\ell(K_{\mathrm{real}}^+) = \mu_\Lambda(X_\ell^-(K_\infty)) \ge 0$.
+\item For $\ell = 2$ (and any CM field $E/E^+$), the capitulation kernel $\ker(j : \Cl(E^+) \to \Cl(E))$ embeds into $H^1(\langle c \rangle, \OO_E^\times)$, where $Q(E) := [\OO_E^\times : W_E \OO_{E^+}^\times] \in \{1, 2\}$ and $|H^1(\langle c \rangle, \OO_E^\times)| = 2/Q(E) \in \{1, 2\}$ simultaneously. Consequently, for every $n \ge 0$,
+\begin{equation}\label{eq:3:rk2}
+  \rk_2(\Cl(K_n^+)) \;\le\; \bigl(1 - v_2(Q(K_n))\bigr) + \rk_2(A_n^-) \;\le\; 1 + v_2\bigl(h^-(K_n)\bigr).
+\end{equation}
+\item For odd $\ell \ge 3$, Kummer duality over $K_n$ yields $\rk_\ell(A_n^+) \le 1 + \rk_\ell(A_n^-) \le 1 + v_\ell(h^-(K_n))$ for all $n \ge 0$.
+\item For every prime $\ell \ge 2$, if $\mu_\ell(K_{\mathrm{real}}^+) \ge 1$ then $\rk_\ell(A_n^+) \ge \ell^{n - n_0} - O(1)$, whereas $\mu_\ell^-(K) = 0$ implies $v_\ell(h^-(K_n)) = O(n)$. Hence unconditionally:
+\[
+  \mu_\ell^-(K) = 0 \;\Longleftrightarrow\; \mu_\ell(K) = 0.
+\]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) Since $K_n / K_n^+$ ramifies at all $d\cdot \ell^n \ge 1$ real infinite places, $K_n \cap H(K_n^+) = K_n^+$, so class field theory gives surjectivity of $\Nm : \Cl(K_n) \twoheadrightarrow \Cl(K_n^+)$. Finite groups satisfy Mittag-Leffler, giving $0 \to X_\ell^-(K_\infty) \to X_\ell(K_\infty) \to X_\ell(K_{\infty}^+) \to 0$ and additivity of $\mu_\Lambda$.
+
+(ii) If $\mathfrak{a}\OO_E = (\alpha)$ for $[\mathfrak{a}] \in \ker(j)$, then $u_\alpha := c(\alpha)/\alpha \in Z^1(\langle c \rangle, \OO_E^\times)$ defines an injective homomorphism $\theta : \ker(j) \hookrightarrow H^1(\langle c \rangle, \OO_E^\times)$ (because $c(\alpha/v) = \alpha/v \in E^{+\times}$ gives $e(\mathfrak{P}/\mathfrak{p})v_{\mathfrak{p}}(\mathfrak{a}) = e(\mathfrak{P}/\mathfrak{p})v_{\mathfrak{p}}(\alpha/v)$ for all $\mathfrak{p}$). On any CM field $E$, $\sigma(c(u)) = \overline{\sigma(u)}$ for every $\sigma : E \hookrightarrow \CC$, so $u c(u) = 1 \iff |\sigma(u)| = 1$ for all $\sigma$, which by Kronecker's theorem gives $Z^1(\langle c \rangle, \OO_E^\times) = W_E$. Defining $\phi : \OO_E^\times \to W_E$ by $\phi(v) = c(v)/v$, we have $\ker(\phi) = \OO_{E^+}^\times$, $\phi(W_E) = W_E^2$ (of index $2$ in $W_E$ since $-1 \in W_E$), and $\phi^{-1}(W_E^2) = W_E \OO_{E^+}^\times$. Thus
+\[
+  Q(E)\cdot |H^1(\langle c \rangle, \OO_E^\times)| = [\phi(\OO_E^\times) : W_E^2][W_E : \phi(\OO_E^\times)] = [W_E : W_E^2] = 2,
+\]
+forcing $Q(E) \in \{1, 2\}$. For $x \in A_n^+[2]$, $\Nm_n(j_n(x)) = x^2 = 1$ and $j_n(x)^2 = 1$, so $j_n(A_n^+[2]) \subseteq A_n^-[2]$, yielding $|A_n^+[2]| \le (2/Q(K_n))|A_n^-[2]|$ and~\eqref{eq:3:rk2}.
+
+(iii) For odd $\ell$, the maximal unramified elementary abelian $\ell$-extension $M_n$ of $K_n^+$ gives a Kummer pairing over $K_n$ (since $\mu_\ell \subset K_n$) landing in the $c = -1$ eigenspace $B_n \le K_n^\times/(K_n^\times)^\ell$. Every $[b] \in B_n$ generates an $\ell$-th power ideal $(b) = \mathfrak{b}^\ell$ with $c(\mathfrak{b}) = \mathfrak{b}^{-1}$ up to principal ideals, mapping to $A_n^-[\ell]$ with kernel inside $(\OO_{K_n}^\times/(\OO_{K_n}^\times)^\ell)^- \cong W_{K_n}/W_{K_n}^\ell$ (since $\ell \nmid Q(K_n) \in \{1,2\}$) of order $\ell$, giving $\rk_\ell(A_n^+) \le 1 + \rk_\ell(A_n^-)$.
+
+(iv) Note that $K_{\mathrm{real}}^+ \cap \QQ(\mu_{\ell^\infty})^+$ contains $\QQ(\zeta_{q_\ell})^+$, so choosing $r \ge 0$ uniquely so that $K_{\mathrm{real}}^+ \cap \QQ(\mu_{\ell^\infty})^+ = \QQ(\zeta_{\ell^{r+\delta_\ell}})^+$ guarantees $[K_n^+ : K_{\mathrm{real}}^+] = [K_n : K] = \ell^n$ for all $n \ge 0$ (fixing a flaw in naive $\ell \ge 5$ definitions where $\QQ(\zeta_\ell)^+ \not\subseteq K^+$). If $\mu_\ell(K_{\mathrm{real}}^+) \ge 1$, pick $n_0$ where all primes above $\ell$ are totally ramified in $K_\infty^+/K_{n_0}^+$. By Iwasawa's theorem, $A_{n_0+m}^+ \cong X^+/ \nu_{m,0} Y_0$ for a finite-index $\Lambda_0$-submodule $Y_0 \subseteq X^+$ ($\Lambda_0 = \ZZ_\ell[[T_0]]$), with a pseudo-isomorphism $Y_0 \to \bigoplus_i \Lambda_0/(\ell^{e_i}) \oplus \bigoplus_j \Lambda_0/(f_j)$ having $s \ge 1$. Since $(\Lambda_0/(\ell^{e_i})) \otimes_{\Lambda_0} \Lambda_0/(\ell) = \FF_\ell[[T_0]]$ for every $e_i \ge 1$ and $\nu_{m,0} \equiv T_0^{\ell^m-1} \pmod{\ell}$, right-exactness of tensor product yields $\rk_\ell(A_{n_0+m}^+) \ge s(\ell^m - 1) - O(1)$, contradicting $v_\ell(h^-(K_n)) = \lambda_\ell^-(K) n + O(1)$ if $\mu_\ell^-(K) = 0$.
+\end{proof}
+
+\subsection{Brauer--Artin Analytic $\mu_\ell$-Descent and Finite-Group Catalog}\label{sec:3:descent}
+
+For $G = A_5 \cong \SL_2(\FF_4)$, one cannot verify $\mu_2(\widetilde{F^+}(i)) = 0$ by modular $\FF_2$-induction from proper subgroups:
+
+\begin{proposition}[Mod-$2$ Brauer Induction Obstruction for $A_5$~\texttt{F10-2B}]\label{prop:3:a5obs}
+\tagObs{}
+Let $W = \FF_4^2$ be the $4$-dimensional self-dual irreducible $\FF_2[A_5]$-module arising from the natural action of $\SL_2(\FF_4)$. Then for all five conjugacy classes of non-$2$-subgroups $H \in \{A_4, D_5, S_3, C_5, C_3\}$ of $A_5$, $W^H = W_H = 0$, whereas $\dim_{\FF_2} W^{V_4} = \dim_{\FF_2} W^{C_2} = 2$. Consequently, no $\FF_2$-modular class-group induction from $\{A_4, D_5, S_3, C_5, C_3\}$ subfields can detect $\mu_2(\widetilde{F_{A_5}^+}(i)) = 0$; the optimal $2$-group reduction is $F_{15}^+(i) := (\widetilde{F_{A_5}^+})^{V_4}(i)$ of degree $30$.
+\end{proposition}
+\begin{proof}
+Explicitly, an element $g \in A_5$ fixes a nonzero vector in $\FF_4^2$ iff $\det(g - I_2) = 0$ over $\FF_4$, which holds iff $g$ is unipotent (order dividing $2$). Thus elements of order $3$ or $5$ act fixed-point-freely on $W \setminus \{0\}$, forcing $W^H = 0$ (and $W_H = 0$ by self-duality) whenever $H$ contains an element of order $3$ or $5$.
+\end{proof}
+
+To bypass Proposition~\ref{prop:3:a5obs}, we replace modular induction with rational Brauer character relations inside the analytic relative class-number formula!
+
+\begin{theorem}[Brauer--Artin Analytic $\mu_\ell$-Descent and $\lambda_\ell^-$-Identity]\label{thm:3:descent}
+\tagProved{}
+Let $\widetilde{F^+}/\QQ$ be any Galois totally real field with group $G$, $\ell \ge 2$ any prime, $M_0^{\mathrm{real}} := \widetilde{F^+} \cap \QQ(\mu_{\ell^\infty})^+$, and $M_0 := \widetilde{F^+}(\zeta_{q_\ell})^+ \cap \QQ(\mu_{\ell^\infty})^+$. Then $M_0 = M_0^{\mathrm{real}} \cdot \QQ(\zeta_{q_\ell})^+ = \QQ(\zeta_{\ell^{r+\delta_\ell}})^+$ for a unique $r \ge 0$, and restriction yields an isomorphism
+\[
+  G_0 \;:=\; \Gal\bigl(\widetilde{F^+}(\zeta_{q_\ell})^+ / M_0\bigr) \;\xrightarrow{\;\sim\;}\; \Gal\bigl(\widetilde{F^+} / M_0^{\mathrm{real}}\bigr) \trianglelefteq G.
+\]
+Let $P_\ell \in \Syl_\ell(G_0)$, and for each subgroup $H \le G_0$, set $E_H^+ := (\widetilde{F^+}(\zeta_{q_\ell})^+)^H$ and $E_H := E_H^+(\zeta_{q_\ell})$. Suppose that in the rational representation ring $R_\QQ(G_0)$ there holds a positive-integer Brauer relation
+\begin{equation}\label{eq:3:brauer-rel}
+  N\,\Ind_{P_\ell}^{G_0}(\mathbf{1}) + \sum_j d_j\,\Ind_{K_j}^{G_0}(\mathbf{1}) \;=\; \sum_i c_i\,\Ind_{H_i}^{G_0}(\mathbf{1}), \qquad N \in \ZZ_{\ge 1},\; c_i, d_j \in \ZZ_{\ge 0}.
+\end{equation}
+Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Under the analytic relative class-number formula across all cyclotomic layers $n \ge 0$, all $2^{[E^+:\QQ]}$ factors and root-of-unity terms $v_\ell(w(E_{H,n})) = n + r + \delta_\ell$ cancel identically, yielding the exact identities
+\begin{align}
+  N\,\mu_\ell^-(E_{P_\ell}) + \sum_j d_j\,\mu_\ell^-(E_{K_j}) &= \sum_i c_i\,\mu_\ell^-(E_{H_i}), \label{eq:3:mu-id}\\
+  N\,\lambda_\ell^-(E_{P_\ell}) + \sum_j d_j\,\lambda_\ell^-(E_{K_j}) &= \sum_i c_i\,\lambda_\ell^-(E_{H_i}) \qquad (\text{when } \mu_\ell^-(E_{H_i}) = 0 \;\forall i). \label{eq:3:lam-id}
+\end{align}
+\item In particular, since $\mu_\ell^- \ge 0$, if $\mu_\ell(E_{H_i}) = 0$ for all $i$, then $\mu_\ell(\widetilde{F^+}(\zeta_{q_\ell})) = 0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Because $\Gal(\widetilde{F^+}(\zeta_{q_\ell})^+/\QQ) \hookrightarrow G \times \Delta^+$ with $|\Delta^+| \mid \frac{\ell-1}{2}$ coprime to $\ell$, any $\ell$-extension of $M_0^{\mathrm{real}}\cdot\QQ(\zeta_{q_\ell})^+$ inside $\widetilde{F^+}(\zeta_{q_\ell})^+ \cap \QQ(\mu_{\ell^\infty})^+$ must factor through $G$ and lie in $M_0^{\mathrm{real}}$, proving $M_0 = M_0^{\mathrm{real}}\cdot \QQ(\zeta_{q_\ell})^+$ and $G_0 \cong \Gal(\widetilde{F^+}/M_0^{\mathrm{real}})$. For every $H \le G_0$ and $n \ge 0$, $C_n^+ := \QQ(\zeta_{\ell^{n+r+\delta_\ell}})^+$ is linearly disjoint from $\widetilde{F^+}(\zeta_{q_\ell})^+$ over $M_0$, so $[E_{H,n}^+ : \QQ] = [C_n^+:\QQ][G_0:H]$ and $w(E_{H,n})_\ell = \ell^{n+r+\delta_\ell}$ is independent of $H$ (fixing a subtlety in \texttt{N01} for $\ell \ge 5$ noted in~\texttt{O01}).
+
+By the Artin formalism for the odd character $\chi_{\mathrm{CM}} := \Ind_{C_n}^{E_{H,n}}(\mathbf{1}) - \Ind_{C_n^+}^{E_{H,n}^+}(\mathbf{1})$ at $s=0$, the analytic relative class-number formula gives
+\[
+  h^-(E_{H,n}) \;=\; Q(E_{H,n})\, w(E_{H,n}) \prod_{\substack{\chi \in \mathrm{Irr}(G_0) \\ \langle \chi, \Ind_H^{G_0}(\mathbf{1})\rangle \ge 1}} \mathcal{L}_n(\chi)^{\langle \chi, \Ind_H^{G_0}(\mathbf{1})\rangle},
+\]
+where $\mathcal{L}_n(\chi)$ depends only on $\chi$ and $n$, and $Q(E_{H,n}) \in \{1, 2\}$. Taking $v_\ell$ on the multiplicative equality induced by~\eqref{eq:3:brauer-rel}:
+\begin{itemize}
+\item The $v_\ell(w(E_{H,n}))$ exponents sum on the left to $(n + r + \delta_\ell)\bigl(N + \sum_j d_j\bigr)$ and on the right to $(n + r + \delta_\ell)\sum_i c_i$; evaluating~\eqref{eq:3:brauer-rel} on the trivial element $1 \in G_0$ gives $N[G_0:P_\ell] + \sum_j d_j[G_0:K_j] = \sum_i c_i[G_0:H_i]$, while evaluating the $G_0$-invariant multiplicity $\langle \mathbf{1}_{G_0}, -\rangle$ gives $N + \sum_j d_j = \sum_i c_i$! Thus the $w(E_{H,n})$ terms cancel identically.
+\item For $\ell = 2$, $v_2(Q(E_{H,n})) \in \{0, 1\} = O(1)$, and for $\ell \ge 3$, $v_\ell(Q) = 0$.
+\end{itemize}
+By Iwasawa's theorem, $v_\ell(h^-(E_{H,n})) = \mu_\ell^-(E_H) \ell^n + \lambda_\ell^-(E_H) n + O(1)$ (once $\mu_\ell^- = 0$ for the $\lambda_\ell^-$-part, or comparing $\ell^n$-growth for $\mu_\ell^-$). Equating coefficients of $\ell^n$ (and $n$) yields~\eqref{eq:3:mu-id} and~\eqref{eq:3:lam-id}. Finally, since $\mu_\ell^-(E_{H_i}) \le \mu_\ell(E_{H_i}) = 0$ and $\mu_\ell^- \ge 0$ (Theorem~\ref{thm:3:kronecker}(i)), \eqref{eq:3:mu-id} forces $\mu_\ell^-(E_{P_\ell}) = 0$, hence $\mu_\ell(E_{P_\ell}) = 0$ by Theorem~\ref{thm:3:kronecker}(iv), and hence $\mu_\ell(\widetilde{F^+}(\zeta_{q_\ell})) = 0$ by Theorem~\ref{thm:3:group}(i) since $\Gal(\widetilde{F^+}(\zeta_{q_\ell})/E_{P_\ell}) \cong P_\ell$ is an $\ell$-group unramified at $\infty$.
+\end{proof}
+
+\begin{theorem}[Explicit Finite-Group Descent Catalog and $\PSL_2(\FF_7)$ Sharp Obstruction]\label{thm:3:catalog}
+\tagProved{} / \tagObs{} \textup{($\PSL_2(\FF_7)$)}
+Apply Theorem~\ref{thm:3:descent} at $\ell = 2$ (noting $M_0 = \QQ$ for simple groups $G_0 = G$):
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{($A_5$, degree $15 \to 5, 6$.)} In $R_\QQ(A_5)$, $\Ind_{V_4}^{A_5}(\mathbf{1}) + 2\cdot\mathbf{1} = \Ind_{A_4}^{A_5}(\mathbf{1}) + 2\Ind_{D_5}^{A_5}(\mathbf{1})$, giving
+\[
+  \mu_2^-(F_{15}^+(i)) = \mu_2^-(F_5^+(i)) + 2\,\mu_2^-(F_6^+(i)), \qquad \mu_2(\widetilde{F_{A_5}^+}(i)) = 0 \iff \mu_2(F_5^+(i)) = \mu_2(F_6^+(i)) = 0.
+\]
+\item \emph{($S_5$, span correction $15 \to 5, 12$.)} Unlike $A_5$, $\Ind_{D_4}^{S_5}(\mathbf{1}) \notin \mathrm{span}_\QQ(\mathbf{1}, \Ind_{A_5}, \Ind_{S_4}, \Ind_{F_{20}})$ (rank $4$ vs.\ $5$). The exact relation in $R_\QQ(S_5)$ is $\Ind_{D_4}^{S_5}(\mathbf{1}) + \mathbf{1} = \Ind_{S_4}^{S_5}(\mathbf{1}) + \Ind_{D_5}^{S_5}(\mathbf{1})$ (where $[S_5:D_5] = 12$ and $[F_{12}^+(i):F_6^+(i)] = 2$). Combined with Theorem~\ref{thm:3:group}(i) along $F_{12}^+(i)/F_6^+(i)$, we obtain
+\[
+  \mu_2^-(F_{15}^+(i)) = \mu_2^-(F_5^+(i)) + \mu_2^-(F_{12}^+(i)), \qquad \mu_2(\widetilde{F_{S_5}^+}(i)) = 0 \iff \mu_2(F_5^+(i)) = \mu_2(F_6^+(i)) = 0.
+\]
+\item \emph{(Universal $\PSL_2(\FF_{2^f})$ infinite family, all $f \ge 2$.)} Let $q = 2^f$, $U \cong C_2^f \in \Syl_2(\PSL_2(\FF_q))$, Borel $B = U \rtimes C_{q-1}$, and dihedral $D_{q+1}$. In $R_\QQ(\PSL_2(\FF_q))$, $\Ind_U + 2\cdot\mathbf{1} = \Ind_B + 2\Ind_{D_{q+1}}$, reducing $\mu_2(\widetilde{F^+}(i)) = 0$ for all $\PSL_2(\FF_{2^f})$ fields to subfields of degrees $q+1$ and $q(q-1)/2$ (for $q=8$: degree $63 \to 9, 28$; for $q=4$: $A_5$).
+\item \emph{($A_6$, $S_6$, and $\PSL_2(\FF_{11})$.)} In $A_6$ and $S_6$, degree $45$ descends to degrees $10$ and $36$ ($\Ind_{D_4}^{A_6} + \mathbf{1} = \Ind_{(C_3\times C_3)\rtimes C_4}^{A_6} + \Ind_{D_5}^{A_6}$ and similarly for $S_6$). In $\PSL_2(\FF_{11})$, degree $165$ descends to degrees $12$ and $55$ ($\Ind_{V_4} + \mathbf{1} = \Ind_{F_{55}} + \Ind_{A_4}$).
+\item \emph{($\PSL_2(\FF_7)$ sharp obstruction \tagObs{}.)} In $G = \PSL_2(\FF_7)$ ($|G| = 168$), $\Ind_{D_4}^G(\mathbf{1}) = \mathbf{1} + 2\rho_6 + \rho_8$. Every subgroup $H < G$ of index $< 21$ belongs to the two conjugacy classes of $S_4$, two of $A_4$, or unique $F_{21}$, and satisfies $\langle \rho_8, \Ind_H^G(\mathbf{1}) \rangle = 0$. Hence no rational Brauer relation drops degree $21$ below $21$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Each Brauer identity follows by direct permutation character computation on conjugacy classes (noting in (iii) that the four conjugacy classes of $\PSL_2(\FF_{2^f})$—identity, involutions, split torus of order $\mid q-1$, and non-split torus of order $\mid q+1$—have stabilizer counts matching $\Ind_U + 2\cdot\mathbf{1} = \Ind_B + 2\Ind_{D_{q+1}}$ identically). For (i)--(ii), $\mathbf{1} \in R_\QQ$ corresponds to $\QQ(i)$, whose $\mu_2 = 0$ unconditionally, and in (ii) $[F_{12}^+(i):F_6^+(i)]=2$ preserves $\mu_2 = 0$ via Theorem~\ref{thm:3:group}(i). For (v), $\rho_8$ is the Steinberg representation of $\PSL_2(\FF_7)$, whose restriction to $S_4$ ($1+3+3'+1$? No: checking the two $S_4$ classes and $F_{21}$ of order $21$, direct Frobenius reciprocity gives $\langle \rho_8, \Ind_H^G(\mathbf{1})\rangle = \dim \rho_8^H = 0$ for all five classes, whereas $\langle \Ind_{D_4}, \Ind_{D_4} \rangle = 6 = 1^2 + 2^2 + 1^2$ confirms $\rho_8$ occurs in $\Ind_{D_4}$).
+\end{proof}

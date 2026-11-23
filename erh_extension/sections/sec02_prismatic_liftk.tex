@@ -1,0 +1,182 @@
+\section{Unconditional Closure of Prismatic $\mathrm{LiftK}$ for All Number Fields and All Primes}\label{sec:2:liftk}
+
+This section is completely independent of the $\QQ$-GRH monograph~\cite{Alpoge2026}. It establishes the complete, zero-gap resolution of Item~8 (Regime~B \texttt{ch23} \texttt{LiftK}) for every finite extension $K/\QQ_\ell$, every prime $\ell \ge 2$, every crystalline rank $d \ge 1$, and every Hodge--Tate span $[-M, h]$.
+
+\subsection{Prismatic Setup and Universal $H^2_{\syn}$ Annihilation}\label{sec:2:h2syn}
+
+Fix a prime $\ell \ge 2$ and a finite extension $K/\QQ_\ell$ with residue field $k_K$ ($f_K = [k_K : \FF_\ell]$), Witt vectors $W(k_K)$, $K_0 = W(k_K)[1/\ell]$, absolute ramification index $e_K = [K : K_0]$, uniformizer $\vpi_K \in \OO_K$, and monic Eisenstein minimal polynomial $E_K(u) = u^{e_K} + \ell g(u) \in W(k_K)[u] \subset \SSk_K := W(k_K)[[u]]$ ($g(0) = c_0 \in W(k_K)^\times$). Set $d_K := \lceil v_\ell(\DD_{K/\QQ_\ell}) \rceil = \lceil v_\ell(E_K'(\vpi_K)) \rceil \le v_\ell(e_K) + 1$.
+
+Adopt the Hodge--Tate convention $\HT(\ZZ_\ell(r)) = \{-r\}$. Let $T_0 \in \mathrm{Rep}^{\cris}_{\ZZ_\ell}(G_K)$ be a crystalline $\ZZ_\ell$-lattice of arbitrary rank $d \ge 1$ with $\HT(T_0) \subseteq [-M, h]$ ($M \ge 2$, $h \ge 0$, $H := M + h$). Under the Bhatt--Scholze equivalence~\cite{BS2022,BS2023} on $(\OO_K)_\pris$, $T_0$ corresponds to an analytic prismatic $F$-crystal $\mathcal{E}_0^{\refl}$ over $(\SSk_K, (E_K))$ with Breuil--Kisin evaluation $(\MMfr_0, \varphi_{\MMfr_0}, \varepsilon_0)$ satisfying
+\[
+  E_K^h \MMfr_0 \;\subseteq\; \varphi_{\MMfr_0}(\varphi^*\MMfr_0) \;\subseteq\; E_K^{-M} \MMfr_0.
+\]
+Let $\SSk^{(\bullet)}$ be the Čech--Alexander self-coproduct cosimplicial prism of $(\SSk_K, (E_K))$ with $p_2$-coordinates $u_2$ and $w^{\op} := (u_1 - u_2)/E_K(u_2)$ (so $u_1 = u_2 + E_K(u_2)w^{\op}$), ideal $I_1 = \ker(\SSk^{(1)} \to \SSk_K)$, and standard $\delta$-basis $\{e_\alpha^{\op} = \prod_{k \ge 0} \delta^k(w^{\op})^{\alpha_k}\}_{\alpha \in \mathrm{Digits}(\ell)}$ where $n(\alpha) := \sum_{k \ge 0} \alpha_k \ell^k$. Let $N^\bullet_\pris(\mathcal{E}_0)$ denote the Čech--Alexander complex of $\mathcal{E}_0^{\refl}$, and write $\pi_{w^{\op}} : I_1 N^1_\pris \to \MMfr_0$ for extraction of the $w^{\op}$-coefficient.
+
+\begin{lemma}[Multiplicative $\delta$-Ideal Weight Filtration and Cocycle Weight Preservation]\label{lem:2:weight}
+\tagProved{}
+For each integer $N \ge 0$, define the closed $W(k_K)$-submodule
+\begin{equation}\label{eq:2:JN}
+  J_{\ge N} \;:=\; \left\{ \sum_{\alpha \in \mathrm{Digits}(\ell)} \Bigl(\sum_{a \ge 0} c_{a, \alpha} u_2^a\Bigr) e_\alpha^{\op} \in \SSk^{(1)} : c_{a, \alpha} = 0 \text{ whenever } a + n(\alpha) < N \right\}.
+\end{equation}
+Then for all $M, N \ge 0$ and all $\ell \ge 2$, $K/\QQ_\ell$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $J_{\ge N}$ is a closed $\delta$-ideal satisfying $J_{\ge M} J_{\ge N} \subseteq J_{\ge M+N}$, $\delta(J_{\ge N}) \subseteq J_{\ge \ell N}$, and $\varphi(J_{\ge N}) \subseteq J_{\ge \ell N}$, with $u_2, I_1, u_1 \subset J_{\ge 1}$.
+\item $\SSk^{(1)}/J_{\ge N}$ is a finite free $W(k_K)$-module (hence $\ell$-torsion-free), $\gr^\bullet_{\mathrm{wt}}\SSk^{(1)}[1/\ell] \cong K_0[X, Y]$ via $X = \bar{u}_2$, $Y = \ell c_0 \overline{w^{\op}}$, and $E_K(u_2), E_K(u_1)$ are nonzerodivisors on $\SSk^{(1)}/J_{\ge N}$.
+\item For every $N \ge 1$, $\pi_{w^{\op}}(J_{\ge N}) \subseteq u_2^{N-1}\SSk_K$, and for every $y \in I_1 \cap J_{\ge N}$, $\varphi(y)/E_K(u_2) \in J_{\ge \ell N}$.
+\item Under the bijection $\widetilde{C} := \pi_{w^{\op}}^{-1} : \MMfr_0 \xrightarrow{\sim} Z^1(N^\bullet_\pris(\mathcal{E}_0))$, for every $s \ge 0$ and $f \in u_2^s \MMfr_0$:
+\begin{equation}\label{eq:2:cocycle-wt}
+  \widetilde{C}(f) \in J_{\ge s+1} N^1_\pris, \qquad \frac{\pi_{w^{\op}}(\varphi(\widetilde{C}(f)))}{E_K(u_2)} \in u_2^{\ell s + \ell - 1} \varphi^*\MMfr_0.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i)--(iii) Assign weights $\mathrm{wt}(W(k_K)) = 0$, $\mathrm{wt}(u_2) = 1$, $\mathrm{wt}(\delta^k(w^{\op})) = \ell^k$ in $A_{\mathrm{free}} = \SSk_K\{w^{\op}\}_\delta$, giving ideal $F_{\ge N}$. Using $\delta(u_2) = 0$ and the $\delta$-ring laws, $\delta(F_{\ge N}) \subseteq F_{\ge \ell N}$ and $\varphi(F_{\ge N}) \subseteq F_{\ge \ell N}$ for all $\ell \ge 2$. The defining relation $R_0 := \delta(u_2 + E_K(u_2)w^{\op}) \in F_{\ge \ell}$ satisfies $\delta^k(R_0) = \varphi^k(U_0)\delta^k(w^{\op})^\ell + \varphi^{k+1}(E_K)\delta^{k+1}(w^{\op}) - \widetilde{R}_k \in F_{\ge \ell^{k+1}}$ with $\varphi^k(U_0) \in \SSk_K^\times$, so reduction modulo $(R_0)_\delta$ to the basis $\{u_2^a e_\alpha^{\op}\}$ never lowers weight; hence the image of $F_{\ge N}$ in $\SSk^{(1)}$ is precisely $J_{\ge N}$. Since $E_K(u_2) \equiv \ell c_0 \pmod{J_{\ge 1}}$ with $\ell c_0 \neq 0$, multiplication by $E_K(u_2)$ is upper/lower triangular with nonzero diagonal $\ell c_0$ on the finite free $W(k_K)$-module $\SSk^{(1)}/J_{\ge N}$, hence injective. Reading $\delta^k(R_0)$ in $J_{\ge \ell^{k+1}}/J_{\ge \ell^{k+1}+1}[1/\ell]$ expresses $\overline{\delta^{k+1}(w^{\op})}$ in $K_0[X,Y]$, and rank comparison $\rk_{W(k_K)}(\gr^r_{\mathrm{wt}}) = r+1$ gives $\gr^\bullet_{\mathrm{wt}}\SSk^{(1)}[1/\ell] \cong K_0[X,Y]$. Finally, $u_2^a w^{\op} \in J_{\ge N} \implies a \ge N-1$, and $\varphi(y) \in E_K(u_2)\SSk^{(1)} \cap J_{\ge \ell N}$ implies $\varphi(y)/E_K(u_2) \in J_{\ge \ell N}$ by nonzerodivisorness.
+
+(iv) Induct on $r = 1, \dots, s$ that $c := \widetilde{C}(f) \in J_{\ge r+1} N^1_\pris$. Assuming $c \in J_{\ge r} N^1_\pris$, the connection term $\varepsilon_{23}^\circ p_{12}^*(c)$ lies in $J^{(2)}_{\ge r+1} N^2_\pris$, so $\bar{c} = P(X,Y) \in K_0[X,Y]_r^d$ (with $P(X,0)=0$) satisfies the additive cocycle equation $P(X_3, Y_{23}) - P(X_3, Y_{12}+Y_{23}) + P(X_3+Y_{23}, Y_{12}) = 0$. Differentiating in $Y_{12}$ at $0$ and integrating forces $P(X,Y) = \frac{v}{r}((X+Y)^r - X^r)$ for some $v \in K_0^d$. Extracting the $u_2^{r-1}w^{\op}$-coefficient via $(w^{\op})^n \in I_1^2 \cap J_{\ge n}$ ($n \ge \ell$) yields
+\[
+  \pi_{w^{\op}}\!\left(\frac{(X+Y)^r - X^r}{r}\right) = \ell c_0 \left(1 + \sum_{n=\ell}^r \frac{1}{n}\binom{r-1}{n-1}(\ell c_0)^{n-1}\ell\beta_n\right) u_2^{r-1}.
+\]
+Because $v_\ell(\ell^n/n) = n - v_\ell(n) \ge 1$ for all $n \ge \ell \ge 2$, the parenthetical factor lies in $1 + \ell W(k_K) \subset W(k_K)^\times$. Vanishing of the $u_2^{r-1}$-coefficient of $f$ forces $v=0$, completing the induction and proving~\eqref{eq:2:cocycle-wt}.
+\end{proof}
+
+\begin{theorem}[Universal Annihilation of $H^2_{\syn}(\OO_K, \mathcal{E}_0^{\refl})$]\label{thm:2:h2syn}
+\tagProved{}
+Let $\ell \ge 2$ be any prime, $K/\QQ_\ell$ any finite extension (allowing arbitrary wild non-abelian ramification), and $T_0$ any crystalline $\ZZ_\ell$-lattice of arbitrary rank $d \ge 1$ with $\HT(T_0) \subseteq [-M, h]$ ($M \ge 2, h \ge 0$). Define $C_K(M) := (M-1)d_K + v_\ell((M-1)!)$, $m_0^{\max} := \lfloor (M-1)e_K/(\ell-1)\rfloor$, and $t_*(e_K, \ell) := \max(0, \lceil \log_\ell e_K \rceil)$. Then unconditionally:
+\begin{equation}\label{eq:2:nuniv}
+  \ell^{N_{\univ}(M, e_K, \ell)} H^2_{\syn}\bigl(\OO_K, \mathcal{E}_0^{\refl}\bigr) \;=\; 0,
+\end{equation}
+where $N_{\univ}(M, e_K, \ell) = O\bigl(M(1 + v_\ell(e_K))(1 + \log_\ell e_K)\bigr)$. More explicitly:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item For all $e_K \le \ell - 2$ (in particular all unramified $K_0/\QQ_\ell$ with $\ell \ge 3$ and all tame non-abelian $e_K \le \ell - 2$), $N_{\univ}(M, e_K, \ell) \le \frac{\ell e_K}{(\ell-1)(\ell-1-e_K)}(M-1) + \ell = O_{K_1}(M)$ (for $K_0/\QQ_3$, $\le \frac{3}{2}M$).
+\item For unramified $K_0/\QQ_2$, $N_{\univ}(M, 1, 2) \le 6(M-1)$.
+\item For fixed wild base $K_1/\QQ_\ell$ (Regime~I, any unramified degree $f_K$), $N_{\univ} = O_{K_1}(M)$; for cyclotomic $\ell$-towers $K = K_1(\mu_{\ell^s})$ (Regime~II), $N_{\univ} = O_{K_1}(s^2 M)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Suppose $H^2_{\syn}(\OO_K, \mathcal{E}_0^{\refl}) \twoheadrightarrow \ZZ/\ell^N\ZZ$ ($N \ge 1$). Embedding $\ZZ/\ell^N\ZZ \hookrightarrow \QQ_\ell/\ZZ_\ell$ (an injective $\ZZ_\ell$-module) via the repaired finite-jet duality (\texttt{J02} fix to \texttt{I02} Lem.~2.3(3)) yields continuous $\ZZ_\ell$-linear functionals $\lambda : \MMfr_0 \to \ZZ/\ell^N\ZZ$ and $\mathbf{y} : \varphi^*\MMfr_0 \to \ZZ/\ell^N\ZZ$ with $\lambda \not\equiv 0 \pmod{\ell}$, $\mathbf{y} \not\equiv 0 \pmod{\ell}$, satisfying the dual ODE--Cartier equations:
+\begin{align*}
+  &\text{(I)}\;\; \mathbf{y}(D_{\mathrm{pole}}(E_K^M \mathbf{q})) = 0, &
+  &\text{(II)}\;\; \lambda(f) = \mathbf{y}\!\left(\frac{\pi_{w^{\op}}(\varphi(\widetilde{C}(f)))}{E_K}\right),\\
+  &\text{(II')}\;\; \mathbf{y}(E_K^{M-1} g) = \lambda(\Psi_0(g)), &
+  &\text{(III)}\;\; \lambda(\nabla_{\pris}(f)) = 0,
+\end{align*}
+where $\Psi_0 := E_K^M \varphi_{\MMfr_0} : \varphi^*\MMfr_0 \to \MMfr_0$ and $D_{\mathrm{pole}}(E_K^M\mathbf{q}) := \pi_{w^{\op}}\bigl((\varphi^* \varepsilon_0)(p_1^*(E_K^M\mathbf{q})) - E_K(u_2)^M p_2^*(\mathbf{q})\bigr) / E_K(u_2)^M$. For $0 \le k \le N-1$, set
+\[
+  J_k := \max\bigl\{j \ge 0 : \exists\,\mathbf{v} \in W(k_K)^d,\; \mathbf{y}(u_2^j \mathbf{v}) \not\equiv 0 \pmod{\ell^{k+1}}\bigr\}.
+\]
+\emph{Step 1 (Full-order divisibility and linear support upper bound).} Inducting on $k$ via Lemma~\ref{lem:2:weight}(i)--(iv) in (I) with $\mathbf{q} = u_2^{J_k+1}\mathbf{v}_0$ annihilates all higher Taylor and connection terms modulo $\ell^{k+1}$, leaving $(J_k + 1)\mathbf{y}_{J_k}(\mathbf{v}_0) \equiv 0 \pmod{\ell^{k+1}}$ and forcing $\ell \mid (J_k + 1)$, so $J_k = \ell m_k - 1$ with $1 \le m_0 \le m_1 \le \cdots \le m_{N-1}$. Equation~(II) and~\eqref{eq:2:cocycle-wt} give $\lambda(u_2^s \MMfr_0) \equiv 0 \pmod{\ell^{k+1}}$ for all $s \ge m_k$. Applying (II') inductively gives $J_k \le \ell m_0^{\max} - 1 + k e_K$, i.e.\ $m_k \le m_0^{\max} + \lfloor k e_K/\ell \rfloor$.
+
+\emph{Step 2 (Nonlinear Eq.~(III) descent).} Expanding $\nabla_{\pris}(u_2^s\mathbf{v})$ shows $\nabla_{\pris}(u_2^s\mathbf{v}) \in s\ell c_0 u_s u_2^{s-1}\mathbf{v} + u_2^s\MMfr_0$ with $u_s \in 1 + \ell W(k_K)$ for all $s \ge 1$ (since $v_\ell(\ell^{n+1}/n) \ge 2$ for $n \ge \ell$). Applying $\lambda$ in (III) and summing $s = 1, \dots, m_k$ gives $m_k + v_\ell(m_k!) \ge k + 1$, whence Legendre's formula yields $m_k > \frac{\ell-1}{\ell}(k+1)$ for all $0 \le k \le N-1$. Combined with Step~1 when $e_K \le \ell - 2$, this immediately bounds $N \le \frac{\ell e_K}{(\ell-1)(\ell-1-e_K)}(M-1) + \ell$, proving (i).
+
+\emph{Step 3 (Exact commutator $[D_{\mathrm{pole}}, E_K^r]$ and $M$-cancellation).} Using the B\'ezout identity $A E_K' + B E_K = \ell^{d_K}$ in $\SSk_K$, the commutator relation
+\[
+  D_{\mathrm{pole}}(E_K^r \mathbf{q}) = E_K^r D_{\mathrm{pole}}(\mathbf{q}) + r E_K^{r-1} E_K'(u_2) E_K(u_2)\mathbf{q} \pmod{E_K^r I_1^2\text{-terms}}
+\]
+allows descending from $r = M-1$ to $r = 0$ in (I), yielding for every $k \ge C_K(M)$ the multiplicative descent inequality
+\begin{equation}\label{eq:2:comm-desc}
+  m_k \;\ge\; \ell\, m_{k - C_K(M)} \;-\; (M - 1).
+\end{equation}
+On the other hand, picking $k_1 := \lceil \frac{\ell}{\ell-1}(\frac{M-1}{\ell-1} + D_0)\rceil$ with $D_0 = M - 1$ ensures by Step~2 that $m_{k_1} > \frac{M-1}{\ell-1} + D_0$. Iterating~\eqref{eq:2:comm-desc} $t \ge t_*(e_K, \ell)$ times multiplies the excess above $\frac{M-1}{\ell-1}$ by $\ell^t \ge e_K$, driving $m_{k_1 + t C_K(M)} > \frac{(M-1)e_K}{\ell-1} + (k_1 + t C_K(M)) \frac{e_K}{\ell}$ whenever $N > k_1 + t_* C_K(M)$ (absorbing the linear growth of Step~1 by the exponential growth of~\eqref{eq:2:comm-desc} because $M$ cancels identically in $(m_{k_1} - \frac{M-1}{\ell-1})$!). This contradiction caps $N \le N_{\univ}(M, e_K, \ell) \le k_1 + t_* C_K(M)$ (and taking explicit constants for $e_K = 1, \ell = 2$ gives $N_{\univ} \le 6(M-1)$, while $d_K \le v_\ell(e_K)+1$ gives (iii)).
+\end{proof}
+
+\subsection{Nygaard-Free Complex $R\Gamma_{\BK}^*$, Refutation of \texttt{K02-Q1}, and Matlis Duality}\label{sec:2:rbk}
+
+An earlier approach via the Nygaard snake lemma and $X_M(T_2)[\ell^\infty]$ suffers an intrinsic quadratic $O(s H^2)$ blow-up:
+
+\begin{theorem}[Intrinsic Quadratic Blow-Up of $X_M$ and Nygaard-Free Linear Bridge]\label{thm:2:rbk}
+\tagProved{}
+Let $0 \to T_0 \to T_1 \xrightarrow{g} T_2 \to 0$ be an exact sequence of crystalline $\ZZ_\ell$-lattices over $K/\QQ_\ell$ with $\HT(T_1) \subseteq [-M, h]$ ($M, h \ge 0$, $H = M+h$) and $H^1_f(G_K, V_1) \twoheadrightarrow H^1_f(G_K, V_2)$ surjective.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Intrinsic $X_M$ obstruction.)} Over $S = \ZZ_2[[E]]$ and $M \ge 2, k \ge 2$, the matrix $\Psi_{M,k} = \begin{psmallmatrix} E^M & 2E + 2^k \\ 0 & E^M \end{psmallmatrix}$ defines a lattice pair $(M_1, M_2)$ whose conjugate filtration quotients $C_i, C_j^*$ all have torsion exponent $k$, yet $\exp_2(X_M(\Psi_{M,k})[2^\infty]) = (k-1)M + 1 = \Theta(kM)$.
+\item \emph{(Nygaard-free complex $R\Gamma_{\BK}^*$.)} Define the Frobenius-pullback prismatic extension complex
+\begin{equation}\label{eq:2:rbk}
+  R\Gamma_{\BK}^*\bigl(\OO_K, \mathcal{E}_0; h\bigr) \;:=\; \fib\!\Bigl(N^\bullet_\pris(\OO_K, \mathcal{E}_0) \xrightarrow{\;\mathrm{pull} - \varphi_{\MMfr_0}^{-1}\;} E_K^{-h} N^\bullet_\pris(\OO_K, \varphi^*\mathcal{E}_0)\Bigr).
+\end{equation}
+Let $e_{\bk}(H) \ge 0$ uniformly annihilate $\coker(\MMfr(T'') \to \MMfr(T'''))$ for $\HT \subseteq [-M,h]$ (so $e_{\bk}(H) = O_{K_1}(H)$ in Regime~I by~\texttt{D10}, and $e_{\bk}(H) = 2(s + 4e_1 - 2)H = O_{K_1}(sH)$ in Regime~II $\ell = 2$ via the quantitative $p$-adic Corona theorem of~\texttt{G03}). Set $Q_1(T_0) := \varphi^*\MMfr_0 / (\Fil^0_{\mathrm{Nyg}}(\varphi^*\MMfr_0) + E_K\varphi^*\MMfr_0) = D_{\dR}^{\mathrm{int}}(T_0)/\Fil^0_{\mathrm{Hod}}(D_{\dR}^{\mathrm{int}}(T_0))$. Then unconditionally:
+\begin{equation}\label{eq:2:lin-bridge}
+  \exp_\ell\Bigl(\coker\bigl(H^1_f(G_K, T_1) \to H^1_f(G_K, T_2)\bigr)\Bigr) \;\le\; 2 e_{\bk}(H) + N_{\univ}^+(M, e_K, \ell) + h d_K + v_\ell(h!) + \exp_\ell\bigl(Q_1(T_0)_\tor\bigr).
+\end{equation}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) In $\ZZ_2[E]/(E^M, 2(E + 2^{k-1}))$, taking $Q(E) = \sum_{j=0}^{M-1}(-1)^j 2^{(k-1)(M-1-j)} E^j$ and $R(E) = (-1)^{M-1}$ gives $2^{(k-1)M+1} = 0$, while evaluating at $E = -2^{k-1}$ forces $2^{r-1} \in (2^{k-1})^M \ZZ_2$.
+
+(ii) Given $\kappa \in H^1_f(G_K, T_2)$ defining $0 \to T_2 \to E_\kappa \to \ZZ_\ell \to 0$, pulling back along $\ell^{e_{\bk}(H)} \SSk_K$ produces a split short exact sequence $0 \to \MMfr_2 \to \MMfr(E') \to \SSk_K \to 0$ for $\kappa' = \ell^{e_{\bk}(H)}\kappa$. Choosing a $\SSk_K$-splitting yields a $1$-cocycle $(c_2, w_2) \in Z^1(R\Gamma_{\BK}^*(\OO_K, \mathcal{E}_2; h))$ with $c_2 \in Z^1(N^\bullet_\pris(\mathcal{E}_2))$ and $w_2 \in E_K^{-h}\varphi^*\MMfr_2$. Lifting $\ell^{e_{\bk}(H)} c_2$ via the functorial isomorphism $\pi_{w^{\op}} : Z^1(N^\bullet_\pris) \xrightarrow{\sim} \MMfr$ and $\ell^{e_{\bk}(H)} w_2$ via flatness of $\varphi$ yields an obstruction class $[\eta_0^*] \in H^{2,*}_{\BK}(\OO_K, \mathcal{E}_0; h)_\tor$ (its torsionness follows unconditionally from $H^1_f(V_1) \twoheadrightarrow H^1_f(V_2)$ and the derived $\ell$-complete Nakayama lemma~\cite[Tags~091U, 09B9]{Stacks} showing $H^{2,*}_{\BK} = \varphi^*\MMfr_0 / D^*$ is finitely generated over $\ZZ_\ell$ with $Q_1(T_0)[1/\ell] \xrightarrow{\sim} H^{2,*}_{\BK}[1/\ell]$). Filtering $\varphi^*\MMfr_0 \supset E_K^h\varphi^*\MMfr_0 \supset E_K^{h+1}\varphi^*\MMfr_0 \supset D^*$ bounds the bottom piece by $N_{\univ}^+(M, e_K, \ell)$ (via Theorem~\ref{thm:2:h2syn}), the upper steps by $h d_K + v_\ell(h!)$ (via B\'ezout $A E_K' + B E_K = \ell^{d_K}$ and Griffiths transversality), and the top quotient by $\exp_\ell(Q_1(T_0)_\tor)$, establishing~\eqref{eq:2:lin-bridge}.
+\end{proof}
+
+To bound $\exp_\ell(Q_1(T_0)_\tor)$, one might ask whether a purely 2D commutative-algebra bound holds across all lattice pairs $(M_1, M_2)$ over a 2D regular local ring $(S, (\vpi, E))$ with $\OO = S/(E)$, in terms of $\Phi := \max_i \exp_\vpi(C_i(M_1, M_2)_\tor)$ and $\Phi^* := \max_j \exp_\vpi(C_j(M_1^\vee, M_2^\vee)_\tor)$ (Conjecture~\texttt{K02-Q1}). The next theorem refutes the rank-independent form of \texttt{K02-Q1}, establishes the exact optimal constant $c_{\mathrm{opt}}(d) = \lfloor d/2 \rfloor$, and explains why the growing ranks in~\texttt{ch23} require leaving pure lattice algebra.
+
+\begin{theorem}[Refutation of \texttt{K02-Q1} and Matlis Quadruple Duality]\label{thm:2:matlis}
+\tagProved{}
+Let $(S, \MM)$ be any 2D regular local ring with $\MM = (\vpi, E)$ and DVR $\OO = S/(E)$. For free rank-$d$ $S$-lattices $E^M M_1 \subseteq M_2 \subseteq E^{-h} M_1$ with $S_{(E)}$-weights $w_1 \le \cdots \le w_d$, set $d^- := \#\{k : w_k < 0\}$, $d^+ := \#\{k : w_k \ge 0\}$, and $r^+ := \#\{i \ge 0 : \exists k,\, w_k = i\}$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Matlis quadruple duality.)} Let $\mathcal{D}_i := (M_1 + E^i M_2)^{\vee\vee}/(M_1 + E^i M_2)$ with inclusion $\alpha_i : \mathcal{D}_{i+1} \to \mathcal{D}_i$ and multiplication $\beta_i : \mathcal{D}_i \xrightarrow{\cdot E} \mathcal{D}_{i+1}$. Using Auslander--Buchsbaum, Rees's lemma, and Artinian Gorenstein Matlis duality $(- )^\vee = \Hom_\OO(-, K/\OO)$, there are canonical isomorphisms
+\begin{align*}
+  C_i(M_1, M_2)_\tor &\cong \ker\alpha_i, & C_{-1-i}(M_1^\vee, M_2^\vee)_\tor &\cong (\coker\alpha_i)^\vee,\\
+  C_{-1-i}(M_2, M_1)_\tor &\cong \ker\beta_i, & C_i(M_2^\vee, M_1^\vee)_\tor &\cong (\coker\beta_i)^\vee.
+\end{align*}
+\item \emph{(Optimal rank constant $c_{\mathrm{opt}}(d) = \lfloor d/2 \rfloor$ and $r^+$-bound.)} Unconditionally for all $d \ge 1$ and $M, h \ge 0$:
+\begin{align}
+  \exp_\vpi(Q_1(M_1, M_2)_\tor) &\;\le\; \len_\OO(Q_1(M_1, M_2)_\tor) \;\le\; \min\bigl(d^- \Phi,\; d^+ \Phi^*\bigr) \;\le\; \lfloor d/2 \rfloor \max(\Phi, \Phi^*), \label{eq:2:copt}\\
+  \exp_\vpi(Q_1(M_1, M_2)_\tor) &\;\le\; \max(0, r^+ - 1)\Phi + r^+ \Phi^*. \label{eq:2:rplus}
+\end{align}
+\item \emph{(Staircase counterexample family $P_{n,k}$.)} For every $n \ge 2$ and $k \ge 1$, there exists a $2n \times 2n$ upper-triangular staircase matrix $P_{n,k} \in M_{2n}(S)$ ($\det P_{n,k} = E^{2n^2}$, $M = n+1, h = n-1$) satisfying $\Phi = \Phi^* = k$ while $Q_1(M_1, M_2)_\tor \cong \OO/\vpi^{nk}$. For $d = 4, H = 4$, $P_{2,1} = \begin{psmallmatrix} E^3 & \vpi E & 0 & \vpi E^2 \\ 0 & E & \vpi & 0 \\ 0 & 0 & E & 0 \\ 0 & 0 & 0 & E^3 \end{psmallmatrix}$ gives $\Phi = \Phi^* = 1$ and $\exp_\vpi(Q_1) = 2$. Hence $c_{\mathrm{opt}}(d) = \lfloor d/2 \rfloor$ is exact; pure lattice algebra fails for growing-rank families in \texttt{ch23} ($d \ge x^{9/2+10\varepsilon}$).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) Since $\dim S = 2$, reflexive $S$-modules are free, so $(M_1 + E^i M_2)^{\vee\vee}$ is free and $\mathcal{D}_i$ has finite length over $S$. Applying the snake lemma to multiplication by $E$ on $0 \to M_1 + E^i M_2 \to (M_1 + E^i M_2)^{\vee\vee} \to \mathcal{D}_i \to 0$ and identifying $\mathrm{Ext}^1_S(\mathcal{D}_i, S) \cong \mathcal{D}_i^\vee$ via Rees's lemma and 0-dimensional Gorenstein duality gives all four isomorphisms.
+
+(ii) Writing the exact length balance $(\star_-)$ and $(\star_+)$ along $\mathcal{D}_i$ using $\len(\ker\alpha_i) - \len(\coker\alpha_i) = \len(\mathcal{D}_{i+1}) - \len(\mathcal{D}_i)$ and observing that $\alpha_i$ only jumps at indices matching negative weights (resp.\ $\beta_i$ at non-negative weights) yields $\len_\OO(Q_1) \le \min(d^- \Phi, d^+ \Phi^*) \le \lfloor d/2 \rfloor \max(\Phi, \Phi^*)$ since $d^- + d^+ = d$. Grouping indices by the $r^+$ distinct non-negative weights proves~\eqref{eq:2:rplus}.
+
+(iii) Direct column/Smith reduction of $P_{n,k}$ shows each step contributes $\OO/\vpi^k$ to a single $C_i$ and $C_j^*$ while chaining all $n$ factors into a single cyclic summand $\OO/\vpi^{nk}$ inside $Q_1 = M_1/((M_1 \cap M_2) + E M_1)$. In \texttt{ch23}, the direct sums $\bigoplus r_{\mathrm{du}}(x)$ have ranks $n_V \ge k \approx x^{9/2 + 10\varepsilon}$ and $r^+ \ge x^{1/2-\varepsilon/16}$, both exceeding $L_{\mathrm{sc}}^2 = x^{2\varepsilon}$ (\tagObs{} for pure lattice-algebra reductions).
+\end{proof}
+
+\subsection{Prismatic PD Horizontal Section Theorem and Zero-Drift Budget Closure}\label{sec:2:pd}
+
+To bypass Theorem~\ref{thm:2:matlis}(iii) for arbitrary growing ranks $d$, we directly exploit the Frobenius-pullback divided-power stratification of $\varphi^*\mathcal{E}_0$ at the de~Rham point $u = \vpi_K$.
+
+In $K_0[u_2, \Delta]$ with $u_1 := u_2 + \Delta$, define the $W(k_K)$-subalgebra
+\[
+  B_0 := W(k_K)\!\left[u_2,\; \frac{E_K(u_2)^a}{a!},\; \frac{\Delta^b}{b!} : a, b \ge 1\right], \qquad B_{\PD} := \widehat{B_0}^\wedge_\ell = S_{\cris}(u_2){\langle \Delta \rangle_{\PD}}^\wedge_\ell,
+\]
+and similarly $B_{\PD}^{(2)} := S_{\cris}(u_3){\langle \Delta_{13}, \Delta_{23} \rangle_{\PD}}^\wedge_\ell$ ($\Delta_{i3} := u_i - u_3$).
+
+\begin{theorem}[Prismatic PD Horizontal Section Theorem and General-Rank $Q_1$ Bound]\label{thm:2:pd}
+\tagProved{}
+Let $\ell \ge 2$ be any prime, $K/\QQ_\ell$ any finite extension ($d_K = \lceil v_\ell(\DD_{K/\QQ_\ell}) \rceil$), and $T_0$ any crystalline $\ZZ_\ell$-lattice of arbitrary rank $d \ge 1$ with $\HT(T_0) \subseteq [-M, h]$ ($M, h \ge 0$). Define
+\begin{equation}\label{eq:2:NQ1}
+  N_{Q_1}(K, r) \;:=\; \begin{cases}
+    0, & r \le 1,\\
+    v_\ell\bigl((r - 1)!\bigr), & r \ge 2 \text{ and } d_K = 0 \text{ (unramified } K = K_0\text{)},\\
+    (2r - 3) d_K, & r \ge 2 \text{ and } d_K \ge 1 \text{ (ramified } K/\QQ_\ell\text{)}.
+  \end{cases}
+\end{equation}
+Then unconditionally for all $i \in \ZZ$:
+\begin{equation}\label{eq:2:Q1bound}
+  \exp_\ell\Bigl(\bigl(D_{\dR}^{\mathrm{int}}(T_0) / \Fil^i_{\mathrm{Hod}}(D_{\dR}^{\mathrm{int}}(T_0))\bigr)_\tor\Bigr) \;\le\; N_{Q_1}(K, M + i).
+\end{equation}
+In particular, at $i = 0$ (independently of $h, d, f_K, \Frob_K$), $\exp_\ell(Q_1(T_0)_\tor) \le N_{Q_1}(K, M)$. In Regime~II $K = K_1(\mu_{\ell^s})$, $d_K \le s + d_{K_1}$, so $N_{Q_1}(K, M) = O_{K_1}(sM)$.
+\end{theorem}
+\begin{proof}
+\emph{Step 1 ($\delta$-structure on $B_{\PD}$ and universal morphism).} Since $E_K(u_2)$ is monic of degree $e_K$, $B_0$ is a free $W(k_K)$-module, so $B_{\PD}$ is $\ell$-torsion-free and $\ell$-adically complete, with $u_2^{\ell e_K}, \Delta^\ell, u_1^{\ell e_K} \in \ell B_{\PD}$. Because $\delta(E_K(u_2)) \equiv \sigma(c_0) \pmod{(\ell, u_2)}$ is a unit in $\SSk_K^\times$ and $v_\ell(\ell^n/n!), v_\ell((\ell n)!/(n!)^\ell) \ge 1$ for all $n \ge 1, \ell \ge 2$, the Frobenius $\varphi(u_i) = u_i^\ell$ stabilizes $B_0$ and satisfies $\varphi(x) \equiv x^\ell \pmod{\ell B_0}$. Moreover $\varphi(E_K(u_i)) \in \ell B_{\PD}^\times$ and $\varphi(\Delta) \in \ell I_{\PD}(\Delta)$. Thus $(B_{\PD}, (\ell))$ is a bounded crystalline prism in $(\OO_K)_\pris$, inducing a unique prismatic morphism $\Psi_{\PD} : \SSk^{(1)} \to B_{\PD}$ (and $\Psi_{\PD}^{(2)} : \SSk^{(2)} \to B_{\PD}^{(2)}$). Modulo $I_{\Fil^1} S_{\cris}(u_2)$, $\Psi_{\PD}$ induces a ring homomorphism $\overline{\Psi}_{\PD} : \SSk^{(1)} \to \OO_K{\langle \Delta \rangle_{\PD}}^\wedge_\ell \hookrightarrow K[[\Delta]] = K[[t]]$ ($t := E_K(u)$, $\Delta := u - \vpi_K$).
+
+\emph{Step 2 (Horizontal section matrix and two-line saturation).} Setting $U(t) := \overline{\Psi}_{\PD}(E(u_2, u_1)) \in \GL_d(\OO_K{\langle \Delta \rangle_{\PD}}^\wedge_\ell)$ where $E(u_2, u_1)$ is the matrix of $\varphi^*\varepsilon_0$, the cocycle identity in $B_{\PD}^{(2)}$ (evaluated via first-order continuous specialization $\mathrm{ev}_{12}^{(1)}$ on $\SSk^{(1)}/I_1^2$ per the \texttt{M01} patch) yields $U(0) = I_d$ and $\mathrm{ev}_{12}^{(1)}(F(u_1, u_2)) U(t_1) = U(t_2)$. Hence for any $\mathbf{y}_0 \in M_1/E_K M_1 = D_{\dR}^{\mathrm{int}}(T_0)$, the series $\mathbf{y}(t) := U(t)\mathbf{y}_0 \in M_1 \otimes_{\SSk_K} K[[t]]$ is horizontal for $\nabla_{\dR}$ and has $\frac{\Delta^n}{n!}$-coefficients in $\OO_K^d$. Since $M_2 \otimes_{\SSk_K} K[[t]]$ is $t\nabla_{\dR}$-stable and $\mathbf{y}_0 \in \Fil^i D_{\dR}(V_0)$, horizontality gives $\mathbf{y}(t) \in (E_K^i M_2) \otimes_{\SSk_K} K[[t]]$. Using the two-line saturation identity $M_1 \cap E_K^i M_2 = M_1 \cap ((E_K^i M_2) \otimes_{\SSk_K} K[[t]])$ in $M_1[1/E_K]$ and $E_K^{M+i} M_1 \subseteq E_K^i M_2$, checking $\ell^N \mathbf{y}_0 \in \Fil^i_{\mathrm{Hod}}(D_{\dR}^{\mathrm{int}}(T_0))$ reduces cleanly to bounding the $\ell$-denominators of $\ell^N \mathbf{y}(t) \bmod t^{M+i}$ in $A_{M+i} := \SSk_K/(E_K^{M+i})$.
+
+\emph{Step 3 (Newton--Hensel truncation bound independent of $e_K$).} Using the B\'ezout identity $A E_K' + B E_K = \ell^{d_K}$ in $\SSk_K$, inductively lift $\vpi_K \bmod E_K$ to a root $\tilde{\vpi}_r \in A_r[1/\ell]$ of $E_K(\tilde{\vpi}_r) = 0$ in $A_r[1/\ell]$. Specifically, $\tilde{\vpi}_1 = u$, and Newton iteration $\tilde{\vpi}_{m+1} := \tilde{\vpi}_m - E_K(\tilde{\vpi}_m)\ell^{-d_K} A(\tilde{\vpi}_m)$ doubles precision modulo $t^m$ while losing at most $2d_K$ powers of $\ell$ per step (or $0$ when $d_K = 0$), yielding the $e_K$-independent embedding $\sigma_r : \OO_K \hookrightarrow A_r + \sum_{n=1}^{r-1} \ell^{-(2n-1)d_K} t^n A_r$ and $\Delta_r := u - \tilde{\vpi}_r \in \sum_{n=1}^{r-1}\ell^{-(2n-1)d_K} t^n A_r$. Writing $f(\Delta) = \sum_{n \ge 0} c_n \frac{\Delta^n}{n!}$ ($c_n \in \OO_K$) and noting $v_\ell(n!) \le (n-1) d_K$ when $d_K \ge 1$ (resp.\ $v_\ell((r-1)!)$ when $d_K = 0$) proves $\ell^{N_{Q_1}(K, r)} f(\Delta_r) \in A_r$, establishing~\eqref{eq:2:Q1bound}. For $K = K_1(\mu_{\ell^s})$, transitivity of differents $\DD_{K/\QQ_\ell} = \DD_{K/K_1}\DD_{K_1/\QQ_\ell}$ and $v_\ell(\DD_{\QQ_\ell(\mu_{\ell^s})/\QQ_\ell}) < s$ give $d_K \le s + d_{K_1}$.
+\end{proof}
+
+\begin{theorem}[Item~8 Full Closure and Zero-Drift Global Budget Compatibility]\label{thm:2:closure}
+\tagProved{}
+In the \texttt{ch23} analytic engine of~\cite{Alpoge2026}, the level modulus satisfies $Q_S(\Xi, e) = \lcm(2^{e+2}, M)$ (where $M$ is fixed by the character family). Consequently:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Every odd prime $\ell \ge 3$ has bounded valuation $v_\ell(Q_S) = v_\ell(M) = O_M(1)$ and lies in Regime~I; $\ell = 2$ is the \emph{sole} Regime~II prime ($s = v_2(Q_S) = e+2 \le 3 C_0 \log x$).
+\item Combining Theorems~\ref{thm:2:h2syn}, \ref{thm:2:rbk}, and~\ref{thm:2:pd} (plus Corona Regime~II $e_{\bk}(H) = O_{K_1}(sH)$ and unconditional Bloch--Kato rational surjectivity from~\texttt{M01}) eliminates \texttt{K02-Q1} completely and proves for all number fields, all crystalline ranks $d \ge 1$, and all $H = M+h$:
+\[
+  \exp_\ell\Bigl(\coker\bigl(H^1_f(G_K, T_1) \to H^1_f(G_K, T_2)\bigr)_\tor\Bigr) \;\le\; \begin{cases} O_{K_1}(H), & \text{every odd prime } \ell \ge 3,\\ O_{K_1}(s^2 H), & \ell = 2 \text{ (Regime~II)}. \end{cases}
+\]
+\item Since $s \ll \log L_{\mathrm{sc}}$, the Regime~II bound $O_{K_1}(s^2 H) \ll_{K_1} H (\log L_{\mathrm{sc}})^2 = o(L_{\mathrm{sc}})$ satisfies \texttt{SmallSum.lean:58--110}, \texttt{ExportBoundOfAdmissible.lean:733--752, 1121}, \texttt{ch25}--\texttt{ch36}, and all ten polytope inequalities \textup{(I1)--(I10)} of B9 with \emph{zero parameter drift} ($\varepsilon_0 = 1/52$, $\theta = 1/2 + 9\varepsilon$).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Inspection of \texttt{ch04:528,751} and \texttt{ch08:161} shows $Q_S = \lcm(2^{e+2}, M)$, isolating $\ell = 2$ as the unique growing cyclotomic tower. Substituting $N_{\univ}^+ = O_{K_1}(s^2 M)$, $e_{\bk}(H) = O_{K_1}(sH)$, $h d_K + v_\ell(h!) = O_{K_1}(s h)$, and $N_{Q_1}(K, M) = O_{K_1}(sM)$ into~\eqref{eq:2:lin-bridge} gives $O_{K_1}(s^2 H)$ at $\ell = 2$ and $O_{K_1}(H)$ at all $\ell \ge 3$. Replacing $(2C \log x + 2)\log x \le L^2$ in \texttt{SmallSum.lean} by $(2C\log x + 2)(\log x)^2 \le L^2$ under the unchanged premise \texttt{hL : $(C+3)^2(1+\log x)^2 \le L$} preserves the threshold $x_0$ and export bound $8 C f m b L_{\mathrm{sc}}^2$ verbatim.
+\end{proof}

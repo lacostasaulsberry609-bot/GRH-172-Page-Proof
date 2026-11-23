@@ -1,0 +1,212 @@
+\section{Dead-End Registry, Companion Artifacts, and Bibliography}\label{sec:7:end}
+
+\subsection{Consolidated Registry of Ruled-Out and Refuted Routes}\label{sec:7:dead}
+
+Across 11 rounds of independent adversarial auditing (Waves~8--17, uncovering and resolving $83$ technical defects across Waves~8--15 and Wave~17), the following routes were rigorously refuted or structurally blocked (\tagObs{}):
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \emph{Mixed-signature number fields} (Prop.~\ref{prop:1:port}(iii)): seven foundational obstructions preclude porting the CM/unitary framework.
+\item \emph{Regime~B classical tools} (\texttt{H02-1}): tame $C_{e_1}$ descent, fractional cyclotomic Wach rings (fail mod $\ell^2$), logarithmic crystalline pushforward, and log-\v{C}ech--Alexander fail in wild ramification.
+\item \emph{Pure 2D lattice algebra \texttt{K02-Q1} for growing ranks} (Thm.~\ref{thm:2:matlis}): refuted for all absolute constants $c \ge 1$ ($c_{\mathrm{opt}}(d) = \lfloor d/2 \rfloor$), bypassed by the prismatic PD horizontal-section theorem (Thm.~\ref{thm:2:pd}).
+\item \emph{$\FF_2[A_5]$-modular induction and degree-$21$ $\PSL_2(\FF_7)$ descent} (Prop.~\ref{prop:3:a5obs}, Thm.~\ref{thm:3:catalog}(v)).
+\item \emph{Excluding \textup{\texttt{(1\^{}3 1)}} orbits via~\cite{ST2025a,ST2025b} to isolate squarefree $S_3$} (Obs.~\ref{obs:4:s3}(i)): hits the Taniguchi--Thorne~\cite{TT2020} $\theta(4,2)=5/6$ wall (no longer needed for \texttt{ch23} thanks to Thm.~\ref{thm:2:closure}).
+\item \emph{Zero-preprint $S_3$ from $a=m^2$, elliptic points, or positive-density second moment} (Obs.~\ref{obs:4:s3}): bounded at $X^{7/8} < X^{23/24}$, $X^{3/4}$, and nonlinear $\dim W = \dim G = 20$.
+\item \emph{Tame Hecke separation, LDS $(2e+1,2)$, and tame-level-$1$ $\GL_4$ Shalika} (Thm.~\ref{thm:5:rq-count1}(ii)).
+\item \emph{$\zeta_\ell$-admissible Kolyvagin, Burnside--$\mu$, Bott non-transfer to $\GSpin(5,2)$, and untwisted $d_0 \ge 3$ channels} (Thm.~\ref{thm:5:d3obs}).
+\item \emph{Brumer--Stark, BCG/Sczech, $\widetilde{H}^1$/Bianchi, Igusa towers, and all non-minimal reductive groups} (Thm.~\ref{thm:5:4pillar}, Thm.~\ref{thm:6:wallb}(ii)).
+\item \emph{Golod--Shafarevich towers for \texttt{ChCore} \texttt{(hN2)} and $S$-ramified pro-$q$ towers for \texttt{h1}} (Thm.~\ref{thm:6:hostex}(i),(iii)).
+\end{enumerate}
+
+\subsection{Inventory of Companion Blueprints and Verification Scripts}\label{sec:7:artifacts}
+
+To facilitate independent verification and continued formalization, the repository packages:
+\begin{itemize}
+\item \texttt{lean\_erh\_blueprint/} (14 Lean~4.33.1 modules, 5,762 lines total; static syntax, interface consistency, and zero-\texttt{sorry} audited, \texttt{lake build} pending):
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{MainERH.lean}, \texttt{RelCMHostVariantII.lean}, \texttt{GeneralizedLemmaM\_HidaSetting4.lean}
+  \item \texttt{ChCore\_ZqTower.lean}, \texttt{GSp4CountI\_RealQuadratic.lean}, \texttt{CountVAbsorption\_C08\_C09.lean}
+  \item \texttt{PrismaticLinearCokernel\_D10\_D11.lean}, \texttt{MasterRQCountI\_SchemeI\_F06\_F07.lean}
+  \item \texttt{RegimeII\_CoronaA1\_G03\_LTDK\_G01.lean}, \texttt{Mu2Zero\_GroupClassification\_F05\_F10\_G02.lean}
+  \item \texttt{CountV\_WallA\_Fixed\_E07\_E08\_F11.lean}, \texttt{Item8\_FullClosure\_J01\_K02\_L02.lean}
+  \item \texttt{GeneralRealQuad\_D4Q8\_H07\_H05.lean}, \texttt{InfiniteS3\_Mu2Zero\_H03\_I01.lean}
+\end{itemize}
+\item \texttt{scripts/} (109 Python/SymPy scripts, including Wave~17 audit \texttt{verify\_o01\_audit\_wave16.py}): exact algebraic, interval-arithmetic, and finite-field verification suites (all finite checks supplement, rather than replace, the proofs in Sections~\ref{sec:2:liftk}--\ref{sec:6:rq}).
+\end{itemize}
+
+\begin{thebibliography}{99}
+
+\bibitem{Alpoge2026}
+L.~Alp\"oge (with Claude),
+\emph{A proof of the Generalized Riemann Hypothesis for Dirichlet $L$-functions},
+announcement (\url{https://alpo.ge/remark.pdf}) and Lean~4.33.1 formalization archive (\url{https://github.com/leanprover-community/riemann-hypothesis}), November~2026.
+
+\bibitem{GRH178}
+Companion Monograph in this Repository (\texttt{main.pdf}),
+\emph{Arakelov-Filtered Automorphic Period Towers and the Generalized Riemann Hypothesis: The Stepanov--Bost Slope Principle over Number Fields} (178 pages), November~2026.
+
+\bibitem{BBP2010}
+K.~Belabas, M.~Bhargava, and C.~Pomerance,
+\emph{Error estimates for the Davenport--Heilbronn theorems},
+Duke Math.\ J.\ \textbf{153} (2010), no.~1, 173--210.
+
+\bibitem{Bennett2001}
+M.~A.~Bennett,
+\emph{Rational approximation to algebraic numbers of small height: the Diophantine equation $|ax^n - by^n| = 1$},
+J.\ Reine Angew.\ Math.\ \textbf{535} (2001), 1--49; and
+\emph{On the representation of unity by binary cubic forms},
+Trans.\ Amer.\ Math.\ Soc.\ \textbf{353} (2001), no.~4, 1507--1534.
+
+\bibitem{BCG2020}
+N.~Bergeron, P.~Charollois, and L.~E.~Garc\'ia,
+\emph{Transgressions of the Euler class and Eisenstein cohomology of $\mathrm{GL}_N(\mathbb{Z})$},
+Japan.\ J.\ Math.\ \textbf{15} (2020), 311--379; and
+\emph{Elliptic units for complex cubic fields / $\mathrm{GL}_N$ Eisenstein classes over imaginary quadratic fields},
+J.\ Reine Angew.\ Math.\ (Crelle) \textbf{797} (2023), 1--40.
+
+\bibitem{BSTTTZ2020}
+M.~Bhargava, A.~Shankar, T.~Taniguchi, F.~Thorne, J.~Tsimerman, and Y.~Zhao,
+\emph{Bounds on $2$-torsion in class groups of number fields and integral points on elliptic curves},
+J.\ Amer.\ Math.\ Soc.\ \textbf{33} (2020), no.~4, 1087--1099.
+
+\bibitem{BSW2022}
+M.~Bhargava, A.~Shankar, and X.~Wang,
+\emph{Squarefree values of polynomial discriminants I},
+Invent.\ Math.\ \textbf{228} (2022), 1037--1073.
+
+\bibitem{BV2015}
+M.~Bhargava and I.~Varma,
+\emph{On the mean number of $2$-torsion elements in the class groups, narrow class groups, and ideal groups of cubic orders and fields},
+Duke Math.\ J.\ \textbf{164} (2015), no.~10, 1911--1933.
+
+\bibitem{BS2022}
+B.~Bhatt and P.~Scholze,
+\emph{Prisms and prismatic cohomology},
+Ann.\ of Math.\ (2) \textbf{196} (2022), no.~3, 1135--1275.
+
+\bibitem{BS2023}
+B.~Bhatt and P.~Scholze,
+\emph{Prismatic $F$-crystals and crystalline Galois representations},
+Camb.\ J.\ Math.\ \textbf{11} (2023), no.~2, 507--562.
+
+\bibitem{BDGJW2025}
+D.~Barrera~Salazar, M.~Dimitrov, A.~Graham, A.~Jorza, and C.~Williams,
+\emph{On $p$-adic $L$-functions for $\mathrm{GL}_{2n}$ in finite-slope families},
+J.\ Amer.\ Math.\ Res.\ (JAMR) \textbf{3} (2025), no.~2, 161--236 (\texttt{arXiv:2211.08126}).
+
+\bibitem{BDW2026}
+D.~Barrera~Salazar, M.~Dimitrov, and C.~Williams,
+\emph{Base-change $p$-adic $L$-functions for $\mathrm{GL}_2$ over totally real fields},
+Adv.\ Math.\ \textbf{486} (2026), 110741 (\texttt{arXiv:2103.10907}).
+
+\bibitem{BP2021}
+G.~Boxer and V.~Pilloni,
+\emph{Higher Coleman theory} (preprint, \texttt{arXiv:2110.10251}).
+
+\bibitem{Caraiani2014}
+A.~Caraiani,
+\emph{Monodromy and local-global compatibility for $l=p$},
+Algebra Number Theory \textbf{8} (2014), no.~7, 1597--1646.
+
+\bibitem{CGLS2022}
+F.~Castella, G.~Grossi, J.~Lee, and C.~Skinner,
+\emph{On the anticyclotomic Iwasawa theory of rational elliptic curves at Eisenstein primes},
+Invent.\ Math.\ \textbf{227} (2022), 517--580.
+
+\bibitem{CGS2025}
+F.~Castella, G.~Grossi, and C.~Skinner,
+\emph{Mazur's main conjecture at Eisenstein primes},
+Math.\ Ann.\ (2025), \texttt{arXiv:2303.04373}.
+
+\bibitem{CV2007}
+C.~Cornut and V.~Vatsal,
+\emph{Nontriviality of Rankin--Selberg $L$-functions and CM points},
+in \emph{L-Functions and Galois Representations}, LMS Lecture Note Ser.\ \textbf{320}, Cambridge Univ.\ Press, 2007, 121--186.
+
+\bibitem{DK2023}
+S.~Dasgupta and M.~Kakde,
+\emph{On the Brumer--Stark conjecture},
+Ann.\ of Math.\ (2) \textbf{197} (2023), no.~1, 289--388.
+
+\bibitem{DR1980}
+P.~Deligne and K.~A.~Ribet,
+\emph{Values of abelian $L$-functions at negative integers over totally real fields},
+Invent.\ Math.\ \textbf{59} (1980), 227--286.
+
+\bibitem{Disegni2024}
+D.~Disegni,
+\emph{Euler systems for conjugate-symplectic motives} (preprint, \texttt{arXiv:2410.08419}).
+
+\bibitem{FW1979}
+B.~Ferrero and L.~C.~Washington,
+\emph{The Iwasawa invariant $\mu_p$ vanishes for abelian number fields},
+Ann.\ of Math.\ (2) \textbf{109} (1979), no.~2, 377--395.
+
+\bibitem{Fukuda1994}
+T.~Fukuda,
+\emph{Remarks on $\mathbb{Z}_p$-extensions of number fields},
+Proc.\ Japan Acad.\ Ser.\ A Math.\ Sci.\ \textbf{70} (1994), no.~8, 264--266.
+
+\bibitem{GR2024}
+A.~Graham and R.~Rockwood,
+\emph{Nearly higher Coleman theory and $p$-adic $L$-functions for $\mathrm{GSp}_4$} (preprint, \texttt{arXiv:2411.04559}).
+
+\bibitem{GS2023}
+A.~Graham and S.~W.~A.~Shah,
+\emph{Anticyclotomic Euler systems for unitary groups},
+Proc.\ London Math.\ Soc.\ (3) \textbf{127} (2023), no.~6, 1577--1680.
+
+\bibitem{Hough2020}
+R.~D.~Hough,
+\emph{The distribution of the least prime in an arithmetic progression and Shintani zeta functions / Fourier transforms on quartic rings},
+J.\ Number Theory \textbf{210} (2020), 1--131 (\texttt{arXiv:1806.01372}).
+
+\bibitem{Iwasawa1973}
+K.~Iwasawa,
+\emph{On the $\mu$-invariants of $\mathbb{Z}_\ell$-extensions},
+in \emph{Number Theory, Algebraic Geometry and Commutative Algebra, in honor of Yasuo Akizuki}, Kinokuniya, Tokyo, 1973, 1--11; also Neukirch--Schmidt--Wingberg, \emph{Cohomology of Number Fields}, 2nd ed., Springer, 2008, Thm.~11.3.8.
+
+\bibitem{LSZ2022}
+D.~Loeffler, C.~Skinner, and S.~L.~Zerbes,
+\emph{An Euler system for $\mathrm{GU}(2,1)$},
+Math.\ Ann.\ \textbf{382} (2022), 1091--1141 (\texttt{arXiv:2010.10946}).
+
+\bibitem{LZ2026}
+D.~Loeffler and S.~L.~Zerbes,
+\emph{On the Bloch--Kato conjecture for $\mathrm{GSp}(4)$},
+Camb.\ J.\ Math.\ \textbf{14} (2026), no.~3, 603--784 (\texttt{arXiv:2003.05960}).
+
+\bibitem{D02}
+Research Reports of Waves 1--17 in this Repository (archived locally in \texttt{erh\_research/}), notably \texttt{D02, E01--E10, F01--F11, G01--G05, H01--H08, I01--I03, J01--J02, K01--K02, L01--L03, M01, N01--N03, O01}.
+
+\bibitem{Rubin1991}
+K.~Rubin,
+\emph{The ``main conjectures'' of Iwasawa theory for imaginary quadratic fields},
+Invent.\ Math.\ \textbf{103} (1991), 25--68.
+
+\bibitem{ST2025a}
+A.~Shankar and J.~Tsimerman,
+\emph{Secondary terms in the Davenport--Heilbronn theorems and $2$-torsion in class groups I} (preprint, \texttt{arXiv:2503.02381}).
+
+\bibitem{ST2025b}
+A.~Shankar and J.~Tsimerman,
+\emph{Counting quartic fields via Shintani zeta functions II} (preprint, \texttt{arXiv:2508.08527}).
+
+\bibitem{Serre1984}
+J.-P.~Serre,
+\emph{L'invariant de Witt de la forme $\mathrm{Tr}(x^2)$},
+Comment.\ Math.\ Helv.\ \textbf{59} (1984), 651--676.
+
+\bibitem{Siad2026}
+A.~Siad,
+\emph{Monogenicity and $2$-torsion in the class group of number fields of odd degree},
+Adv.\ Math.\ \textbf{501} (2026), Article 111108 (\texttt{arXiv:2011.08834}).
+
+\bibitem{Stacks}
+The Stacks Project Authors,
+\emph{The Stacks Project}, \url{https://stacks.math.columbia.edu}, Tags \texttt{091U}, \texttt{09B9}, \texttt{090V}, \texttt{0B3N}.
+
+\bibitem{TT2020}
+T.~Taniguchi and F.~Thorne,
+\emph{Levels of distribution for sieve problems in prehomogeneous vector spaces},
+Amer.\ J.\ Math.\ \textbf{142} (2020), no.~4, 1217--1258.
+
+\end{thebibliography}

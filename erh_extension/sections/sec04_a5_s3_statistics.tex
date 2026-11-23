@@ -1,0 +1,123 @@
+\section{Unconditional $A_5/S_5$ Certifications, Infinite Towers, and Cubic $S_3$ Statistics}\label{sec:4:a5s3}
+
+\subsection{Fukuda's Criterion, Deligne--Ribet $2^{-d}$-Integrality, and $A_5/S_5$ Certifications}\label{sec:4:a5}
+
+To verify $\mu_2(E(i)) = \lambda_2(E(i)) = 0$ on totally real fields $E$ of degree $d \in \{5, 6\}$ where $2$ splits (precluding single-dyadic class number arguments; note by~\texttt{F10-3E} every $A_5/S_5$ field has $g_2(F_{15}^+) \ge 2$ and $\ge 3$ when $2$ is unramified), we combine Fukuda's stabilization criterion with Deligne--Ribet $2$-adic $L$-functions without assuming Wiles's Main Conjecture or GRH.
+
+\begin{theorem}[Fukuda Criterion and Deligne--Ribet $2^{-d}$-Integrality Criterion]\label{thm:4:fukuda-dr}
+\tagProved{}
+Let $E/\QQ$ be a totally real field of degree $d = [E:\QQ]$ with $\gcd(D_E, 2) = 1$, and set $E_n := E(\mu_{2^{n+2}})$ for $n \ge 0$ (so $E_0 = E(i)$).
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Fukuda 1994~\cite{Fukuda1994} for arbitrary $g_2 \ge 1$.)} Write $A_n^- := \Cl_2(E_n)^-$ and $h_2^-(E_n) = |A_n^-|$. If $v_2(h^-(E_1)) = v_2(h^-(E_0))$, then $v_2(h^-(E_n)) = v_2(h^-(E_0))$ for all $n \ge 0$; in particular $\mu_2^-(E(i)) = \lambda_2^-(E(i)) = 0$. More generally, writing $E(\sqrt{-2})$ for the layer-$1$ subextension of $E(\mu_8)$ with $\chi_{-4}\chi_8$, if $h^-(E(\sqrt{-2}))$ is odd and $h^-(E(i))$ is odd, then $\mu_2(E(i)) = \lambda_2(E(i)) = 0$.
+\item \emph{(Deligne--Ribet $2^{-d}$-integrality, zero Wiles black box.)} Let $L_{2, E}(s, \chi_T)$ be the $2$-adic Deligne--Ribet $L$-function~\cite{DR1980} interpolating $L_E(0, \chi_{-4}\chi)$ along the cyclotomic $\ZZ_2$-variable $T = \chi(5) - 1$. Then $w(E_n) = 2^{n+2}$, $Q(E(i)) = Q(E(\sqrt{-2})) = 1$, and
+\begin{equation}\label{eq:4:gE}
+  g_E(T) \;:=\; 2^{-d}\bigl(5(1+T) - 1\bigr)\, L_{2, E}(0, \chi_T) \;\in\; \ZZ_2[[T]],
+\end{equation}
+with $\mu_2^-(E(i)) = \mu(g_E(T))$ and $\lambda_2^-(E(i)) = \lambda(g_E(T))$ by the analytic relative class-number formula. Explicitly:
+\begin{itemize}
+\item \textup{(DR-0)} Set $N_4 := 2^{-d} L_E(0, \chi_{-4}) = h^-(E(i)) \in \ZZ_{\ge 1}$ and $N_8 := 2^{-d} L_E(0, \chi_{-8}) = h^-(E(\sqrt{-2})) \in \ZZ_{\ge 1}$. If $N_4$ is odd, then $\mu_2(E(i)) = \lambda_2(E(i)) = 0$.
+\item \textup{(DR-1)} Writing $g_E(T) = \sum_{k \ge 0} c_k T^k \in \ZZ_2[[T]]$, if $v_2(N_4) = 1$ and $N_8$ is odd, then $\mu_2^-(E(i)) = 0$ and $\lambda_2^-(E(i)) = 1$.
+\item \textup{(DR-2)} Evaluating $g_E(i-1) \in \ZZ_2[i]$ (where $i^2 = -1$ corresponds to the quartic character $\chi_{16}$ of order $4$), $g_E(i-1) = b_0 + b_1 i \in \ZZ[i]$ with $c_0 = N_4$, $c_1 \equiv N_8 - N_4 \pmod{2}$, and $b_0 \equiv c_0 - c_2 \pmod{2}$, $b_1 \equiv c_1 - c_3 \pmod{2}$. Whenever $v_2(N_4) \ge 1$ and $b_0$ or $b_1$ is odd, $g_E(T) \not\equiv 0 \pmod{2}$, hence $\mu_2^-(E(i)) = 0$ and $\mu_2(E(i)) = 0$ with $\lambda_2^-(E(i)) \le 3$ (specifically $\lambda_2^- = 2$ if $c_0 \equiv c_1 \equiv 0 \pmod 2$ and $b_0$ or $b_1$ is odd, or $v_2(b_0^2 + b_1^2) = 2$ with $2 \parallel N_4$ and $2 \parallel N_8$).
+\end{itemize}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) For $X_2^-(E_\infty) = \varprojlim_n A_n^-$, Iwasawa's theorem gives finite quotients $Z_n := \ker(X_2^- \twoheadrightarrow A_n^-)$ satisfying $Z_{n+1} = \xi_n Z_n$ with $\xi_n = ((1+T)^{2^{n+1}}-1)/((1+T)^{2^n}-1) \equiv T^{2^n} \pmod{2}$. If $|A_1^-| = |A_0^-|$, then $Z_1 = Z_0$, so $Z_0 = \xi_0 Z_0 \subset (2, T) Z_0$, forcing $Z_0 = 0$ by Nakayama's lemma over the local ring $\Lambda = \ZZ_2[[T]]$, hence $A_n^- = A_0^-$ for all $n$.
+
+(ii) First, if an odd prime $p \mid w(E_n)$, then $\QQ(\zeta_p) \subseteq E_n$ is unramified at $2$, so it is fixed by the inertia group $I_{\mathfrak{P}}$ of any prime $\mathfrak{P} \mid 2$ in $E_n/E$; yet $\gcd(D_E, 2)=1$ and $E \cap \QQ_{\infty,2}^+ = \QQ$ imply $E_n/E$ is totally ramified at $2$, forcing $\QQ(\zeta_p) \subseteq E$, contradicting total reality of $E$. Hence $w(E_n) = 2^{n+2}$. Next, if $Q(E(i)) = 2$, there exists $u \in \OO_{E(i)}^\times$ with $c(u) = i u$; setting $\alpha = (1+i)u$ gives $c(\alpha) = \alpha \in \OO_E$ with $(\alpha)^2 = (2)$, contradicting $2 \nmid D_E$. Similarly $Q(E(\sqrt{-2})) = 2$ gives $\alpha\sqrt{-2} \in \OO_{E(\sqrt{-2})}^\times \implies (2)(\alpha)^2 = (1)$, contradiction. Thus $Q(E(i)) = Q(E(\sqrt{-2})) = 1$, and $N_4 = h^-(E(i)), N_8 = h^-(E(\sqrt{-2})) \in \ZZ_{\ge 1}$ follow from the analytic class number formula (since $\gcd(D_E, 2) = 1$ makes $\Nm_{E_{\PP}/\QQ_2} : \OO_{E_{\PP}}^\times \twoheadrightarrow \ZZ_2^\times$ surjective, so every $\chi_{-4}\chi$ ramifies at all $\PP \mid 2$ and no $2$-adic Euler factor is missing).
+
+To prove $g_E(T) \in \ZZ_2[[T]]$ without extra $2$-adic divisibility black boxes (the 4-line Weierstrass proof of~\texttt{O01}), write $F_E(T) := (5(1+T)-1)L_{2,E}(0,\chi_T) \in \ZZ_2[[T]][1/2]$ (in fact $\ZZ_2[[T]]$ by~\cite{DR1980}). By the Weierstrass preparation theorem, $F_E(T) = 2^{\mu(F_E)} P(T) U(T)$ with $\mu(F_E) \in \ZZ$, distinguished $P \in \ZZ_2[T]$, and $U \in \ZZ_2[[T]]^\times$. Evaluating at all $2^n$-th roots of unity $\zeta - 1$ and taking $v_2$ of the product gives $\mu(F_E) 2^n + \lambda(F_E) n + O(1)$ on the left, and $(d + \mu_2^-(E(i))) 2^n + \lambda_2^-(E(i)) n + O(1)$ on the right by the analytic class number formula and $v_2(5^{2^n}-1) = n+2 = v_2(w(E_n))$. Comparing $2^n$-coefficients gives $\mu(F_E) = d + \mu_2^-(E(i)) \ge d$ (since $\mu_2^- \ge 0$ by Theorem~\ref{thm:3:kronecker}(i)), proving $g_E(T) = 2^{-d} F_E(T) = 2^{\mu_2^-(E(i))} P(T) U(T) \in \ZZ_2[[T]]$ together with $\mu_2^- = \mu(g_E)$ and $\lambda_2^- = \lambda(g_E)$ simultaneously! Finally, evaluating $(i-1)^2 = -2i$, $(i-1)^3 = 2 + 2i \equiv 2 - 2i \pmod{4}$ yields the stated mod-$2$ congruences for $b_0, b_1$, completing the proof via Theorem~\ref{thm:3:kronecker}(iv).
+\end{proof}
+
+\begin{theorem}[First Unconditional Non-Solvable $A_5$ and $S_5$ Certifications]\label{thm:4:a5-s5-cert}
+\tagProved{}
+Zero GRH is used. Via smooth contour approximate functional equations for $L_E(0, \chi_{-4}), L_E(0, \chi_{-8}), L_E(0, \chi_{16})$ on the degree-$5$ and degree-$6$ resolvent fields $F_5^+$ and $F_6^+$, equipped with rigorous four-term error bounds (contour scaling, monotonic discrete trapezoidal tail bound, Trefethen--Weideman strip error, and Higham complex Horner + pairwise summation bound $\varepsilon_{\fp}^{\rig} \le 4.55\times 10^{-7}$, total error $< 0.18$ for all $N_4, N_8$ and $< 0.36$ for $g(i-1)/2$), Theorem~\ref{thm:3:catalog}(i)--(ii) and Theorem~\ref{thm:4:fukuda-dr} unconditionally certify $\mu_2(\widetilde{F^+}(i)) = 0$ for the following three totally real fields:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \textbf{Pure Regime-A $A_5(10931^2) = A_5(17^2 \cdot 643^2)$:} $f_5(x) = x^5 - 2x^4 - 6x^3 + 6x^2 + 6x - 3$ (monogenic, $D_2 = C_5$, $D_{17} = V_4$, $D_{643} = C_2$), resolvent $g_6(x) = x^6 - x^5 - 11x^4 + 2x^3 + 31x^2 + 5x - 19$ ($D_{F_6^+} = 10931^3$). Analytic certification gives $N_4(F_5^+) = 2$, $N_8(F_5^+) = 5$ (odd) and $N_4(F_6^+) = 2$, $N_8(F_6^+) = 3$ (odd), so $\lambda_2^-(F_5^+) = \lambda_2^-(F_6^+) = 1$, $\mu_2(\widetilde{F_{A_5}^+}(i)) = 0$, and $\lambda_2^-(F_{15}^+(i)) = 3$.
+\item \textbf{Single-Prime Pure Regime-A $A_5(11699^2)$:} $f_5(x) = x^5 - 2x^4 - 8x^3 + 5x^2 + 8x - 1$ (monogenic, $D_2 = C_5$, $D_{11699} = V_4$), resolvent $g_6(x) = x^6 - 13x^4 - 2x^3 + 37x^2 + 10x - 11$. Analytic certification gives $N_4(F_5^+) = 2, N_8(F_5^+) = 5$ and $N_4(F_6^+) = 6, N_8(F_6^+) = 7$, so $\lambda_2^-(F_5^+) = \lambda_2^-(F_6^+) = 1$, $\mu_2(\widetilde{F_{A_5}^+}(i)) = 0$, and $\lambda_2^-(F_{15}^+(i)) = 3$.
+\item \textbf{Minimal Totally Real $S_5(7^3 \cdot 11^3 \cdot 41^2) = S_5(767431973)$:} $f_5(x) = x^5 - 2x^4 - 11x^3 + 7x^2 + 23x + 3$ ($2,3$-unramified, $D_2 = C_6$, Regime~B $D_p = D_4$ at $p \in \{7, 11\}$), resolvent $g_6(x) = x^6 - 3x^5 - 11x^4 + 21x^3 + 28x^2 - 12x - 17$. Analytic certification gives $N_4(F_6^+) = 2, N_8(F_6^+) = 9$ ($\lambda_2^-(F_6^+) = 1$) and $N_4(F_5^+) = 4, N_8(F_5^+) = 8$ with $g_{F_5^+}(i-1)/2 = -9140 + 5049i$ ($b_1$ odd, hence $\lambda_2^-(F_5^+) = 2$), proving $\mu_2(\widetilde{F_{S_5}^+}(i)) = 0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Dedekind's monogenicity criterion verified on all primes $p^2 \mid D$ establishes exact ring discriminants and Frobenius cycle types, forcing Galois groups $A_5$ (square discriminant + $(1,1,3)$ cycle) and $S_5$ (non-square discriminant + $(1,1,3)$ cycle). Exact polynomial isomorphism $R_6(f_5)(\phi(x)) \equiv 0 \pmod{g_6(x)}$ verifies $F_6^+ \subset \widetilde{F_5^+}$. The root-number signs are pinned cleanly (using $\psi_{16}(D_E)W(\psi_{16})^d$ verified on real quadratic test fields). The four error bounds—splitting at $A = \sqrt{|D_E| 16^d}/(2\pi)^d$, contour tail $S_0 = 9.0$ where logarithmic derivative $(2d-1)/s - d\pi/2 < 0$ ensures discrete tail $\le$ continuous tail, Trefethen--Weideman strip error, and Higham complex Horner bound—yield total errors strictly below $0.18$ for all $N_4, N_8$ and $0.354 < 0.45$ for $g(i-1)/2$, uniquely determining exact integers in all 13 values. Applying Theorems~\ref{thm:3:catalog} and~\ref{thm:4:fukuda-dr} completes the proof.
+\end{proof}
+
+\subsection{Infinite Non-Solvable and Solvable Non-Abelian $\mu_2 = 0$ Families}\label{sec:4:inf-nonab}
+
+\begin{theorem}[Infinite Pure Regime-A Non-Solvable $P_2 \times A_5$, $C_2^{4m} \rtimes A_5$, and $2.A_5$ Towers]\label{thm:4:inf-a5}
+\tagProved{}
+Let $F_5^+$ be the certified pure Regime-A $A_5(11699^2)$ field (or $A_5(10931^2)$) from Theorem~\ref{thm:4:a5-s5-cert}, with Galois closure $L_0 := \widetilde{F_5^+}$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Infinite pure Regime-A $P_2 \times A_5$ and $C_2^{4m}\rtimes A_5$ towers.)} For the irreducible $4$-dimensional $\FF_2[A_5]$-module $W = \FF_4^2$, we have $W|_{V_4} \cong \FF_2[V_4]$ free, hence $H^n(A_5, W) = 0$ for all $n \ge 1$. Using narrow ray class fields at $\MM_t = 4 \mathfrak{d}_{F_5^+}(q_1\cdots q_{t-1})\infty$ and Chebotarev density to construct totally real $C_2^4$-extensions with split ramified primes $q_t$, we obtain infinitely many pairwise non-isomorphic, $100\%$ pure Regime-A ($\gcd(D,6)=1$, all decomposition groups abelian), totally real fields with Galois groups $P_2 \times A_5$ (for arbitrary finite $2$-groups $P_2$) and $C_2^{4m} \rtimes A_5$ ($m \ge 1$), all unconditionally satisfying $\mu_2(\widetilde{L^+}(i)) = 0$.
+\item \emph{(Infinite $2,3$-unramified $2.A_5 = \SL_2(\FF_5)$ family.)} Computing Serre's trace-form Witt invariant~\cite{Serre1984} via explicit $LDL^T = G$ congruence shows $A_5(10931^2)$ has $w_2 = -1$ at $\{17, 643\}$ (obstructed), whereas $A_5(11699^2)$ has $w_2 = +1$ everywhere and embeds into a $2,3$-unramified totally real $\SL_2(\FF_5)$-extension $L_0$. Twisting by squarefree $d_q = \pm 2^a 3^b q$ ($q \nmid 6 D_{L_0}$ prime) via a surjective local CRT map onto the $64$ local triples $\RR^\times/(\RR^\times)^2 \times \QQ_2^\times/(\QQ_2^\times)^2 \times \QQ_3^\times/(\QQ_3^\times)^2$ produces infinitely many pairwise non-isomorphic $2,3$-unramified totally real $\SL_2(\FF_5)$ fields with $\mu_2 = 0$ (though $D_{11699} = V_4 \mapsto Q_8$ enters Regime~B at $11699$).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) Since $W|_{V_4} \cong \FF_2[V_4]$ is projective, Shapiro/transfer shows $H^n(A_5, W) = 0$ for all $n \ge 1$, guaranteeing split $C_2^4 \rtimes A_5$ extensions exist without obstruction. Choosing totally positive ray-class generators $\alpha_i \equiv 1 \pmod{4\mathfrak{d}}$ with $v_{q_t}$ controlled at $q_t$ ensures $2$ is unramified (via $t^2 + t = (\gamma-1)/4$), all $p \mid D_{F_5^+}$ split completely, and $D_{q_t} \le C_2^{4m}$ is abelian, preserving pure Regime~A. Applying Theorem~\ref{thm:3:group}(i) along the $2$-extension $\widetilde{L^+}(i)/L_0(i)$ preserves $\mu_2 = 0$.
+
+(ii) By Serre~\cite[Thm.~1]{Serre1984}, the Witt obstruction $\rho^*(f_5) \in \Br(\QQ)[2]$ vanishes for $A_5(11699^2)$, giving a totally real $2.A_5 = \SL_2(\FF_5)$ cover $L_0$. Since $2.A_5$ is non-split (has no index-$2$ subgroup of order $60$), quadratic twists $L_0(\sqrt{d_q})$ remain surjective onto $\SL_2(\FF_5)$ (for $q \nmid 6 D_{L_0}$, ensuring ramification at $q$ distinguishes fields), and Theorem~\ref{thm:3:group}(i) gives $\mu_2(L_q(i)) = 0$ for all $q$.
+\end{proof}
+
+Combining Theorem~\ref{thm:3:group}(i) with the Chevalley--Hilbert reciprocity criterion (Theorem~\ref{thm:4:s3-sieve}(i) below for arbitrary odd degree $d$ with $2$ inert or uniquely ramified above $2$) also yields infinite pure Regime-A solvable families:
+
+\begin{theorem}[Infinite Pure Regime-A $S_4$, $\GL_2(\FF_3)$, $C_2^4\rtimes D_5$, and $D_5/D_7$ Families~\texttt{F05-2, F10-3}]\label{thm:4:inf-solv}
+\tagProved{}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Infinite $S_4$ and $\GL_2(\FF_3) \cong 2^+ S_4$ families.)} Starting from any pure Regime-A $2$-inert totally real $S_3$ field $F_3$ with $2 \nmid h^+(F_3)$ (such as the $18$ purely algebraically certified bases $F^+_{473}, F^+_{785}, F^+_{1345}, \dots$ or $F^+_{257}, R_3(1957), R_3(2777)$), narrow ray class fields at $24 D_{F_3}$ yield infinitely many pairwise non-isomorphic pure Regime-A totally real $S_4$ fields $L_p$ with $\mu_2(L_p(i)) = 0$. Moreover, Serre's Witt obstruction vanishes identically on all such $L_p$ (explicitly verified on $L_{373}, L_{409}/F^+_{473}$ and $S_4(2777)$), and quadratic twists at $\ell \equiv 1 \pmod 4$ ($\ell \nmid 6 D_{\widetilde{F_0}}$) yield infinitely many pure Regime-A totally real $\GL_2(\FF_3)$ fields with $\mu_2(\widetilde{F}(i)) = 0$ (purely algebraic on $L_{373}, L_{409}$!).
+\item \emph{(Infinite $C_2^{p_0-1} \rtimes D_{p_0}$ and $D_5/D_7$ certifications.)} For odd primes $p_0 \ge 5$, $D_{p_0}$ is never a local Galois group over $\QQ_2$ (hence $g_2(\widetilde{F^+_{D_{p_0}}}) \ge 2$), but descending to the non-Galois degree-$p_0$ subfield $F_{p_0}^+$ gives $\mu_2(\widetilde{F_{D_{p_0}}^+}(i)) = 0$ whenever $2$ is inert in $F_{p_0}^+$ and $2 \nmid h^+(F_{p_0}^+)$. Six consecutive Brumer $D_5$ fields ($D = 401^2, 817^2, 1393^2, 2153^2, 3121^2, 4321^2$) and $D_7(577^3)$ are purely algebraically certified with $h^+ = 1$, and $H^2(D_{p_0}, W) = 0$ generates infinitely many pure Regime-A $C_2^4 \rtimes D_5$ fields with $\mu_2(\widetilde{F}(i)) = 0$ above $D_5(401^2)$.
+\item \emph{(Mersenne criterion for odd $C_p \rtimes C_q$.)} For odd primes $q \mid (p-1)$, $C_p \rtimes C_q$ occurs over $\QQ_2$ (allowing $g_2 = 1$) iff $\ord_p(2) = q \iff p \mid (2^q - 1)$ (e.g.\ $C_7 \rtimes C_3$, $C_{31}\rtimes C_5$, $C_{127}\rtimes C_7$, $C_{23}\rtimes C_{11}$).
+\end{enumerate}
+\end{theorem}
+
+\subsection{Cubic $S_3$ Fields: Zero-Preprint Bounds, Tame $X^{5/6}$ Sieve, and $1/8$ Gap}\label{sec:4:s3}
+
+For varying totally real cubic $S_3$ fields $F_3$, Bhargava--Varma~\cite{BV2015} proved that while the \emph{ordinary} $2$-class group mean over $2$-inert acceptable families $\Sigma$ is $\mathbb{E}_\Sigma[|\Cl_2(F_3)|] = 5/4$ (giving $\ge 75\%$ with $2 \nmid h(F_3)$ and hence $\mu_2(\widetilde{F_3}) = 0$ without $i$), the \emph{narrow} $2$-class group mean is $\mathbb{E}_\Sigma[|\Cl_2^+(F_3)|] = 2$. Because a degenerate distribution $\mathbb{P}(1,2) = 3/4, \mathbb{P}(2,2) = 1/4$ satisfies $\mathbb{E}[|\Cl_2^+|] = 2$ with $\mathbb{P}(h^+ \text{ odd}) = 0$, Markov's inequality alone fails! Let $N_k(X) := \#\{F_3 \in \Sigma : 0 < D_{F_3} < X,\, |\Cl_2^+(F_3)| = 2^k\}$, $N_{\Sigma}(X) = \sum_{k \ge 0} N_k(X)$, and $M_\Sigma^+(X) := \sum_{k \ge 0} (2^k - 1) N_k(X)$. Subtracting directly yields the exact sign-verified identity (\texttt{F05-3}, sign corrected in~\texttt{N02}):
+\begin{equation}\label{eq:4:N0id}
+  N_0(X) \;=\; \underbrace{\sum_{k \ge 2} (2^k - 2) N_k(X)}_{=: T_1(\Sigma; X) \ge 2 N_{\ge 2}(X)} \;+\; \bigl(N_\Sigma(X) - M_\Sigma^+(X)\bigr).
+\end{equation}
+
+\begin{theorem}[Zero-Preprint $T_1 \gg X^{5/6}$ and $N_{\ge 2} \gg X^{0.5548}$ Bounds for $S_3$~\texttt{N02-1}]\label{thm:4:zero-preprint}
+\tagProved{} \textup{(100\% published literature, zero arXiv preprints)}
+Let $\Sigma$ be any acceptable $2$-inert totally real cubic family containing all squarefree local specifications at sufficiently large $p$, and restrict to $\Sigma^{S_3}$. Using solely the published theorems of Siad~\cite{Siad2026} (Adv.\ Math.\ 501, 2026), Bhargava--Shankar--Wang~\cite{BSW2022} (Invent.\ Math.\ 228, 2022), Bennett~\cite{Bennett2001} (Trans.\ AMS 353, 2001), and BSTTTZ~\cite{BSTTTZ2020} (J.\ AMS 33, 2020):
+\begin{equation}\label{eq:4:T1}
+\begin{aligned}
+  T_1(\Sigma^{S_3}; X) &\;\gg_\Sigma\; X^{5/6},\\
+  N_{\ge 2}(\Sigma^{S_3}; X) &\;:=\; \#\bigl\{F_3 \in \Sigma^{S_3} : 0 < D_{F_3} < X,\; |\Cl_2^+(F_3)| \ge 4\bigr\} \;\gg_{\Sigma,\varepsilon}\; X^{\frac{5}{6} - \theta_{\mathrm{BSTTTZ}} - \varepsilon} \;\gg_\Sigma\; X^{0.5548},
+\end{aligned}
+\end{equation}
+where $\theta_{\mathrm{BSTTTZ}} = 0.2784\ldots < 0.2785$ is the BSTTTZ $2$-torsion exponent.
+\end{theorem}
+\begin{proof}
+Represent monogenic maximal cubic rings $R \in \Sigma_{\mono}$ by $f(x) = x^3 + a_1 x^2 + a_2 x + a_3 \in \ZZ[x]$ with $a_1 \in \{0,1,2\}$ and naive height $H_{\mathrm{naive}}(f) < T := (X/54)^{1/6}$, which guarantees $0 < D(f) \le 54 T^6 = X$. By~\cite{BSW2022} (cited in~\cite[Thm.~2.2]{Siad2026}), $\#\Sigma_{\mono}(T) = c_{\mono}(\Sigma) T^5 + o(T^5) \asymp X^{5/6}$. By~\cite[Thm.~1.1 \& fn.~3]{Siad2026}, the narrow $2$-torsion average over $\Sigma_{\mono}(T)$ equals exactly $1 + 2^{-(3-1)/2} + 2^0 = 5/2$. By~\cite[Thm.~1.1]{Bennett2001}, each positive-discriminant binary cubic form represents $\pm 1$ at most $20$ times, so each cubic field $F_3$ occurs $\le 20$ times in $\Sigma_{\mono}$. Since $\max(m-2, 0) \ge m - 2$ for all $m \ge 1$ (and $C_3$ fields contribute at most $O(X^{1/2 + 0.2785}) = o(X^{5/6})$),
+\[
+  T_1(\Sigma^{S_3}; X) \;\ge\; \frac{1}{20}\sum_{R \in \Sigma_{\mono}(T)} \bigl(|\Cl_2^+(R)| - 2\bigr) - o(X^{5/6}) \;=\; \frac{c_{\mono}(\Sigma)}{40 \cdot 54^{5/6}}\,X^{5/6} + o(X^{5/6}).
+\]
+Combining $T_1 \le N_{\ge 2} \cdot \max_{D < X} |\Cl_2^+(F_3)|$ with $|\Cl_2^+(F_3)| \le 2|\Cl_2(F_3)| \ll_\varepsilon D^{\theta_{\mathrm{BSTTTZ}}+\varepsilon}$~\cite{BSTTTZ2020} gives $N_{\ge 2} \gg X^{5/6 - 0.2785} > X^{0.5548}$.
+\end{proof}
+
+\begin{theorem}[Tame $S_3$ Cubic Fields with $\mu_2 = \lambda_2 = 0$ Modulo ST 2025~\texttt{H03, I01}]\label{thm:4:s3-sieve}
+\tagMod{} \textup{(Modulo Shankar--Tsimerman 2025 preprints~\cite{ST2025a,ST2025b}; 0 remaining sieve lemmas)}
+Let $\Sigma_2$ be the family of totally real $S_3$ cubic fields (and associated $S_4$ quartic fields via Heilbronn--Bhargava) which are inert at $2$ (quartic type \texttt{(31)}), unramified at $3$, and non-overramified at all $p \ge 5$ (excluding \textup{\texttt{(1\^{}2 1\^{}2), (2\^{}2), (1\^{}4)}}).
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Chevalley--Hilbert parity criterion.)} If $F_3$ is any totally real cubic field in which $2$ has a unique prime ideal above it (either $2$ inert or $2$ totally ramified \textup{\texttt{(1\^{}3)}}), then $\OO_{F_3}^\times \cap \Nm(F_3(i)^\times) = \OO_{F_3}^{\times,+}$, $2 \nmid h(F_3(i)) \iff 2 \nmid h^+(F_3)$, and $2 \nmid h^+(F_3) \implies \mu_2(\widetilde{F_3}(i)) = \lambda_2(F_3(i)) = 0$.
+\item \emph{(Exact secondary-term cancellation and interval certification.)} For every acceptable cubic/quartic family $\Sigma$, the secondary $X^{5/6}$ residue satisfies exact identity cancellation $\mathrm{Term}_1(\Sigma) \equiv c_{5/6}^{\mathrm{cub}}(\Sigma)$ after subtracting $N_\Sigma - M_\Sigma^+$. With the verified scalar $\kappa_2 = \pi/8$ and the $p=2$ Ibukiyama--Saito Hasse sign $\epsilon_2^{\mathrm{IS}} = -\mathrm{iso}_2$ resolving sign conventions in~\cite{ST2025a,ST2025b}, 40-digit interval arithmetic certifies $-\mathrm{Term}_2^{\mathrm{sm}}(\Sigma_2) \in [+0.03283992, +0.03284035] > 0$.
+\item \emph{(Closed \texttt{L-ST-Sieve} and $\gg X^{5/6}$ lower bound.)} Decomposing $\delta_p^{\mathrm{bad}} = M_p^1 + \widetilde{R}_p - S_p + E_p$ on $V(\ZZ/p^2\ZZ)$ with dyadic Type-1 switching, parabolic duality bijection $N(p^7\widehat{S_p}, Y) = N(J_p^{\mathrm{flag}}, Y/p^{10})$, Hough's~\cite{Hough2020} support vanishing outside $\mathscr{O}_{D1^2}$, and the four-variable convexity balance $a^5 r^5 S^7 e^{16} = X$ yields
+\[
+  M_{\Sigma_2}^+(\psi; X) \;=\; C_1(\Sigma_2)\widetilde{\psi}(1) X + C_{5/6}^{\mathrm{quart}}(\Sigma_2)\widetilde{\psi}(5/6) X^{5/6} + O(X^{13/16+o(1)}).
+\]
+Consequently, modulo the finite-local-condition theorems of~\cite{ST2025a,ST2025b}, for sufficiently large $X$:
+\begin{equation}\label{eq:4:s3-count}
+  \#\bigl\{F_3 \text{ tot.\ real } S_3 : 0 < D_{F_3} < X,\; 2\text{-inert},\; 3\text{-unram.},\; \mu_2(\widetilde{F_3}(i)) = \lambda_2(F_3(i)) = 0\bigr\} \;\ge\; 0.03940\,X^{5/6} - O(X^{13/16+o(1)}).
+\end{equation}
+(Note: $\Sigma_2$ comprises $\approx 95.16\%$ pure Regime~A fields and $\approx 4.84\%$ tame \textup{\texttt{(1\^{}3)}} primes $p \equiv 2 \pmod 3$ with $D_p \cong S_3$, all of which now pass \texttt{ch23} via Theorem~\ref{thm:2:closure}. Moreover, Theorem~\ref{thm:4:zero-preprint}'s $T_1 \gg X^{5/6}$ reinforces the $X^{5/6}$ lower bound independently of $-\mathrm{Term}_2$.)
+\end{enumerate}
+\end{theorem}
+
+\begin{obstruction}[The $1/8$ Zero-Preprint Gap, Nonlinear Fiber-Product Barrier, and Parametric Obstructions~\texttt{N02, I01-3}]\label{obs:4:s3}
+\tagProved{} / \tagObs{}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Exact $1/8$ zero-preprint gap.)} In published literature prior to~\cite{ST2025a,ST2025b}, the sharpest error bound for $N_\Sigma(X) - M_\Sigma^+(X)$ is Belabas--Bhargava--Pomerance~\cite{BBP2010} ($O(X^{23/24+\varepsilon})$), constrained by $q^2 \le L = X^{1/12} \implies Q = X^{1/24}$. Thus the published exponent gap in~\eqref{eq:4:N0id} is exactly $\frac{23}{24} - \frac{5}{6} = \frac{1}{8}$. Similarly, excluding \textup{\texttt{(1\^{}3 1)}} orbits to isolate squarefree $\Sigma_0$ hits the exact Taniguchi--Thorne~\cite{TT2020} $\theta(4,2) = 5/6$ dual/primal barrier.
+\item \emph{(Nonlinear fiber-product obstruction to positive density $\gg X$.)} Counting the second moment $\sum(|\Cl_2^+|-1)(|\Cl_2^+|-2)$ corresponds to $\GL_2 \times \SL_3 \times \SL_3$ ($\dim 20$) acting on the nonlinear complete intersection $W = (2\otimes\mathrm{Sym}^2(3)) \times_{\mathrm{Sym}^3(2)} (2\otimes\mathrm{Sym}^2(3)) \subset \mathbb{A}^{24}$ ($\dim W = 20$), which is neither a prehomogeneous vector space nor coregular; linearization occurs only along the monogenic slice $a = 1$ ($\asymp X^{5/6}$).
+\item \emph{(Parametric unit-rank and $2$-ramified \textup{\texttt{(1\^{}3)}} obstructions.)} The $2$-parameter monogenic ring $U_{1,\pm 1}$ has universal unit group $\{\pm \theta^k\}$ (rank $1$); no monic totally real cubic has two totally definite linear units $\theta - m_1, \theta - m_2$ (by Minkowski $D \ge 81/4 > 4$); two linear units generate full signature rank $r_{\mathrm{sig}} = 3$ only for Shanks's cyclic $C_3$ family and one $S_3$ $1$-parameter family ($\ll X^{1/4}$), while Thomas's family has constant $r_{\mathrm{sig}} = 2$. In \texttt{verify\_n02\_s3\_zero\_preprint.py}, $100\%$ zero-GRH certification covers all $564$ pure Regime-A $2$-inert $S_3$ fields with $D \le 80{,}000$ ($232$ with $2 \nmid h^+$) and all $90$ $2$-totally-ramified \textup{\texttt{(1\^{}3)}} $S_3$ fields with $D = 4m \le 20{,}000$ ($47$ with $2 \nmid h^+$, though $30/45$ prime-conductor $D=4p$ fields have $2 \mid h^+$).
+\end{enumerate}
+\end{obstruction}

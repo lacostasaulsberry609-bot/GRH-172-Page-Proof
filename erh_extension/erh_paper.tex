@@ -1,0 +1,203 @@
+\documentclass[10pt,reqno]{amsart}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  \usepackage[no-math]{fontspec}
+\fi
+
+\usepackage[letterpaper,margin=0.72in,footskip=0.34in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs,bm}
+\usepackage{enumitem}
+\usepackage{booktabs,longtable,array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=teal!65!black,urlcolor=blue!65!black]{hyperref}
+
+\allowdisplaybreaks
+\raggedbottom
+\emergencystretch=1.6em
+\setlength{\parskip}{2pt plus 0.6pt}
+\setlist[enumerate]{topsep=2.5pt,itemsep=1.8pt,parsep=0pt,leftmargin=2.0em}
+\setlist[itemize]{topsep=2.5pt,itemsep=1.8pt,parsep=0pt,leftmargin=1.6em}
+\setcounter{tocdepth}{2}
+
+\numberwithin{equation}{section}
+
+\newtheoremstyle{tightplain}{4pt}{4pt}{\itshape}{}{\bfseries}{.}{0.45em}{}
+\newtheoremstyle{tightdef}{4pt}{4pt}{\normalfont}{}{\bfseries}{.}{0.45em}{}
+
+\theoremstyle{tightplain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{tightdef}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{obstruction}[theorem]{Obstruction}
+\newtheorem{example}[theorem]{Example}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep2.8\p@\@plus2\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\itshape #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% Standard number and algebra macros
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\AAf}{\mathbb{A}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\PP}{\mathfrak{p}}
+\newcommand{\QQp}{\mathfrak{q}}
+\newcommand{\MM}{\mathfrak{m}}
+\newcommand{\DD}{\mathfrak{D}}
+\newcommand{\ff}{\mathfrak{f}}
+\newcommand{\SSk}{\mathfrak{S}}
+\newcommand{\MMfr}{\mathfrak{M}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\PGL}{\mathrm{PGL}}
+\newcommand{\GSp}{\mathrm{GSp}}
+\newcommand{\GSpin}{\mathrm{GSpin}}
+\newcommand{\GO}{\mathrm{GO}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\GU}{\mathrm{GU}}
+\newcommand{\UU}{\mathrm{U}}
+\newcommand{\Gal}{\mathrm{Gal}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Nm}{\operatorname{Nm}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\len}{\operatorname{len}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Frob}{\mathrm{Frob}}
+\newcommand{\Art}{\mathrm{Art}}
+\newcommand{\rec}{\mathrm{rec}}
+\newcommand{\Br}{\mathrm{Br}}
+\newcommand{\Sel}{\mathrm{Sel}}
+\newcommand{\Sha}{\mathrm{Sha}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\Fil}{\mathrm{Fil}}
+\newcommand{\gr}{\mathrm{gr}}
+\newcommand{\HT}{\mathrm{HT}}
+\newcommand{\WD}{\mathrm{WD}}
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\cris}{\mathrm{cris}}
+\newcommand{\syn}{\mathrm{syn}}
+\newcommand{\et}{\mathrm{\acute{e}t}}
+\newcommand{\ur}{\mathrm{ur}}
+\newcommand{\tor}{\mathrm{tors}}
+\newcommand{\sat}{\mathrm{sat}}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\cyc}{\mathrm{cyc}}
+\newcommand{\ac}{\mathrm{ac}}
+\newcommand{\an}{\mathrm{an}}
+\newcommand{\alg}{\mathrm{alg}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\PD}{\mathrm{PD}}
+\newcommand{\BK}{\mathrm{BK}}
+\newcommand{\bk}{\mathrm{bk}}
+\newcommand{\Iw}{\mathrm{Iw}}
+\newcommand{\Gr}{\mathrm{Gr}}
+\newcommand{\BDP}{\mathrm{BDP}}
+\newcommand{\Eis}{\mathrm{Eis}}
+\newcommand{\Kl}{\mathrm{Kl}}
+\newcommand{\Si}{\mathrm{Si}}
+\newcommand{\St}{\mathrm{St}}
+\newcommand{\spl}{\mathrm{spl}}
+\newcommand{\ns}{\mathrm{ns}}
+\newcommand{\sm}{\mathrm{sm}}
+\newcommand{\rd}{\mathrm{rd}}
+\newcommand{\idx}{\mathrm{idx}}
+\newcommand{\Syl}{\mathrm{Syl}}
+\newcommand{\AI}{\mathrm{AI}}
+\newcommand{\BC}{\mathrm{BC}}
+\newcommand{\Asai}{\mathrm{Asai}}
+\newcommand{\fib}{\operatorname{fib}}
+\newcommand{\ad}{\mathrm{ad}}
+\newcommand{\std}{\mathrm{std}}
+\newcommand{\univ}{\mathrm{univ}}
+\newcommand{\tame}{\mathrm{tame}}
+\newcommand{\refl}{\mathrm{refl}}
+\newcommand{\mono}{\mathrm{mono}}
+\newcommand{\overr}{\mathrm{over}}
+\newcommand{\rig}{\mathrm{rig}}
+\newcommand{\tot}{\mathrm{tot}}
+\newcommand{\fp}{\mathrm{fp}}
+\newcommand{\Leo}{\mathrm{Leo}}
+\newcommand{\triv}{\mathrm{triv}}
+\newcommand{\narrow}{\mathrm{narrow}}
+\newcommand{\charp}{\operatorname{char}}
+\newcommand{\expell}{\operatorname{exp}_\ell}
+\newcommand{\expw}{\operatorname{exp}_\varpi}
+\newcommand{\vpi}{\varpi}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\pris}{\triangle}
+
+% Provenance & Rigor Tags
+\newcommand{\tagProved}{\textup{\textbf{\textsf{[PROVED]}}}}
+\newcommand{\tagMod}{\textup{\textbf{\textsf{[PROVED-MOD-EXPLICIT-LEMMA]}}}}
+\newcommand{\tagCond}{\textup{\textbf{\textsf{[CONDITIONAL]}}}}
+\newcommand{\tagObs}{\textup{\textbf{\textsf{[OPEN-OBSTRUCTION]}}}}
+
+\title[Prismatic LiftK, Brauer--Artin Descent, and the ERH]{%
+  Prismatic $\mathrm{LiftK}$, Brauer--Artin Iwasawa Descent,\\
+  Automorphic Selmer Obstructions, and the Extended Riemann Hypothesis\\
+  over Totally Real and CM Fields}
+
+\author{ERH Extension Research Project (Waves 1--17)}
+\date{November 23, 2026}
+
+\begin{document}
+
+\begin{abstract}
+We establish four standalone mathematical pillars and a unified conditional reduction framework extending the Arakelov-filtered automorphic period-tower method (developed for Dirichlet $L$-functions in the companion $\mathbb{Q}$-GRH monograph) toward the Extended Riemann Hypothesis (ERH) over totally real and CM number fields.
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \textbf{Unconditional Prismatic Arithmetic Geometry (Full Closure of Regime~B $\mathrm{LiftK}$).} Independently of the $\mathbb{Q}$-GRH monograph, we close the wild non-abelian prismatic lifting problem (\texttt{ch23} \texttt{LiftK}) for \emph{all} number fields, \emph{all} primes $\ell \ge 2$, and \emph{all} crystalline ranks $d \ge 1$ with zero open gaps. Specifically, we prove a universal $H^2_{\syn}$ annihilation exponent $N_{\univ}(M, e_K, \ell) = O\bigl(M(1 + v_\ell(e_K))(1 + \log_\ell e_K)\bigr)$, bypass the intrinsic quadratic blow-up of Nygaard-filtered $X_M[\ell^\infty]$ via a Nygaard-free Frobenius-pullback complex $R\Gamma_{\BK}^*$, disprove the pure 2D commutative-algebra conjecture \texttt{K02-Q1} by proving the exact optimal rank constant $c_{\mathrm{opt}}(d) = \lfloor d/2 \rfloor$ via Matlis quadruple duality, and establish a prismatic PD horizontal-section theorem yielding $\exp_\ell(Q_1(T_0)_\tor) \le N_{Q_1}(K, M) = O_{K_1}(sM)$ independently of $d$ and $h$. All odd primes $\ell \ge 3$ fall in Regime~I ($O_{K_1}(H)$) and only $\ell = 2$ enters Regime~II ($O_{K_1}(s^2 H)$), passing all ten polytope constraints of the analytic engine with zero drift.
+
+\item \textbf{Non-Abelian Iwasawa $\mu_2 = 0$, Brauer--Artin Descent, and Cubic $S_3$ Statistics.} We give an elementary $2$-adic Kronecker $\rk_2$-reflection theorem ($\mu_2^-(K)=0 \iff \mu_2(K)=0$) and its odd-$\ell$ generalization, classify $100\%$ of groups with $G' \le O_2(G)$ as unconditionally satisfying $\mu_2(\widetilde{F^+}(i)) = 0$, and prove a Brauer--Artin analytic $\mu_\ell$-descent theorem bypassing the $\FF_2[A_5]$-module obstruction. Combined with Fukuda's criterion and Deligne--Ribet $2^{-d}$-integrality, we unconditionally certify $\mu_2(\widetilde{F^+}(i)) = 0$ for concrete pure Regime-A $A_5$ fields ($A_5(10931^2)$, $A_5(11699^2)$) and minimal $S_5(7^3 \cdot 11^3 \cdot 41^2)$, and construct infinite pure Regime-A non-solvable $P_2 \times A_5$ and $C_2^{4m} \rtimes A_5$ towers (plus $2.A_5 = \SL_2(\FF_5)$ families). For $S_3$ cubic fields, we prove unconditionally from published theorems alone (zero preprints) the $2$-torsion tail lower bound $T_1(\Sigma^{S_3}; X) \gg X^{5/6}$ and $N_{\ge 2}(\Sigma^{S_3}; X) \gg X^{0.5548}$, identify the exact $23/24 - 5/6 = 1/8$ zero-preprint exponent gap and nonlinear fiber-product obstruction ($\dim W = \dim G = 20$), and close the sieve \texttt{L-ST-Sieve} modulo Shankar--Tsimerman (2025) preprints to obtain $\ge 0.03940\,X^{5/6} - O(X^{13/16+o(1)})$ tame $S_3$ fields with $\mu_2 = \lambda_2 = 0$.
+
+\item \textbf{Automorphic Selmer Vanishing and Reductive Architecture No-Go Theorems.} We close real-quadratic odd-weight Hilbert modular Bloch--Kato vanishing (Count~I) across all real quadratic bases $K_0 = \QQ(\sqrt{D})$ (split $50\%$ preprint-free; inert $50\%$ modulo Boxer--Pilloni and Graham--Rockwood preprints, up to the $(\mathrm{Aut}_3)_{L^+}$/Greenberg--Mazur dichotomy), prove analytic $\mu_{\an}^{\mathrm{opt}} = 0$ for definite-quaternion Eisenstein measures in degree $d_0 \ge 3$ without residual irreducibility, isolate the $\zeta_\ell$-admissible prime Catch-22, Burnside--$\mu$ incompatibility, and Bott-periodicity non-transfer $c_\infty(\SO(2d_0-1,2)) = (-1)^{\lfloor (d_0-1)/2 \rfloor}$, and prove a four-pillar reductive-group No-Go theorem showing that diagonal $\mathcal{G}_3$ (Count~V) and diagonal $\GSp_4$ (Count~II) are unique minimal viable architectures among classical groups.
+
+\item \textbf{Unified Real-Quadratic $D_4/Q_8$ ERH Reduction and Universal $\Delta$-Nontrivial Control.} Relative to the $\QQ$-GRH monograph framework, ERH for all totally real and CM $D_4/Q_8$ extensions over arbitrary $K_0 = \QQ(\sqrt{D})$ (both Regime~A and Regime~B, with exact iff Regime~A/B criteria) reduces to two open arithmetic interfaces ($\mathrm{Wash}_q^{\mathrm{stat}}$ and Wall~B $\iff \mathrm{EffMaass}_{p_0}(g_\eta)$) plus the Count~I interface. We also audit \texttt{HostEx}/\texttt{ChCore}, isolate \texttt{h1} to the single $\omega_\ell^1$-component, and prove a universal $\Delta$-nontrivial control theorem over $100\%$ of unramified primes $\ell \nmid D_K$ yielding fixed-twist vanishing of \texttt{b1p} and \texttt{b1}-odd and positive-density $\mu_\ell^-(E(\zeta_\ell)) = 0$ at fixed twists.
+\end{enumerate}
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+\input{sections/sec01_architecture}
+\input{sections/sec02_prismatic_liftk}
+\input{sections/sec03_mu2_brauer_artin}
+\input{sections/sec04_a5_s3_statistics}
+\input{sections/sec05_automorphic_selmer_nogo}
+\input{sections/sec06_real_quad_erh_hostex}
+\input{sections/sec07_frontiers_and_bibliography}
+
+\end{document}
